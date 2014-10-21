@@ -21,6 +21,10 @@
 		DB672FB419F6BE9A00E596F7 /* UTI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FB219F6BE9A00E596F7 /* UTI.swift */; };
 		DB672FB619F6DDD000E596F7 /* UTI+CoreTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FB519F6DDD000E596F7 /* UTI+CoreTypes.swift */; };
 		DB672FB719F6DDD000E596F7 /* UTI+CoreTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FB519F6DDD000E596F7 /* UTI+CoreTypes.swift */; };
+		DB672FB919F6E32000E596F7 /* NSURL+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FB819F6E32000E596F7 /* NSURL+Resource.swift */; };
+		DB672FBA19F6E32000E596F7 /* NSURL+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FB819F6E32000E596F7 /* NSURL+Resource.swift */; };
+		DB672FBC19F6E32E00E596F7 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FBB19F6E32E00E596F7 /* Resource.swift */; };
+		DB672FBD19F6E32E00E596F7 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FBB19F6E32E00E596F7 /* Resource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,8 @@
 		DB672FAF19F6BE4B00E596F7 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		DB672FB219F6BE9A00E596F7 /* UTI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTI.swift; sourceTree = "<group>"; };
 		DB672FB519F6DDD000E596F7 /* UTI+CoreTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UTI+CoreTypes.swift"; sourceTree = "<group>"; };
+		DB672FB819F6E32000E596F7 /* NSURL+Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Resource.swift"; sourceTree = "<group>"; };
+		DB672FBB19F6E32E00E596F7 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +123,8 @@
 				DB672FAF19F6BE4B00E596F7 /* Result.swift */,
 				DB672FB219F6BE9A00E596F7 /* UTI.swift */,
 				DB672FB519F6DDD000E596F7 /* UTI+CoreTypes.swift */,
+				DB672FBB19F6E32E00E596F7 /* Resource.swift */,
+				DB672FB819F6E32000E596F7 /* NSURL+Resource.swift */,
 				DB672F7319F6B9D300E596F7 /* Supporting Files */,
 			);
 			path = URLGrey;
@@ -320,8 +328,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB672FB919F6E32000E596F7 /* NSURL+Resource.swift in Sources */,
 				DB672FB019F6BE4B00E596F7 /* Result.swift in Sources */,
 				DB672FB619F6DDD000E596F7 /* UTI+CoreTypes.swift in Sources */,
+				DB672FBC19F6E32E00E596F7 /* Resource.swift in Sources */,
 				DB672FAD19F6BE3400E596F7 /* Box.swift in Sources */,
 				DB672FB319F6BE9A00E596F7 /* UTI.swift in Sources */,
 			);
@@ -339,8 +349,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB672FBA19F6E32000E596F7 /* NSURL+Resource.swift in Sources */,
 				DB672FB119F6BE4B00E596F7 /* Result.swift in Sources */,
 				DB672FB719F6DDD000E596F7 /* UTI+CoreTypes.swift in Sources */,
+				DB672FBD19F6E32E00E596F7 /* Resource.swift in Sources */,
 				DB672FAE19F6BE3400E596F7 /* Box.swift in Sources */,
 				DB672FB419F6BE9A00E596F7 /* UTI.swift in Sources */,
 			);

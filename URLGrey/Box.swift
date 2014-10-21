@@ -8,14 +8,14 @@
 
 import Foundation
 
-final class Box<T> {
+public final class Box<T> {
     private let boxed: T
     
     init(_ value : T) {
         self.boxed = value
     }
     
-    var value: T {
+    public var value: T {
         return boxed
     }
 }

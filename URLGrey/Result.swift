@@ -8,19 +8,19 @@
 
 import Foundation
 
-enum Result<T> {
+public enum Result<T> {
     case None
     case Success(Box<T>)
     case Failure(NSError)
     
-    var value: T? {
+    public var value: T? {
         switch self {
         case Success(let boxed): return boxed.value
         default: return nil
         }
     }
     
-    func map<U>(transform: T -> U) -> Result<U> {
+    public func map<U>(transform: T -> U) -> Result<U> {
         switch self {
         case Success(let box):
             return .Success(Box(transform(box.value)))
@@ -31,7 +31,7 @@ enum Result<T> {
         }
     }
     
-    func map(defaultValue failure: @autoclosure () -> T) -> T {
+    public func map(defaultValue failure: @autoclosure () -> T) -> T {
         switch self {
         case Success(let box):
             return box.value
@@ -40,7 +40,7 @@ enum Result<T> {
         }
     }
     
-    func map<U>(defaultValue failure: @autoclosure () -> U, transform success: T -> U) -> U {
+    public func map<U>(defaultValue failure: @autoclosure () -> U, transform success: T -> U) -> U {
         switch self {
         case Success(let box):
             return success(box.value)
