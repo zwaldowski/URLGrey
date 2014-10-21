@@ -13,6 +13,10 @@
 		DB672F9C19F6B9E000E596F7 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB672F9119F6B9E000E596F7 /* URLGrey.framework */; };
 		DB672FAA19F6BA2900E596F7 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DB672F7519F6B9D300E596F7 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB672FAB19F6BA4900E596F7 /* URLGreyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672F8219F6B9D300E596F7 /* URLGreyTests.swift */; };
+		DB672FAD19F6BE3400E596F7 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FAC19F6BE3400E596F7 /* Box.swift */; };
+		DB672FAE19F6BE3400E596F7 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FAC19F6BE3400E596F7 /* Box.swift */; };
+		DB672FB019F6BE4B00E596F7 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FAF19F6BE4B00E596F7 /* Result.swift */; };
+		DB672FB119F6BE4B00E596F7 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FAF19F6BE4B00E596F7 /* Result.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,8 @@
 		DB672F8219F6B9D300E596F7 /* URLGreyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLGreyTests.swift; sourceTree = "<group>"; };
 		DB672F9119F6B9E000E596F7 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB672F9B19F6B9E000E596F7 /* URLGrey-MobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "URLGrey-MobileTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB672FAC19F6BE3400E596F7 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		DB672FAF19F6BE4B00E596F7 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				DB672F7519F6B9D300E596F7 /* URLGrey.h */,
+				DB672FAC19F6BE3400E596F7 /* Box.swift */,
+				DB672FAF19F6BE4B00E596F7 /* Result.swift */,
 				DB672F7319F6B9D300E596F7 /* Supporting Files */,
 			);
 			path = URLGrey;
@@ -304,6 +312,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB672FB019F6BE4B00E596F7 /* Result.swift in Sources */,
+				DB672FAD19F6BE3400E596F7 /* Box.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +329,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB672FB119F6BE4B00E596F7 /* Result.swift in Sources */,
+				DB672FAE19F6BE3400E596F7 /* Box.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +442,7 @@
 		DB672F8719F6B9D300E596F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -441,12 +454,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = URLGrey;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		DB672F8819F6B9D300E596F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -496,6 +511,7 @@
 		DB672FA519F6B9E000E596F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -512,6 +528,7 @@
 				PRODUCT_NAME = URLGrey;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -519,6 +536,7 @@
 		DB672FA619F6B9E000E596F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
