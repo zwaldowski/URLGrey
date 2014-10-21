@@ -10,6 +10,9 @@
 		DB672F7619F6B9D300E596F7 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DB672F7519F6B9D300E596F7 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB672F7C19F6B9D300E596F7 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB672F7019F6B9D300E596F7 /* URLGrey.framework */; };
 		DB672F8319F6B9D300E596F7 /* URLGreyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672F8219F6B9D300E596F7 /* URLGreyTests.swift */; };
+		DB672F9C19F6B9E000E596F7 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB672F9119F6B9E000E596F7 /* URLGrey.framework */; };
+		DB672FAA19F6BA2900E596F7 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DB672F7519F6B9D300E596F7 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB672FAB19F6BA4900E596F7 /* URLGreyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672F8219F6B9D300E596F7 /* URLGreyTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,15 +23,24 @@
 			remoteGlobalIDString = DB672F6F19F6B9D300E596F7;
 			remoteInfo = URLGrey;
 		};
+		DB672F9D19F6B9E000E596F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB672F6719F6B9D300E596F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB672F9019F6B9E000E596F7;
+			remoteInfo = "URLGrey-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DB672F7019F6B9D300E596F7 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB672F7419F6B9D300E596F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB672F7519F6B9D300E596F7 /* URLGrey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLGrey.h; sourceTree = "<group>"; };
-		DB672F7B19F6B9D300E596F7 /* URLGreyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLGreyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB672F7B19F6B9D300E596F7 /* URLGrey-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "URLGrey-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB672F8119F6B9D300E596F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB672F8219F6B9D300E596F7 /* URLGreyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLGreyTests.swift; sourceTree = "<group>"; };
+		DB672F9119F6B9E000E596F7 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB672F9B19F6B9E000E596F7 /* URLGrey-MobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "URLGrey-MobileTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +56,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB672F7C19F6B9D300E596F7 /* URLGrey.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB672F8D19F6B9E000E596F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB672F9819F6B9E000E596F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB672F9C19F6B9E000E596F7 /* URLGrey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +90,9 @@
 			isa = PBXGroup;
 			children = (
 				DB672F7019F6B9D300E596F7 /* URLGrey.framework */,
-				DB672F7B19F6B9D300E596F7 /* URLGreyTests.xctest */,
+				DB672F7B19F6B9D300E596F7 /* URLGrey-Tests.xctest */,
+				DB672F9119F6B9E000E596F7 /* URLGrey.framework */,
+				DB672F9B19F6B9E000E596F7 /* URLGrey-MobileTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +142,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB672F8E19F6B9E000E596F7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB672FAA19F6BA2900E596F7 /* URLGrey.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -149,7 +186,43 @@
 			);
 			name = URLGreyTests;
 			productName = URLGreyTests;
-			productReference = DB672F7B19F6B9D300E596F7 /* URLGreyTests.xctest */;
+			productReference = DB672F7B19F6B9D300E596F7 /* URLGrey-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DB672F9019F6B9E000E596F7 /* MobileURLGrey */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB672FA419F6B9E000E596F7 /* Build configuration list for PBXNativeTarget "MobileURLGrey" */;
+			buildPhases = (
+				DB672F8C19F6B9E000E596F7 /* Sources */,
+				DB672F8D19F6B9E000E596F7 /* Frameworks */,
+				DB672F8E19F6B9E000E596F7 /* Headers */,
+				DB672F8F19F6B9E000E596F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MobileURLGrey;
+			productName = "URLGrey-iOS";
+			productReference = DB672F9119F6B9E000E596F7 /* URLGrey.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DB672F9A19F6B9E000E596F7 /* MobileURLGreyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB672FA719F6B9E000E596F7 /* Build configuration list for PBXNativeTarget "MobileURLGreyTests" */;
+			buildPhases = (
+				DB672F9719F6B9E000E596F7 /* Sources */,
+				DB672F9819F6B9E000E596F7 /* Frameworks */,
+				DB672F9919F6B9E000E596F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB672F9E19F6B9E000E596F7 /* PBXTargetDependency */,
+			);
+			name = MobileURLGreyTests;
+			productName = "URLGrey-iOSTests";
+			productReference = DB672F9B19F6B9E000E596F7 /* URLGrey-MobileTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -165,6 +238,12 @@
 						CreatedOnToolsVersion = 6.1;
 					};
 					DB672F7A19F6B9D300E596F7 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					DB672F9019F6B9E000E596F7 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					DB672F9A19F6B9E000E596F7 = {
 						CreatedOnToolsVersion = 6.1;
 					};
 				};
@@ -183,6 +262,8 @@
 			targets = (
 				DB672F6F19F6B9D300E596F7 /* URLGrey */,
 				DB672F7A19F6B9D300E596F7 /* URLGreyTests */,
+				DB672F9019F6B9E000E596F7 /* MobileURLGrey */,
+				DB672F9A19F6B9E000E596F7 /* MobileURLGreyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -196,6 +277,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DB672F7919F6B9D300E596F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB672F8F19F6B9E000E596F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB672F9919F6B9E000E596F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,6 +315,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB672F8C19F6B9E000E596F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB672F9719F6B9E000E596F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB672FAB19F6BA4900E596F7 /* URLGreyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -227,6 +337,11 @@
 			isa = PBXTargetDependency;
 			target = DB672F6F19F6B9D300E596F7 /* URLGrey */;
 			targetProxy = DB672F7D19F6B9D300E596F7 /* PBXContainerItemProxy */;
+		};
+		DB672F9E19F6B9E000E596F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB672F9019F6B9E000E596F7 /* MobileURLGrey */;
+			targetProxy = DB672F9D19F6B9E000E596F7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -324,7 +439,7 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = URLGrey;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -341,7 +456,7 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = URLGrey;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -360,7 +475,7 @@
 				);
 				INFOPLIST_FILE = URLGreyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "URLGrey-Tests";
 			};
 			name = Debug;
 		};
@@ -374,7 +489,85 @@
 				);
 				INFOPLIST_FILE = URLGreyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "URLGrey-Tests";
+			};
+			name = Release;
+		};
+		DB672FA519F6B9E000E596F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = URLGrey/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = URLGrey;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DB672FA619F6B9E000E596F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = URLGrey/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = URLGrey;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DB672FA819F6B9E000E596F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = URLGreyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "URLGrey-MobileTests";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DB672FA919F6B9E000E596F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = URLGreyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "URLGrey-MobileTests";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -403,6 +596,22 @@
 			buildConfigurations = (
 				DB672F8A19F6B9D300E596F7 /* Debug */,
 				DB672F8B19F6B9D300E596F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DB672FA419F6B9E000E596F7 /* Build configuration list for PBXNativeTarget "MobileURLGrey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB672FA519F6B9E000E596F7 /* Debug */,
+				DB672FA619F6B9E000E596F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DB672FA719F6B9E000E596F7 /* Build configuration list for PBXNativeTarget "MobileURLGreyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB672FA819F6B9E000E596F7 /* Debug */,
+				DB672FA919F6B9E000E596F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
