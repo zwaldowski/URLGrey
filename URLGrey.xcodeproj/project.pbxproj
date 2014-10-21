@@ -516,6 +516,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -534,6 +535,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -593,6 +595,7 @@
 		DB672FA819F6B9E000E596F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -612,6 +615,7 @@
 		DB672FA919F6B9E000E596F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -644,6 +648,7 @@
 				DB672F8819F6B9D300E596F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB672F8919F6B9D300E596F7 /* Build configuration list for PBXNativeTarget "URLGreyTests" */ = {
 			isa = XCConfigurationList;
@@ -652,6 +657,7 @@
 				DB672F8B19F6B9D300E596F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB672FA419F6B9E000E596F7 /* Build configuration list for PBXNativeTarget "MobileURLGrey" */ = {
 			isa = XCConfigurationList;
@@ -660,6 +666,7 @@
 				DB672FA619F6B9E000E596F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB672FA719F6B9E000E596F7 /* Build configuration list for PBXNativeTarget "MobileURLGreyTests" */ = {
 			isa = XCConfigurationList;
@@ -668,6 +675,7 @@
 				DB672FA919F6B9E000E596F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
