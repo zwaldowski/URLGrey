@@ -15,42 +15,65 @@ import Foundation
 
 // MARK: Internal Resource Meta-Types
 
-public struct _Readable<InOut>: ReadableResource {
-    typealias InType = InOut
-    typealias OutType = InOut
-    
-    public var read: (InType -> OutType?) { return { $0 } }
+public struct _Readable<Original: AnyObject, InOut>: ReadableResource {
+    typealias OriginalType = Original
+
+    public var read: (InOut -> InOut?) { return { $0 } }
     
     public let key: String
 }
 
-public struct _Writable<InOut>: WritableResource {
-    typealias InType = InOut
-    typealias OutType = InOut
+public struct _Writable<Original: AnyObject, InOut>: WritableResource {
+    typealias OriginalType = Original
     
-    public var read: (InType -> OutType?) { return { $0 } }
-    public var write: (OutType -> InType!) { return { $0 } }
+    public var read: (InOut -> InOut?) { return { $0 } }
+    public var write: (InOut -> InOut!) { return { $0 } }
     
     public let key: String
 }
 
-public struct _MapReadable<InOut: ReadableResourceConvertible>: ReadableResource {
-    typealias InType = InOut.ReadableResourceType
-    typealias OutType = InOut
+public struct _ReadableDirect<InOut: AnyObject>: ReadableResource {
+    typealias OriginalType = InOut
+
+    public var read: (InOut -> InOut?) { return { $0 } }
     
-    public var read: (InType -> OutType?) { return { OutType(URLResource: $0) } }
+    public let key: String
+}
+
+public struct _WritableDirect<InOut: AnyObject>: WritableResource {
+    typealias OriginalType = InOut
+    
+    public var read: (InOut -> InOut?) { return { $0 } }
+    public var write: (InOut -> InOut!) { return { $0 } }
+    
+    public let key: String
+}
+
+public struct _ReadableConvert<InOut: ReadableResourceConvertible>: ReadableResource {
+    typealias OriginalType = AnyObject
+    
+    public var read: (InOut.ReadableResourceType -> InOut?) { return { InOut(URLResource: $0) } }
 
     public let key: String
 }
 
-public struct _MapWritable<InOut: WritableResourceConvertible>: WritableResource {
-    typealias InType = InOut.ReadableResourceType
-    typealias OutType = InOut
-    
-    public var read: (InType -> OutType?) { return { OutType(URLResource: $0) } }
-    public var write: (OutType -> InType!) { return { $0.resourceValue } }
+public struct _WritableConvert<InOut: WritableResourceConvertible>: WritableResource {
+    typealias OriginalType = AnyObject
+
+    public var read: (InOut.ReadableResourceType -> InOut?) { return { InOut(URLResource: $0) } }
+    public var write: (InOut -> InOut.ReadableResourceType!) { return { $0.resourceValue } }
     
     public let key: String
+}
+
+public struct _WritableMap<In, Out>: WritableResource {
+    typealias OriginalType = AnyObject
+    typealias InType = In
+    typealias OutType = Out
+    
+    public let key: String
+    public let read: (In -> Out?)
+    public let write: (Out -> In!)
 }
 
 // MARK: Convertible Private Extensions
@@ -211,33 +234,22 @@ extension UbiquitousStatus: ReadableResourceConvertible {
     
 }
 
-// MARK: Custom Thumbnail Dictionary Resource Meta-Type
+// MARK: Custom Thumbnail Dictionary Resource
 
-public struct _WritableThumbnailDictionary: WritableResource {
-    public typealias InType = [String : ImageType]
-    public typealias OutType = ThumbnailDictionary
-    
-    public var read: (InType -> OutType?) {
-        return {
-            var ret = OutType()
-            for (sizeKey, image) in $0 {
-                if let key = ThumbnailSize(string: sizeKey) {
-                    ret[key] = (image as ImageType)
-                }
-            }
-            return ret
+func ThumbnailDictionaryRead(dictionary: [String : ImageType]) -> [ThumbnailSize : ImageType]? {
+    var ret = [ThumbnailSize : ImageType]()
+    for (sizeKey, image) in dictionary {
+        if let key = ThumbnailSize(string: sizeKey) {
+            ret[key] = (image as ImageType)
         }
     }
-    
-    public var write: (OutType -> InType!) {
-        return {
-            var ret = InType()
-            for (size, image) in $0 {
-                ret[size.stringValue] = image
-            }
-            return ret
-        }
+    return ret
+}
+
+func ThumbnailDictionaryWrite(dictionary: [ThumbnailSize : ImageType]) -> [String : ImageType]! {
+    var ret = [String : ImageType]()
+    for (size, image) in dictionary {
+        ret[size.stringValue] = image
     }
-    
-    public let key: String
+    return ret
 }

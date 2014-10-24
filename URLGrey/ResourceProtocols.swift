@@ -11,16 +11,18 @@ import Foundation
 // MARK: ReadableResource
 
 public protocol ReadableResource {
-    typealias InType
-    typealias OutType
+    typealias OriginalType: AnyObject
+    typealias InputType
+    typealias ValueType
+    
     var key: String { get }
-    var read: (InType -> OutType?) { get }
+    var read: (InputType -> ValueType?) { get }
 }
 
 // MARK: WritableResource
 
 public protocol WritableResource: ReadableResource {
-    var write: (OutType -> InType!) { get }
+    var write: (ValueType -> InputType!) { get }
 }
 
 // MARK: ReadableResourceConvertible
