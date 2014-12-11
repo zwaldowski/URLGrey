@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0620"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DB672F6F19F6B9D300E596F7"
+               BlueprintIdentifier = "DBE246041A39272000BF3533"
                BuildableName = "URLGrey.framework"
                BlueprintName = "URLGrey"
                ReferencedContainer = "container:URLGrey.xcodeproj">
@@ -28,8 +28,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DB672F7A19F6B9D300E596F7"
-               BuildableName = "URLGrey-Tests.xctest"
+               BlueprintIdentifier = "DBE2460E1A39272000BF3533"
+               BuildableName = "URLGreyTests.xctest"
                BlueprintName = "URLGreyTests"
                ReferencedContainer = "container:URLGrey.xcodeproj">
             </BuildableReference>
@@ -46,8 +46,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DB672F7A19F6B9D300E596F7"
-               BuildableName = "URLGrey-Tests.xctest"
+               BlueprintIdentifier = "DBE2460E1A39272000BF3533"
+               BuildableName = "URLGreyTests.xctest"
                BlueprintName = "URLGreyTests"
                ReferencedContainer = "container:URLGrey.xcodeproj">
             </BuildableReference>
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DB672F6F19F6B9D300E596F7"
+            BlueprintIdentifier = "DBE246041A39272000BF3533"
             BuildableName = "URLGrey.framework"
             BlueprintName = "URLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">
@@ -75,7 +75,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DB672F6F19F6B9D300E596F7"
+            BlueprintIdentifier = "DBE246041A39272000BF3533"
             BuildableName = "URLGrey.framework"
             BlueprintName = "URLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">
@@ -93,7 +93,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DB672F6F19F6B9D300E596F7"
+            BlueprintIdentifier = "DBE246041A39272000BF3533"
             BuildableName = "URLGrey.framework"
             BlueprintName = "URLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">

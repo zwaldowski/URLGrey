@@ -2,13 +2,16 @@
 //  URLGreyTests.swift
 //  URLGreyTests
 //
-//  Created by Zachary Waldowski on 10/21/14.
+//  Created by Zachary Waldowski on 12/10/14.
 //  Copyright (c) 2014 Zachary Waldowski. All rights reserved.
 //
 
-import Foundation
-import XCTest
 import URLGrey
+import XCTest
+
+#if os(iOS)
+import UIKit
+#endif
 
 class URLGreyTests: XCTestCase {
     
