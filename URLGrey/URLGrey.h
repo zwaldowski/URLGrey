@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Zachary Waldowski. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 //! Project version number for URLGrey.
 FOUNDATION_EXPORT double URLGreyVersionNumber;
