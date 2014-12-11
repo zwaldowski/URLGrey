@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DBC8E4481A39698F00780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
+		DBC8E44A1A39699600780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
 		DBE2460A1A39272000BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBE246101A39272000BF3533 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246051A39272000BF3533 /* URLGrey.framework */; };
 		DBE2461F1A3927D600BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBE246311A3928B200BF3533 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246291A39288C00BF3533 /* LlamaKit.framework */; };
-		DBE246321A3928B600BF3533 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE2462D1A39288C00BF3533 /* LlamaKit.framework */; };
-		DBE246391A3928E200BF3533 /* LlamaKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBE2462D1A39288C00BF3533 /* LlamaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DBE2463A1A3928E800BF3533 /* LlamaKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246291A39288C00BF3533 /* LlamaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBE246431A3928FB00BF3533 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463B1A3928FB00BF3533 /* Errors.swift */; };
 		DBE246441A3928FB00BF3533 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463B1A3928FB00BF3533 /* Errors.swift */; };
 		DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */; };
@@ -50,76 +48,11 @@
 			remoteGlobalIDString = DBE246041A39272000BF3533;
 			remoteInfo = URLGrey;
 		};
-		DBE246281A39288C00BF3533 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FB2F8D8119BF637B00E4C49E;
-			remoteInfo = "LlamaKit-iOS";
-		};
-		DBE2462A1A39288C00BF3533 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FB2F8D8C19BF637B00E4C49E;
-			remoteInfo = "LlamaKit-iOSTests";
-		};
-		DBE2462C1A39288C00BF3533 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D0297D1019D67999009986A9;
-			remoteInfo = "LlamaKit-Mac";
-		};
-		DBE2462E1A39288C00BF3533 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D0297D1A19D67999009986A9;
-			remoteInfo = "LlamaKit-MacTests";
-		};
-		DBE246351A3928D600BF3533 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = FB2F8D8019BF637B00E4C49E;
-			remoteInfo = "LlamaKit-iOS";
-		};
-		DBE246371A3928D900BF3533 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D0297D0F19D67999009986A9;
-			remoteInfo = "LlamaKit-Mac";
-		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		DBE246331A3928C100BF3533 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				DBE246391A3928E200BF3533 /* LlamaKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBE246341A3928C400BF3533 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				DBE2463A1A3928E800BF3533 /* LlamaKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		DBC8E4471A39698F00780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = Carthage.checkout/LlamaKit/build/Debug/LlamaKit.framework; sourceTree = "<group>"; };
+		DBC8E4491A39699600780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = "Carthage.checkout/LlamaKit/build/Debug-iphoneos/LlamaKit.framework"; sourceTree = "<group>"; };
 		DBE245E41A39271000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE245EF1A39271100BF3533 /* URLGreyTests-Mobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "URLGreyTests-Mobile.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE246051A39272000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,7 +61,6 @@
 		DBE2460F1A39272000BF3533 /* URLGreyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLGreyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE246151A39272000BF3533 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBE246201A39280800BF3533 /* Info-Mobile.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Mobile.plist"; sourceTree = "<group>"; };
-		DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LlamaKit.xcodeproj; path = Carthage.checkout/LlamaKit/LlamaKit.xcodeproj; sourceTree = "<group>"; };
 		DBE2463B1A3928FB00BF3533 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Sequence.swift"; sourceTree = "<group>"; };
 		DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Resource.swift"; sourceTree = "<group>"; };
@@ -145,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE246311A3928B200BF3533 /* LlamaKit.framework in Frameworks */,
+				DBC8E44A1A39699600780F2F /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE246321A3928B600BF3533 /* LlamaKit.framework in Frameworks */,
+				DBC8E4481A39698F00780F2F /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,12 +108,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DBC8E44B1A3969AC00780F2F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				DBC8E4491A39699600780F2F /* LlamaKit.framework */,
+			);
+			name = iOS;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		DBC8E44C1A3969B300780F2F /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				DBC8E4471A39698F00780F2F /* LlamaKit.framework */,
+			);
+			name = Mac;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		DBE245DA1A39271000BF3533 = {
 			isa = PBXGroup;
 			children = (
 				DBE246061A39272000BF3533 /* URLGrey */,
 				DBE246131A39272000BF3533 /* URLGreyTests */,
-				DBE246301A39288E00BF3533 /* Frameworks */,
 				DBE245E51A39271000BF3533 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -217,6 +166,8 @@
 		DBE246071A39272000BF3533 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DBC8E44B1A3969AC00780F2F /* iOS */,
+				DBC8E44C1A3969B300780F2F /* Mac */,
 				DBE246081A39272000BF3533 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -238,25 +189,6 @@
 				DBE246201A39280800BF3533 /* Info-Mobile.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DBE246221A39288B00BF3533 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DBE246291A39288C00BF3533 /* LlamaKit.framework */,
-				DBE2462B1A39288C00BF3533 /* LlamaKit-iOSTests.xctest */,
-				DBE2462D1A39288C00BF3533 /* LlamaKit.framework */,
-				DBE2462F1A39288C00BF3533 /* LlamaKit-MacTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		DBE246301A39288E00BF3533 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,12 +221,10 @@
 				DBE245E01A39271000BF3533 /* Frameworks */,
 				DBE245E11A39271000BF3533 /* Headers */,
 				DBE245E21A39271000BF3533 /* Resources */,
-				DBE246341A3928C400BF3533 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DBE246361A3928D600BF3533 /* PBXTargetDependency */,
 			);
 			name = MobileURLGrey;
 			productName = MobileURLGrey;
@@ -327,12 +257,10 @@
 				DBE246011A39272000BF3533 /* Frameworks */,
 				DBE246021A39272000BF3533 /* Headers */,
 				DBE246031A39272000BF3533 /* Resources */,
-				DBE246331A3928C100BF3533 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DBE246381A3928D900BF3533 /* PBXTargetDependency */,
 			);
 			name = URLGrey;
 			productName = URLGrey;
@@ -390,12 +318,6 @@
 			mainGroup = DBE245DA1A39271000BF3533;
 			productRefGroup = DBE245E51A39271000BF3533 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = DBE246221A39288B00BF3533 /* Products */;
-					ProjectRef = DBE246211A39288B00BF3533 /* LlamaKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				DBE246041A39272000BF3533 /* URLGrey */,
@@ -405,37 +327,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		DBE246291A39288C00BF3533 /* LlamaKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LlamaKit.framework;
-			remoteRef = DBE246281A39288C00BF3533 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBE2462B1A39288C00BF3533 /* LlamaKit-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "LlamaKit-iOSTests.xctest";
-			remoteRef = DBE2462A1A39288C00BF3533 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBE2462D1A39288C00BF3533 /* LlamaKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LlamaKit.framework;
-			remoteRef = DBE2462C1A39288C00BF3533 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBE2462F1A39288C00BF3533 /* LlamaKit-MacTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "LlamaKit-MacTests.xctest";
-			remoteRef = DBE2462E1A39288C00BF3533 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DBE245E21A39271000BF3533 /* Resources */ = {
@@ -527,16 +418,6 @@
 			isa = PBXTargetDependency;
 			target = DBE246041A39272000BF3533 /* URLGrey */;
 			targetProxy = DBE246111A39272000BF3533 /* PBXContainerItemProxy */;
-		};
-		DBE246361A3928D600BF3533 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "LlamaKit-iOS";
-			targetProxy = DBE246351A3928D600BF3533 /* PBXContainerItemProxy */;
-		};
-		DBE246381A3928D900BF3533 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "LlamaKit-Mac";
-			targetProxy = DBE246371A3928D900BF3533 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
