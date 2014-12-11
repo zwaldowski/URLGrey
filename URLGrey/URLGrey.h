@@ -7,11 +7,6 @@
 //
 
 @import Foundation;
-#if TARGET_OS_IPHONE
-@import UIKit.UIImage;
-#else
-@import AppKit.NSImage;
-#endif
 
 //! Project version number for URLGrey.
 FOUNDATION_EXPORT double URLGreyVersionNumber;
