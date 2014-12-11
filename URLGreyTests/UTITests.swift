@@ -9,7 +9,9 @@
 import URLGrey
 import XCTest
 
-#if os(iOS)
+#if os(OSX)
+    import Cocoa
+#elseif os(iOS)
     import UIKit
 #endif
 
