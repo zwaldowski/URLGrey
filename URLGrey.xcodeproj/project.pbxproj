@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0F61D21A38CEC6001911FD /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0F61D11A38CEC6001911FD /* Errors.swift */; };
 		DB38C05E19F9D6A300E84F18 /* NSFileManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */; };
 		DB38C05F19F9D6A300E84F18 /* NSFileManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */; };
 		DB672F7619F6B9D300E596F7 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DB672F7519F6B9D300E596F7 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB0F61D11A38CEC6001911FD /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Sequence.swift"; sourceTree = "<group>"; };
 		DB672F7019F6B9D300E596F7 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB672F7419F6B9D300E596F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				DB672FC119F6E43F00E596F7 /* ResourceInternal.swift */,
 				DB672FBE19F6E3B600E596F7 /* Resource.swift */,
 				DB672FB819F6E32000E596F7 /* NSURL+Resource.swift */,
+				DB0F61D11A38CEC6001911FD /* Errors.swift */,
 				DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */,
 				DB672F7319F6B9D300E596F7 /* Supporting Files */,
 			);
@@ -348,6 +351,7 @@
 				DB38C05E19F9D6A300E84F18 /* NSFileManager+Sequence.swift in Sources */,
 				DB672FAD19F6BE3400E596F7 /* Box.swift in Sources */,
 				DB672FC219F6E43F00E596F7 /* ResourceInternal.swift in Sources */,
+				DB0F61D21A38CEC6001911FD /* Errors.swift in Sources */,
 				DB672FB319F6BE9A00E596F7 /* UTI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
