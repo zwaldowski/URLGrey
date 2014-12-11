@@ -7,29 +7,30 @@
 //
 
 import Foundation
+import LlamaKit
 
 public extension NSURL {
     
     private func noValueError(#key: String) -> NSError {
         return error(code: URLGreyError.InvalidResourceValue, description: "Retrieving a value for \(key) on \(self) succeeded, but the value was invalid.")
     }
-
+    
     public func getResourceValue<K, V where K: ReadableResource, V == K.ValueType>(forKey key: K) -> Result<V> {
         var value: AnyObject?
         var error: NSError?
         if (getResourceValue(&value, forKey: key.key, error: &error)) {
             if let inValue = value as? K.InputType {
                 if let ret = key.read(inValue) {
-                    return .Success(Box(ret))
+                    return success(ret)
                 }
             }
-            return .Failure(noValueError(key: key.key))
+            return failure(noValueError(key: key.key))
         } else {
-            return .Failure(error!)
+            return failure(error!)
         }
     }
     
-    public func setResourceValue<K, V where K: WritableResource, V == K.ValueType>(value: V?, forKey key: K) -> Result<Void> {
+    public func setResourceValue<K, V where K: WritableResource, V == K.ValueType>(value: V?, forKey key: K) -> Result<()> {
         var error: NSError?
         var finalValue: AnyObject?
         
@@ -39,9 +40,9 @@ public extension NSURL {
         }
         
         if self.setResourceValue(finalValue, forKey: key.key, error: &error) {
-            return .Success(Box())
+            return success()
         } else {
-            return .Failure(error!)
+            return failure(error!)
         }
     }
     
