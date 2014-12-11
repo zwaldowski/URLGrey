@@ -18,28 +18,27 @@ public extension NSURL {
     public func getResourceValue<K, V where K: ReadableResource, V == K.ValueType>(forKey key: K) -> Result<V> {
         var value: AnyObject?
         var error: NSError?
-        if (getResourceValue(&value, forKey: key.key, error: &error)) {
+        if (getResourceValue(&value, forKey: key.stringValue, error: &error)) {
             if let inValue = value as? K.InputType {
                 if let ret = key.read(inValue) {
                     return success(ret)
                 }
             }
-            return failure(noValueError(key: key.key))
+            return failure(noValueError(key: key.stringValue))
         } else {
             return failure(error!)
         }
     }
     
-    public func setResourceValue<K, V where K: WritableResource, V == K.ValueType>(value: V?, forKey key: K) -> Result<()> {
+    public func setResourceValue<K, V where K: WritableResource, V == K.ValueType, K.OriginalType: AnyObject>(value: V?, forKey key: K) -> Result<()> {
         var error: NSError?
         var finalValue: AnyObject?
         
         if let value = value {
-            let reverseTransformed = key.write(value) as K.OriginalType?
-            finalValue = reverseTransformed as AnyObject?
+            finalValue = key.write(value) as? K.OriginalType
         }
         
-        if self.setResourceValue(finalValue, forKey: key.key, error: &error) {
+        if self.setResourceValue(finalValue, forKey: key.stringValue, error: &error) {
             return success()
         } else {
             return failure(error!)
