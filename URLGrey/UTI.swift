@@ -146,10 +146,10 @@ public extension UTI {
         
     }
     
-    public static func preferredIdentifier(tag: Tag, conformingTo parent: UTI? = nil) -> UTI? {
+    public init!(preferredTag tag: Tag, conformingTo parent: UTI? = nil) {
         let parentUTI = parent?.identifier
-        if let preferred = UTTypeCreatePreferredIdentifierForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() {
-            return UTI(preferred)
+        if let preferredIdentifier = UTTypeCreatePreferredIdentifierForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() {
+            self.init(preferredIdentifier)
         } else {
             return nil
         }
