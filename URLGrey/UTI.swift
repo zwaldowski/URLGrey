@@ -86,41 +86,16 @@ extension UTI: Hashable {
 
 #endif
 
-// MARK: Tag Classes (Private, OS X bits)
+// MARK: Tag Classes (Private)
 
 private extension UTI {
-
-    enum TagKind {
-        case FilenameExtension
-        case MIME
-        #if os(OSX)
-            case Pasteboard
-            case Legacy
-        #endif
-        
-        var stringValue: String {
-            #if os(OSX)
-                switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension
-                case .MIME: return kUTTagClassMIMEType
-                case .Pasteboard: return kUTTagClassNSPboardType
-                case .Legacy: return kUTTagClassOSType
-                }
-            #else
-                switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension
-                case .MIME: return kUTTagClassMIMEType
-                }
-            #endif
-        }
+    
+    func preferredTag(kind: String) -> String? {
+        return UTTypeCopyPreferredTagWithClass(identifier, kind)?.takeRetainedValue()
     }
     
-    func preferredTag(kind: TagKind) -> String? {
-        return UTTypeCopyPreferredTagWithClass(identifier, kind.stringValue)?.takeRetainedValue()
-    }
-    
-    func allTags(kind: TagKind) -> [String]? {
-        return UTTypeCopyAllTagsWithClass(identifier, kind.stringValue)?.takeRetainedValue() as? [String]
+    func allTags(kind: String) -> [String]? {
+        return UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() as? [String]
     }
     
 }
@@ -136,29 +111,6 @@ public extension UTI {
             case Pasteboard(String)
             case Legacy(OSType)
         #endif
-        
-        private init?(kind: TagKind, value: String) {
-            #if os(OSX)
-                switch kind {
-                case .FilenameExtension: self = .FilenameExtension(value)
-                case .MIME: self = .MIME(value)
-                case .Pasteboard: self = .Pasteboard(value)
-                case .Legacy:
-                    if let osType = OSType(string: value) {
-                        self = .Legacy(osType)
-                    } else {
-                        return nil
-                    }
-                default: return nil
-                }
-            #else
-                switch kind {
-                case .FilenameExtension: self = .FilenameExtension(value)
-                case .MIME: self = .MIME(value)
-                default: return nil
-                }
-            #endif
-        }
         
         var kindValue: String {
             #if os(OSX)
@@ -213,37 +165,37 @@ public extension UTI {
     }
     
     public var preferredPathExtension: String? {
-        return preferredTag(.FilenameExtension)
+        return preferredTag(kUTTagClassFilenameExtension)
     }
     
     public var preferredMIMEType: String? {
-        return preferredTag(.MIME)
+        return preferredTag(kUTTagClassMIMEType)
     }
     
     public var pathExtensions: [String]? {
-        return allTags(.FilenameExtension)
+        return allTags(kUTTagClassFilenameExtension)
     }
     
     public var MIMETypes: [String]? {
-        return allTags(.MIME)
+        return allTags(kUTTagClassMIMEType)
     }
     
     #if os(OSX)
     
         public var preferredPasteboardType: String? {
-            return preferredTag(.Pasteboard)
+            return preferredTag(kUTTagClassNSPboardType)
         }
         
         public var preferredLegacyType: OSType? {
-            return OSType(string: preferredTag(.Legacy))
+            return preferredTag(kUTTagClassOSType).map { OSType(string: $0)! }
         }
         
         public var pasteboardTypes: [String]? {
-            return allTags(.Pasteboard)
+            return allTags(kUTTagClassNSPboardType)
         }
         
         public var preferredLegacyTypes: [OSType]? {
-            return allTags(.Legacy)?.map { OSType(string: $0)! }
+            return allTags(kUTTagClassOSType)?.map { OSType(string: $0)! }
         }
     
     #endif
