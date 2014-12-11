@@ -112,7 +112,7 @@ public extension UTI {
             case Legacy(OSType)
         #endif
         
-        var kindValue: String {
+        private var kindValue: String {
             #if os(OSX)
                 switch self {
                 case .FilenameExtension: return kUTTagClassFilenameExtension
@@ -128,7 +128,7 @@ public extension UTI {
             #endif
         }
         
-        var stringValue: String {
+        private var stringValue: String {
             #if os(OSX)
                 switch self {
                 case .FilenameExtension(let ext): return ext
