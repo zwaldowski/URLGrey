@@ -44,6 +44,9 @@ public struct UTI {
 extension UTI: Printable {
     
     public var description: String {
+        if dynamic {
+            return "Dynamic type (\(identifier))"
+        }
         return UTTypeCopyDescription(identifier).takeRetainedValue()
     }
     
