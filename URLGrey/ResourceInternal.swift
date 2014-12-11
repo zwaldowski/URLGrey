@@ -18,52 +18,59 @@ import Foundation
 public struct _Readable<Original: AnyObject, InOut>: ReadableResource {
     typealias OriginalType = Original
 
-    public var read: (InOut -> InOut?) { return { $0 } }
+    public let stringValue: String
     
-    public let key: String
+    public func read(value: InOut) -> InOut? { return value }
 }
 
 public struct _Writable<Original: AnyObject, InOut>: WritableResource {
     typealias OriginalType = Original
     
-    public var read: (InOut -> InOut?) { return { $0 } }
-    public var write: (InOut -> InOut!) { return { $0 } }
+    public let stringValue: String
     
-    public let key: String
+    public func read(value: InOut) -> InOut? { return value }
+    public func write(value: InOut) -> InOut! { return value }
 }
 
 public struct _ReadableDirect<InOut: AnyObject>: ReadableResource {
     typealias OriginalType = InOut
 
-    public var read: (InOut -> InOut?) { return { $0 } }
+    public let stringValue: String
     
-    public let key: String
+    public func read(value: InOut) -> InOut? { return value }
 }
 
 public struct _WritableDirect<InOut: AnyObject>: WritableResource {
     typealias OriginalType = InOut
     
-    public var read: (InOut -> InOut?) { return { $0 } }
-    public var write: (InOut -> InOut!) { return { $0 } }
+    public let stringValue: String
     
-    public let key: String
+    public func read(value: InOut) -> InOut? { return value }
+    public func write(value: InOut) -> InOut! { return value }
 }
 
 public struct _ReadableConvert<InOut: ReadableResourceConvertible>: ReadableResource {
     typealias OriginalType = AnyObject
     
-    public var read: (InOut.ReadableResourceType -> InOut?) { return { InOut(URLResource: $0) } }
-
-    public let key: String
+    public let stringValue: String
+    
+    public func read(value: InOut.ReadableResourceType) -> InOut? {
+        return InOut(URLResource: value)
+    }
 }
 
 public struct _WritableConvert<InOut: WritableResourceConvertible>: WritableResource {
     typealias OriginalType = AnyObject
 
-    public var read: (InOut.ReadableResourceType -> InOut?) { return { InOut(URLResource: $0) } }
-    public var write: (InOut -> InOut.ReadableResourceType!) { return { $0.resourceValue } }
+    public let stringValue: String
     
-    public let key: String
+    public func read(value: InOut.ReadableResourceType) -> InOut? {
+        return InOut(URLResource: value)
+    }
+    
+    public func write(value: InOut) -> InOut.ReadableResourceType! {
+        return value.resourceValue
+    }
 }
 
 public struct _WritableMap<In, Out>: WritableResource {
@@ -71,9 +78,18 @@ public struct _WritableMap<In, Out>: WritableResource {
     typealias InType = In
     typealias OutType = Out
     
-    public let key: String
-    public let read: (In -> Out?)
-    public let write: (Out -> In!)
+    public let stringValue: String
+    public let reading: (In -> Out?)
+    public let writing: (Out -> In!)
+    
+    public func read(value: In) -> Out? {
+        return reading(value)
+    }
+    
+    public func write(value: Out) -> In! {
+        return writing(value)
+    }
+    
 }
 
 // MARK: Convertible Private Extensions
