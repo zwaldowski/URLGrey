@@ -5,7 +5,7 @@
       location = "group:URLGrey.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Carthage.checkout/LlamaKit/LlamaKit.xcodeproj">
+      location = "group:Carthage/Checkouts/LlamaKit/LlamaKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:URLGrey.playground">
