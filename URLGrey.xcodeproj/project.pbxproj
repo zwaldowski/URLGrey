@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB37A7C01A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
+		DB37A7C11A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
 		DBC8E4481A39698F00780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
 		DBC8E44A1A39699600780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
 		DBC8E4501A396EA200780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
@@ -55,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB37A7BF1A5B181A00647B9D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		DBC8E4471A39698F00780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = Carthage.checkout/LlamaKit/build/Debug/LlamaKit.framework; sourceTree = "<group>"; };
 		DBC8E4491A39699600780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = "Carthage.checkout/LlamaKit/build/Debug-iphoneos/LlamaKit.framework"; sourceTree = "<group>"; };
 		DBE245E41A39271000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +159,7 @@
 		DBE246061A39272000BF3533 /* URLGrey */ = {
 			isa = PBXGroup;
 			children = (
+				DB37A7BF1A5B181A00647B9D /* Data.swift */,
 				DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */,
 				DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */,
 				DBE2463E1A3928FB00BF3533 /* Resource.swift */,
@@ -388,6 +392,7 @@
 				DBE246501A3928FB00BF3533 /* UTI.swift in Sources */,
 				DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBE246481A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
+				DB37A7C11A5B181A00647B9D /* Data.swift in Sources */,
 				DBE2464E1A3928FB00BF3533 /* ResourceProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +417,7 @@
 				DBE2464F1A3928FB00BF3533 /* UTI.swift in Sources */,
 				DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBE246471A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
+				DB37A7C01A5B181A00647B9D /* Data.swift in Sources */,
 				DBE2464D1A3928FB00BF3533 /* ResourceProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
