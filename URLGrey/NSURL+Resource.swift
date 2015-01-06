@@ -11,22 +11,18 @@ import LlamaKit
 
 public extension NSURL {
     
-    private func noValueError(#key: String) -> NSError {
-        return error(code: URLGreyError.InvalidResourceValue, description: "Retrieving a value for \(key) on \(self) succeeded, but the value was invalid.")
-    }
-    
     public func getResourceValue<K, V where K: ReadableResource, V == K.ValueType>(forKey key: K) -> Result<V> {
         var value: AnyObject?
-        var error: NSError?
-        if (getResourceValue(&value, forKey: key.stringValue, error: &error)) {
+        var fetchError: NSError?
+        if (getResourceValue(&value, forKey: key.stringValue, error: &fetchError)) {
             if let inValue = value as? K.InputType {
                 if let ret = key.read(inValue) {
                     return success(ret)
                 }
             }
-            return failure(noValueError(key: key.stringValue))
+            return failure(error(code: URLGreyError.InvalidResourceValue(key.stringValue)))
         } else {
-            return failure(error!)
+            return failure(fetchError!)
         }
     }
     
