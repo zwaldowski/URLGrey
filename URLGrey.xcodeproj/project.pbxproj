@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		DB37A7C01A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
 		DB37A7C11A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
-		DBC8E4481A39698F00780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
-		DBC8E44A1A39699600780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
-		DBC8E4501A396EA200780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
-		DBC8E4511A396EA700780F2F /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
+		DB94851E1A60578F009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
+		DB9485231A6058D2009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
+		DB9485241A6058FA009B4848 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246051A39272000BF3533 /* URLGrey.framework */; };
+		DB9485251A6058FD009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
+		DB9485261A605903009B4848 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE245E41A39271000BF3533 /* URLGrey.framework */; };
+		DB9485271A605905009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
 		DBE2460A1A39272000BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBE246101A39272000BF3533 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246051A39272000BF3533 /* URLGrey.framework */; };
 		DBE2461F1A3927D600BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBE246431A3928FB00BF3533 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463B1A3928FB00BF3533 /* Error.swift */; };
 		DBE246441A3928FB00BF3533 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463B1A3928FB00BF3533 /* Error.swift */; };
@@ -32,7 +33,6 @@
 		DBE246501A3928FB00BF3533 /* UTI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE246411A3928FB00BF3533 /* UTI.swift */; };
 		DBE246511A3928FB00BF3533 /* UTI+CoreTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */; };
 		DBE246521A3928FB00BF3533 /* UTI+CoreTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */; };
-		DBE246531A39293B00BF3533 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE245E41A39271000BF3533 /* URLGrey.framework */; };
 		DBE246561A392B9500BF3533 /* UTITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE246551A392B9500BF3533 /* UTITests.swift */; };
 		DBE246571A392B9500BF3533 /* UTITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE246551A392B9500BF3533 /* UTITests.swift */; };
 		DBEF00A21AC473B000E1E603 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00A11AC473B000E1E603 /* URLError.swift */; };
@@ -58,8 +58,8 @@
 
 /* Begin PBXFileReference section */
 		DB37A7BF1A5B181A00647B9D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		DBC8E4471A39698F00780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = Carthage.checkout/LlamaKit/build/Debug/LlamaKit.framework; sourceTree = "<group>"; };
-		DBC8E4491A39699600780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = "Carthage.checkout/LlamaKit/build/Debug-iphoneos/LlamaKit.framework"; sourceTree = "<group>"; };
+		DBC8E4471A39698F00780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = "<group>"; };
+		DBC8E4491A39699600780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = "<group>"; };
 		DBE245E41A39271000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE245EF1A39271100BF3533 /* URLGreyTests-Mobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "URLGreyTests-Mobile.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE246051A39272000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBC8E44A1A39699600780F2F /* LlamaKit.framework in Frameworks */,
+				DB9485231A6058D2009B4848 /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,8 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE246531A39293B00BF3533 /* URLGrey.framework in Frameworks */,
-				DBC8E4511A396EA700780F2F /* LlamaKit.framework in Frameworks */,
+				DB9485271A605905009B4848 /* LlamaKit.framework in Frameworks */,
+				DB9485261A605903009B4848 /* URLGrey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBC8E4481A39698F00780F2F /* LlamaKit.framework in Frameworks */,
+				DB94851E1A60578F009B4848 /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,8 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE246101A39272000BF3533 /* URLGrey.framework in Frameworks */,
-				DBC8E4501A396EA200780F2F /* LlamaKit.framework in Frameworks */,
+				DB9485241A6058FA009B4848 /* URLGrey.framework in Frameworks */,
+				DB9485251A6058FD009B4848 /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,8 +124,8 @@
 				DBC8E4491A39699600780F2F /* LlamaKit.framework */,
 			);
 			name = iOS;
-			path = ..;
-			sourceTree = "<group>";
+			path = Carthage/Build/iOS;
+			sourceTree = SOURCE_ROOT;
 		};
 		DBC8E44C1A3969B300780F2F /* Mac */ = {
 			isa = PBXGroup;
@@ -133,8 +133,8 @@
 				DBC8E4471A39698F00780F2F /* LlamaKit.framework */,
 			);
 			name = Mac;
-			path = ..;
-			sourceTree = "<group>";
+			path = Carthage/Build/Mac;
+			sourceTree = SOURCE_ROOT;
 		};
 		DBE245DA1A39271000BF3533 = {
 			isa = PBXGroup;
@@ -539,6 +539,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/iOS",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -556,6 +560,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/iOS",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -568,6 +576,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/iOS",
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
@@ -585,6 +594,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/iOS",
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
@@ -603,6 +613,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/Mac",
+					"$(inherited)",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -629,6 +643,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/Mac",
+					"$(inherited)",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -645,6 +663,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/Mac",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
@@ -666,6 +685,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/Mac",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
