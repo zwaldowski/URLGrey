@@ -37,6 +37,8 @@
 		DBE246571A392B9500BF3533 /* UTITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE246551A392B9500BF3533 /* UTITests.swift */; };
 		DBEF00A21AC473B000E1E603 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00A11AC473B000E1E603 /* URLError.swift */; };
 		DBEF00A31AC473B000E1E603 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00A11AC473B000E1E603 /* URLError.swift */; };
+		DBEF00AB1AC47DAA00E1E603 /* URLGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */; };
+		DBEF00AC1AC47DAA00E1E603 /* URLGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,7 @@
 		DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UTI+CoreTypes.swift"; sourceTree = "<group>"; };
 		DBE246551A392B9500BF3533 /* UTITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTITests.swift; sourceTree = "<group>"; };
 		DBEF00A11AC473B000E1E603 /* URLError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
+		DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLGrey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,7 @@
 				DBEF00A81AC47C2800E1E603 /* Result */,
 				DBEF00A11AC473B000E1E603 /* URLError.swift */,
 				DBE246091A39272000BF3533 /* URLGrey.h */,
+				DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */,
 				DBE246411A3928FB00BF3533 /* UTI.swift */,
 				DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */,
 				DBE246071A39272000BF3533 /* Supporting Files */,
@@ -392,6 +396,7 @@
 				DBE246501A3928FB00BF3533 /* UTI.swift in Sources */,
 				DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBE246481A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
+				DBEF00AC1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DB37A7C11A5B181A00647B9D /* Data.swift in Sources */,
 				DBE2464E1A3928FB00BF3533 /* ResourceProtocols.swift in Sources */,
 			);
@@ -417,6 +422,7 @@
 				DBE2464F1A3928FB00BF3533 /* UTI.swift in Sources */,
 				DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBE246471A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
+				DBEF00AB1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DB37A7C01A5B181A00647B9D /* Data.swift in Sources */,
 				DBE2464D1A3928FB00BF3533 /* ResourceProtocols.swift in Sources */,
 			);
