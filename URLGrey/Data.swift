@@ -8,50 +8,33 @@
 
 import Dispatch
 
-public struct DataGenerator: GeneratorType, SequenceType {
+public struct Data {
     
-    private typealias BufferPairs = Data.BufferPairs
-    private var buffersGenerator: IndexingGenerator<BufferPairs>
-    private var currentGenerator: Data.Buffer.Generator?
+    public typealias Buffer = UnsafeBufferPointer<Byte>
+    private typealias Pointer = UnsafePointer<Byte>
+    private typealias BufferPairs = [(dispatch_data_t, Buffer)]
     
-    private init(buffersGenerator: BufferPairs.Generator) {
-        self.buffersGenerator = buffersGenerator
+    private var data: dispatch_data_t
+    
+    public init() {
+        self.init(dispatch_data_empty)
     }
     
-    private init(buffers: BufferPairs) {
-        self.init(buffersGenerator: buffers.generate())
+    public init(_ data: dispatch_data_t) {
+        self.data = data
     }
     
-    public mutating func next() -> UInt8? {
-        if let currentEl = currentGenerator?.next() {
-            return currentEl
-        }
-        
-        currentGenerator = buffersGenerator.next()?.1.generate()
-        return currentGenerator?.next()
+    public var isEmpty: Bool {
+        return count == 0
     }
     
-    public func generate() -> DataGenerator {
-        return DataGenerator(buffersGenerator: buffersGenerator.generate())
+    public var count: Int {
+        return Int(dispatch_data_get_size(data))
     }
     
 }
 
-public struct Data {
-    
-    private let data: dispatch_data_t
-    
-    private typealias Pointer = UnsafePointer<UInt8>
-    private typealias Buffer = UnsafeBufferPointer<UInt8>
-    private typealias BufferPairs = [(dispatch_data_t, Buffer)]
-    
-    public init() {
-        self.data = dispatch_data_empty
-    }
-    
-    private init(_ data: dispatch_data_t) {
-        self.data = data
-    }
+extension Data {
     
     public init<T>(var array: [T]) {
         self.init(pointer: &array, count: array.count, owner: array)
@@ -67,7 +50,7 @@ public struct Data {
     
     public init<T, Owner>(pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {
         let count = UInt(sizeof(T) * tCount)
-        self.init(dispatch_data_create(pointer, count, queue) { [owner] in return })
+        self.init(dispatch_data_create(pointer, count, queue) { _ = owner })
     }
     
     public enum UnsafeOwnership {
@@ -88,7 +71,7 @@ public struct Data {
         self.init(dispatch_data_create(pointer, count, queue, destructor))
     }
     
-    private func apply(function: (data: dispatch_data_t, range: HalfOpenInterval<Int>, buffer: UnsafeBufferPointer<UInt8>) -> Bool) {
+    private func apply(function: (data: dispatch_data_t, range: HalfOpenInterval<Int>, buffer: Buffer) -> Bool) {
         dispatch_data_apply(data) { (data, cOffset, cPointer, cCount) -> Bool in
             let offset = Int(cOffset)
             let count = Int(cCount)
@@ -97,7 +80,7 @@ public struct Data {
         }
     }
     
-    public func apply<T>(function: (range: HalfOpenInterval<Int>, buffer: UnsafeBufferPointer<UInt8>) -> T?) -> T? {
+    public func apply<T>(function: (range: HalfOpenInterval<Int>, buffer: Buffer) -> T?) -> T? {
         var ret: T?
         apply { _, range, buffer -> Bool in
             if let value = function(range: range, buffer: buffer) {
@@ -122,13 +105,21 @@ public struct Data {
 
 extension Data: SequenceType {
     
-    public func generate() -> DataGenerator {
+    private var buffersArray: BufferPairs {
         var buffers = BufferPairs()
         apply { (data, _, buffer) -> Bool in
             buffers.append(data, buffer)
             return true
         }
-        return DataGenerator(buffers: buffers)
+        return buffers
+    }
+    
+    public func generate() -> DataGenerator {
+        return DataGenerator(buffers: buffersArray)
+    }
+    
+    public func buffers() -> SequenceOf<Buffer> {
+        return SequenceOf(lazy(buffersArray).map { $0.1 })
     }
     
 }
@@ -140,10 +131,10 @@ extension Data: CollectionType {
     }
     
     public var endIndex: Int {
-        return Int(dispatch_data_get_size(data))
+        return count
     }
     
-    public subscript (index: Int) -> UInt8 {
+    public subscript (index: Int) -> Byte {
         return apply { range, buffer in
             if range.contains(index) {
                 let local = Int(index - range.start)
@@ -167,6 +158,53 @@ extension Data: Sliceable {
     
 }
 
+extension Data: ByteCollection {
+    
+    public typealias Element = Byte
+    
+    public mutating func append(newData: Data) {
+        data = dispatch_data_create_concat(data, newData.data)
+    }
+    
+}
+
+// MARK: DataGenerator
+
+public struct DataGenerator: GeneratorType, SequenceType {
+    
+    private typealias BufferPairs = Data.BufferPairs
+    private var buffersGenerator: IndexingGenerator<BufferPairs>
+    private var currentGenerator: Data.Buffer.Generator?
+    
+    private init(buffersGenerator: BufferPairs.Generator) {
+        self.buffersGenerator = buffersGenerator
+    }
+    
+    private init(buffers: BufferPairs) {
+        self.init(buffersGenerator: buffers.generate())
+    }
+    
+    public mutating func next() -> Byte? {
+        if let currentEl = currentGenerator?.next() {
+            return currentEl
+        }
+        
+        currentGenerator = buffersGenerator.next()?.1.generate()
+        return currentGenerator?.next()
+    }
+    
+    public func generate() -> DataGenerator {
+        return DataGenerator(buffersGenerator: buffersGenerator.generate())
+    }
+    
+}
+
+// MARK: Operators
+
 public func +(lhs: Data, rhs: Data) -> Data {
     return Data(dispatch_data_create_concat(lhs.data, rhs.data))
+}
+
+public func +=(inout lhs: Data, rhs: Data) {
+    lhs.append(rhs)
 }

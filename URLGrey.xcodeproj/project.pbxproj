@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DB37A7C01A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
 		DB37A7C11A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
+		DB6798351A61804500E1F2AF /* ByteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798341A61804500E1F2AF /* ByteCollection.swift */; };
+		DB6798361A61804500E1F2AF /* ByteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798341A61804500E1F2AF /* ByteCollection.swift */; };
 		DB94851E1A60578F009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
 		DB9485231A6058D2009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
 		DB9485241A6058FA009B4848 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246051A39272000BF3533 /* URLGrey.framework */; };
@@ -60,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		DB37A7BF1A5B181A00647B9D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		DB6798341A61804500E1F2AF /* ByteCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteCollection.swift; sourceTree = "<group>"; };
 		DBC8E4471A39698F00780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = "<group>"; };
 		DBC8E4491A39699600780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = "<group>"; };
 		DBE245E41A39271000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB67983D1A6181AD00E1F2AF /* I/O */ = {
+			isa = PBXGroup;
+			children = (
+				DB37A7BF1A5B181A00647B9D /* Data.swift */,
+				DB6798341A61804500E1F2AF /* ByteCollection.swift */,
+			);
+			name = I/O;
+			sourceTree = "<group>";
+		};
 		DBC8E44B1A3969AC00780F2F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +174,7 @@
 		DBE246061A39272000BF3533 /* URLGrey */ = {
 			isa = PBXGroup;
 			children = (
-				DB37A7BF1A5B181A00647B9D /* Data.swift */,
+				DB67983D1A6181AD00E1F2AF /* I/O */,
 				DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */,
 				DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */,
 				DBE2463E1A3928FB00BF3533 /* Resource.swift */,
@@ -388,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB6798361A61804500E1F2AF /* ByteCollection.swift in Sources */,
 				DBE246441A3928FB00BF3533 /* Error.swift in Sources */,
 				DBE246521A3928FB00BF3533 /* UTI+CoreTypes.swift in Sources */,
 				DBEF00A31AC473B000E1E603 /* URLError.swift in Sources */,
@@ -414,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB6798351A61804500E1F2AF /* ByteCollection.swift in Sources */,
 				DBE246431A3928FB00BF3533 /* Error.swift in Sources */,
 				DBE246511A3928FB00BF3533 /* UTI+CoreTypes.swift in Sources */,
 				DBEF00A21AC473B000E1E603 /* URLError.swift in Sources */,
