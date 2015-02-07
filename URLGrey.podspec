@@ -8,9 +8,10 @@ Pod::Spec.new do |s|
   s.author           = { "Zachary Waldowski" => "zach@waldowski.me" }
   s.social_media_url = "http://twitter.com/zwaldowski"
   s.ios.deployment_target = "8.0"
-  s.osx.deployment_target = "10.10"
+  s.osx.deployment_target = "10.9"
   s.source       = { :git => "https://github.com/zwaldowski/URLGrey", :tag => "v#{s.version}" }
   s.source_files  = "URLGrey/*.swift"
   s.exclude_files = "Classes/Exclude"
+  s.source_files  = "URLGrey/*.swift", "URLGrey/URLGreyPrivate.{h,m}"
   s.dependency "LlamaKit", "~> 0.1.0"
 end

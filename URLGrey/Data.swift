@@ -8,13 +8,14 @@
 
 import Dispatch
 
+/// A read-only construct that conceptually models a buffer of bytes.
 public struct Data {
     
     public typealias Buffer = UnsafeBufferPointer<Byte>
     private typealias Pointer = UnsafePointer<Byte>
     private typealias BufferPairs = [(dispatch_data_t, Buffer)]
     
-    private var data: dispatch_data_t
+    var data: dispatch_data_t
     
     public init() {
         self.init(dispatch_data_empty)
@@ -37,20 +38,15 @@ public struct Data {
 extension Data {
     
     public init<T>(var array: [T]) {
-        self.init(pointer: &array, count: array.count, owner: array)
+        self.init(unsafeWithOwnedPointer: &array, count: array.count, owner: array)
     }
     
     public init<T>(var slice: Slice<T>) {
-        self.init(pointer: &slice, count: slice.count, owner: slice)
+        self.init(unsafeWithOwnedPointer: &slice, count: slice.count, owner: slice)
     }
     
     public init<T>(var array: ContiguousArray<T>) {
-        self.init(pointer: &array, count: array.count, owner: array)
-    }
-    
-    public init<T, Owner>(pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {
-        let count = UInt(sizeof(T) * tCount)
-        self.init(dispatch_data_create(pointer, count, queue) { _ = owner })
+        self.init(unsafeWithOwnedPointer: &array, count: array.count, owner: array)
     }
     
     public enum UnsafeOwnership {
@@ -59,7 +55,12 @@ extension Data {
         case Unmap
     }
     
-    public init<T, Owner>(pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeOwnership = .Copy) {
+    private init<T, Owner>(unsafeWithOwnedPointer pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {
+        let count = UInt(sizeof(T) * tCount)
+        self.init(dispatch_data_create(pointer, count, queue) { [owner] in })
+    }
+    
+    private init<T, Owner>(unsafeWithPointer pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeOwnership = .Copy) {
         let count = UInt(sizeof(T) * tCount)
         let destructor: (() -> ())? = {
             switch behavior {

@@ -18,6 +18,7 @@ import UIKit
 class IOChannelTests: XCTestCase {
     
     func testRead() {
+        
         var pattern: [Byte] = [ 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x12 ]
         var buffer: [Byte] = Array(count: 1024 * 10, repeatedValue: Byte(0))
         memset_pattern8(&buffer, &pattern, UInt(buffer.count))
