@@ -70,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB09669E1A87254E00368038 /* URLGrey.private.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = URLGrey.private.modulemap; sourceTree = "<group>"; };
+		DB09669F1A87255600368038 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = URLGreyPrivate/module.modulemap; sourceTree = "<group>"; };
 		DB37A7BF1A5B181A00647B9D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		DB67982E1A617F8500E1F2AF /* IOChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOChannel.swift; sourceTree = "<group>"; };
 		DB6798311A617FD600E1F2AF /* PipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PipeSource.swift; sourceTree = "<group>"; };
@@ -133,6 +135,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB0966A01A87255800368038 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				DB09669F1A87255600368038 /* module.modulemap */,
+			);
+			name = Private;
+			sourceTree = "<group>";
+		};
 		DB67983D1A6181AD00E1F2AF /* I/O */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +201,8 @@
 		DBE246071A39272000BF3533 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB09669E1A87254E00368038 /* URLGrey.private.modulemap */,
+				DB0966A01A87255800368038 /* Private */,
 				DBE246081A39272000BF3533 /* Info.plist */,
 			);
 			name = "Supporting Files";
