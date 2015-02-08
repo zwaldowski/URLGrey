@@ -7,8 +7,6 @@
 //
 
 #import "URLGreyPrivate.h"
-@import ObjectiveC.runtime;
-@import Darwin.Availability;
 
 dispatch_data_t _URLGreyCreateDispatchData(NSData *data, BOOL copy) {
     __block dispatch_data_t ret = nil;
