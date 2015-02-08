@@ -174,6 +174,17 @@
 			name = I/O;
 			sourceTree = "<group>";
 		};
+		DB7704C01A882DC100F6D184 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */,
+				DBE2463E1A3928FB00BF3533 /* Resource.swift */,
+				DBE2463F1A3928FB00BF3533 /* ResourceInternal.swift */,
+				DBE246401A3928FB00BF3533 /* ResourceProtocols.swift */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
 		DBE245DA1A39271000BF3533 = {
 			isa = PBXGroup;
 			children = (
@@ -199,10 +210,7 @@
 			children = (
 				DB67983D1A6181AD00E1F2AF /* I/O */,
 				DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */,
-				DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */,
-				DBE2463E1A3928FB00BF3533 /* Resource.swift */,
-				DBE2463F1A3928FB00BF3533 /* ResourceInternal.swift */,
-				DBE246401A3928FB00BF3533 /* ResourceProtocols.swift */,
+				DB7704C01A882DC100F6D184 /* Resource */,
 				DBEF00A81AC47C2800E1E603 /* Result */,
 				DBEF00A11AC473B000E1E603 /* URLError.swift */,
 				DBE246091A39272000BF3533 /* URLGrey.h */,

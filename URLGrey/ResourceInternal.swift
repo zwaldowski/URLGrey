@@ -7,87 +7,153 @@
 //
 
 import Foundation
-#if os(OSX)
-    import AppKit.NSImage
-#elseif os(iOS)
-    import UIKit.UIImage
-#endif
 
 // MARK: Internal Resource Meta-Types
 
-public struct _Readable<Original: AnyObject, InOut>: ReadableResource {
-    typealias OriginalType = Original
-
-    public let stringValue: String
+/// Read-only values that can cross the Objective-C bridge (`String`, `Int`)
+public struct _Readable<T: _ObjectiveCBridgeable>: ResourceReadable {
     
-    public func read(value: InOut) -> InOut? { return value }
-}
-
-public struct _Writable<Original: AnyObject, InOut>: WritableResource {
-    typealias OriginalType = Original
+    public let key: String
     
-    public let stringValue: String
-    
-    public func read(value: InOut) -> InOut? { return value }
-    public func write(value: InOut) -> InOut! { return value }
-}
-
-public struct _ReadableDirect<InOut: AnyObject>: ReadableResource {
-    typealias OriginalType = InOut
-
-    public let stringValue: String
-    
-    public func read(value: InOut) -> InOut? { return value }
-}
-
-public struct _WritableDirect<InOut: AnyObject>: WritableResource {
-    typealias OriginalType = InOut
-    
-    public let stringValue: String
-    
-    public func read(value: InOut) -> InOut? { return value }
-    public func write(value: InOut) -> InOut! { return value }
-}
-
-public struct _ReadableConvert<InOut: ReadableResourceConvertible>: ReadableResource {
-    typealias OriginalType = AnyObject
-    
-    public let stringValue: String
-    
-    public func read(value: InOut.ReadableResourceType) -> InOut? {
-        return InOut(URLResource: value)
-    }
-}
-
-public struct _WritableConvert<InOut: WritableResourceConvertible>: WritableResource {
-    typealias OriginalType = AnyObject
-
-    public let stringValue: String
-    
-    public func read(value: InOut.ReadableResourceType) -> InOut? {
-        return InOut(URLResource: value)
+    public static func read(input: AnyObject?) -> AnyResult<T> {
+        switch input {
+        case .Some(let ret as T):
+            return success(ret)
+        case .Some:
+            return failure(error(code: URLError.ResourceReadConversion))
+        case .None:
+            return failure(error(code: URLError.ResourceReadUnavailable))
+        }
     }
     
-    public func write(value: InOut) -> InOut.ReadableResourceType! {
-        return value.resourceValue
+    public func read(input: AnyObject?) -> AnyResult<T> {
+        return self.dynamicType.read(input)
     }
+    
 }
 
-public struct _WritableMap<In, Out>: WritableResource {
-    typealias OriginalType = AnyObject
-    typealias InType = In
-    typealias OutType = Out
+/// Read-only types that come out exactly as we want them (`NSURL`, `NSDate`)
+public struct _ReadableObject<T: AnyObject>: ResourceReadable {
     
-    public let stringValue: String
-    public let reading: (In -> Out?)
-    public let writing: (Out -> In!)
+    public let key: String
     
-    public func read(value: In) -> Out? {
-        return reading(value)
+    public static func read(input: AnyObject?) -> ObjectResult<T> {
+        switch input {
+        case .Some(let ret as T):
+            return success(ret)
+        case .Some:
+            return failure(error(code: URLError.ResourceReadConversion))
+        case .None:
+            return failure(error(code: URLError.ResourceReadUnavailable))
+        }
     }
     
-    public func write(value: Out) -> In! {
-        return writing(value)
+    public func read(input: AnyObject?) -> ObjectResult<T> {
+        return self.dynamicType.read(input)
+    }
+    
+}
+
+/// Read-only that must be converted after being bridged to some native type
+/// (i.e., `String`->`URLGrey.UTI`)
+public struct _ReadableConvert<T: ResourceReadableConvertible>: ResourceReadable {
+    
+    public let key: String
+    
+    public static func read(input: AnyObject?) -> AnyResult<T> {
+        switch input {
+        case .Some(let value as T.ResourceValue):
+            if let ret = T(URLResource: value) {
+                return success(ret)
+            }
+            return failure(error(code: URLError.ResourceReadConversion))
+        case .Some:
+            return failure(error(code: URLError.ResourceReadConversion))
+        case .None:
+            return failure(error(code: URLError.ResourceReadUnavailable))
+        }
+    }
+    
+    public func read(input: AnyObject?) -> AnyResult<T> {
+        return self.dynamicType.read(input)
+    }
+
+}
+
+/// Read-write values that can cross the Objective-C bridge (`String`, `Int`)
+public struct _Writable<O: _ObjectiveCBridgeable, I: AnyObject>: ResourceReadable, ResourceWritable {
+    
+    public let key: String
+    
+    public func read(input: AnyObject?) -> AnyResult<O> {
+        return _Readable<O>.read(input)
+    }
+    
+    public func write(input: O) -> ObjectResult<AnyObject> {
+        if let ret = input as? I {
+            return success(ret)
+        }
+        return failure(error(code: URLError.ResourceWriteConversion))
+    }
+    
+}
+
+/// Read-write types that come out exactly as we want them (`NSURL`, `NSDate`)
+public struct _WritableObject<T: AnyObject>: ResourceReadable, ResourceWritable {
+
+    public let key: String
+    
+    public func read(input: AnyObject?) -> ObjectResult<T> {
+        return _ReadableObject<T>.read(input)
+    }
+    
+    public func write(input: T) -> ObjectResult<AnyObject> {
+        return success(input)
+    }
+
+}
+
+/// Read-only that must be converted after being bridged to some native type
+/// (i.e., `String`->`URLGrey.UTI`)
+public struct _WritableConvert<T: ResourceWritableConvertible>: ResourceReadable, ResourceWritable {
+    
+    public let key: String
+    
+    public func read(input: AnyObject?) -> AnyResult<T> {
+        return _ReadableConvert<T>.read(input)
+    }
+    
+    public func write(input: T) -> ObjectResult<AnyObject> {
+        if let ret: AnyObject = input.URLResourceValue {
+            return success(ret)
+        }
+        return failure(error(code: URLError.ResourceWriteConversion))
+    }
+    
+}
+
+public struct _WritableOf<O, I: _ObjectiveCBridgeable>: ResourceReadable, ResourceWritable {
+    
+    public let key: String
+    public let reading: I -> O?
+    public let writing: O -> AnyObject
+    
+    public func read(input: AnyObject?) -> AnyResult<O> {
+        switch input {
+        case .Some(let value as I):
+            if let ret = reading(value) {
+                return success(ret)
+            }
+            return failure(error(code: URLError.ResourceReadConversion))
+        case .Some:
+            return failure(error(code: URLError.ResourceReadConversion))
+        case .None:
+            return failure(error(code: URLError.ResourceReadUnavailable))
+        }
+    }
+    
+    public func write(input: O) -> ObjectResult<AnyObject> {
+        return success(writing(input))
     }
     
 }
@@ -185,16 +251,16 @@ private extension UbiquitousStatus {
 
 private extension ThumbnailSize {
     
-    init?(string: String) {
+    init?(URLResource string: String) {
         switch string {
-        case NSThumbnail1024x1024SizeKey: self = .W1024H1024
+        case NSThumbnail1024x1024SizeKey: self = .W1024
         default: return nil
         }
     }
     
-    var stringValue: String {
+    var URLResourceValue: String {
         switch self {
-        case .W1024H1024: return NSThumbnail1024x1024SizeKey
+        case .W1024: return NSThumbnail1024x1024SizeKey
         }
     }
     
@@ -202,7 +268,7 @@ private extension ThumbnailSize {
 
 // MARK: Convertible Public Extensions
 
-extension UTI: ReadableResourceConvertible {
+extension UTI: ResourceReadableConvertible {
     
     public init!(URLResource: String) {
         self.init(URLResource)
@@ -210,7 +276,7 @@ extension UTI: ReadableResourceConvertible {
     
 }
 
-extension FileType: ReadableResourceConvertible {
+extension FileType: ResourceReadableConvertible {
     
     public init!(URLResource string: String) {
         self.init(string: string)
@@ -220,17 +286,17 @@ extension FileType: ReadableResourceConvertible {
 
 #if os(OSX)
     
-    extension Quarantine: WritableResourceConvertible {
+    extension Quarantine: ResourceWritableConvertible {
 
         public init?(URLResource: AnyObject) {
-            if let dictionary = URLResource as? NSDictionary {
+            if let dictionary = URLResource as? [NSObject: AnyObject] {
                 self.init(dictionary: dictionary)
             } else {
                 return nil
             }
         }
         
-        public var resourceValue: AnyObject! {
+        public var URLResourceValue: AnyObject? {
             let dictionary = dictionaryValue
             if dictionary.isEmpty {
                 return NSNull()
@@ -242,7 +308,7 @@ extension FileType: ReadableResourceConvertible {
     
 #endif
 
-extension UbiquitousStatus: ReadableResourceConvertible {
+extension UbiquitousStatus: ResourceReadableConvertible {
     
     public init!(URLResource: String) {
         self.init(string: URLResource)
@@ -252,20 +318,20 @@ extension UbiquitousStatus: ReadableResourceConvertible {
 
 // MARK: Custom Thumbnail Dictionary Resource
 
-func ThumbnailDictionaryRead(dictionary: [String : ImageType]) -> [ThumbnailSize : ImageType]? {
+func ThumbnailDictionaryRead(dictionary: [String: ImageType]) -> [ThumbnailSize: ImageType]? {
     var ret = [ThumbnailSize : ImageType]()
     for (sizeKey, image) in dictionary {
-        if let key = ThumbnailSize(string: sizeKey) {
+        if let key = ThumbnailSize(URLResource: sizeKey) {
             ret[key] = (image as ImageType)
         }
     }
     return ret
 }
 
-func ThumbnailDictionaryWrite(dictionary: [ThumbnailSize : ImageType]) -> [String : ImageType]! {
-    var ret = [String : ImageType]()
+func ThumbnailDictionaryWrite(dictionary: [ThumbnailSize: ImageType]) -> AnyObject {
+    var ret = [String: ImageType]()
     for (size, image) in dictionary {
-        ret[size.stringValue] = image
+        ret[size.URLResourceValue] = image
     }
     return ret
 }

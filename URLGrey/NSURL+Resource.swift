@@ -10,39 +10,26 @@ import Foundation
 
 public extension NSURL {
     
-    public func getResourceValue<K, V where K: ReadableResource, V == K.ValueType>(forKey key: K) -> AnyResult<V> {
-        let keyString = key.stringValue
-
+    public func value<K: ResourceReadable, R: ResultType where K.ReadResult == R>(forResource resource: K) -> R {
+        let key = resource.key
+        
         var value: AnyObject?
         var fetchError: NSError?
-        if (getResourceValue(&value, forKey: keyString, error: &fetchError)) {
-            if let inValue = value as? K.InputType {
-                if let ret = key.read(inValue) {
-                    return success(ret)
-                }
-            }
-            
-            return failure(error(code: URLError.InvalidResourceRead(keyString)))
-        } else {
-            return failure(error(code: URLError.ReadResource(keyString), underlying: fetchError))
+        if !getResourceValue(&value, forKey: key, error: &fetchError) {
+            return K.ReadResult(failure: error(code: URLError.ResourceRead(key), underlying: fetchError))
         }
+        return resource.read(value)
     }
     
-    public func setResourceValue<K, V where K: WritableResource, V == K.ValueType, K.OriginalType: AnyObject>(value: V?, forKey key: K) -> VoidResult {
-        let keyString = key.stringValue
-        
-        // This is ugly, but `let`-ing it out separately got it mad
-        if let finalValue: AnyObject? = value.map({
-            key.write($0) as? K.OriginalType
-        }) {
+    public func setValue<K: ResourceWritable, V where K.InputValue == V>(value: V, forResource resource: K) -> VoidResult {
+        let key = resource.key
+
+        return resource.write(value).flatMap { finalValue -> VoidResult in
             var saveError: NSError?
-            if setResourceValue(finalValue, forKey: key.stringValue, error: &saveError) {
-                return success()
-            } else {
-                return failure(error(code: URLError.WriteResource(keyString), underlying: saveError))
+            if !self.setResourceValue(finalValue, forKey: key, error: &saveError) {
+                return failure(error(code: URLError.ResourceWrite(key), underlying: saveError))
             }
-        } else {
-            return failure(error(code: URLError.InvalidResourceWrite(keyString)))
+            return success()
         }
     }
     

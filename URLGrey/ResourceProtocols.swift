@@ -6,35 +6,36 @@
 //  Copyright (c) 2014 Zachary Waldowski. All rights reserved.
 //
 
-import Foundation
+// MARK: ResourceReadable
 
-// MARK: ReadableResource
-
-public protocol ReadableResource {
-    typealias OriginalType
-    typealias InputType
-    typealias ValueType
+public protocol ResourceReadable {
+    typealias ReadResult: ResultType
     
-    var stringValue: String { get }
-    func read(_: InputType) -> ValueType?
-}
-
-// MARK: WritableResource
-
-public protocol WritableResource: ReadableResource {
-    func write(_: ValueType) -> InputType!
-}
-
-// MARK: ReadableResourceConvertible
-
-public protocol ReadableResourceConvertible {
-    typealias ReadableResourceType
+    var key: String { get }
     
-    init?(URLResource: ReadableResourceType)
+    func read(_: AnyObject?) -> ReadResult
 }
 
-// MARK: WritableResourceConvertible
+// MARK: ResourceWritable
 
-public protocol WritableResourceConvertible: ReadableResourceConvertible {
-    var resourceValue: ReadableResourceType! { get }
+public protocol ResourceWritable {
+    typealias InputValue
+    
+    var key: String { get }
+    
+    func write(_: InputValue) -> ObjectResult<AnyObject>
+}
+
+// MARK: ResourceReadableConvertible
+
+public protocol ResourceReadableConvertible {
+    typealias ResourceValue
+    
+    init?(URLResource: ResourceValue)
+}
+
+// MARK: ResourceWritableConvertible
+
+public protocol ResourceWritableConvertible: ResourceReadableConvertible {
+    var URLResourceValue: AnyObject? { get }
 }
