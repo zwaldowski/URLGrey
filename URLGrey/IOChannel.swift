@@ -7,7 +7,6 @@
 //
 
 import Dispatch
-import LlamaKit
 
 public final class IOChannel: PipeSource {
     
@@ -30,11 +29,11 @@ public final class IOChannel: PipeSource {
         self.init(channel: channel)
     }
     
-    public func readUntilEnd(#queue: dispatch_queue_t, handler: Result<Data> -> ()) {
+    public func readUntilEnd(#queue: dispatch_queue_t, handler: AnyResult<Data> -> ()) {
         read(queue: queue, handler: handler)
     }
     
-    public func read(length: Int = Int.max, queue: dispatch_queue_t, handler: Result<Data> -> ()) {
+    public func read(length: Int = Int.max, queue: dispatch_queue_t, handler: AnyResult<Data> -> ()) {
         let progress = NSProgress.currentProgress().map { _ in NSProgress(totalUnitCount: Int64(length)) }
         progress?.kind = NSProgressKindFile
         progress?.setUserInfoObject(NSProgressFileOperationKindReceiving, forKey: NSProgressFileOperationKindKey)

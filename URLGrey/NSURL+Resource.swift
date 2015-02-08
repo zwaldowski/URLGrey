@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import LlamaKit
 
 public extension NSURL {
     
-    public func getResourceValue<K, V where K: ReadableResource, V == K.ValueType>(forKey key: K) -> Result<V> {
+    public func getResourceValue<K, V where K: ReadableResource, V == K.ValueType>(forKey key: K) -> AnyResult<V> {
         let keyString = key.stringValue
 
         var value: AnyObject?
@@ -29,7 +28,7 @@ public extension NSURL {
         }
     }
     
-    public func setResourceValue<K, V where K: WritableResource, V == K.ValueType, K.OriginalType: AnyObject>(value: V?, forKey key: K) -> Result<()> {
+    public func setResourceValue<K, V where K: WritableResource, V == K.ValueType, K.OriginalType: AnyObject>(value: V?, forKey key: K) -> VoidResult {
         let keyString = key.stringValue
         
         // This is ugly, but `let`-ing it out separately got it mad

@@ -7,14 +7,13 @@
 //
 
 import Dispatch
-import LlamaKit
 
 public protocol PipeSource {
     
     typealias Data: ByteCollection
 
-    func read(#length: Int, queue: dispatch_queue_t, handler: Result<Data> -> ())
-    func readUntilEnd(#queue: dispatch_queue_t, handler: Result<Data> -> ())
+    func read(#length: Int, queue: dispatch_queue_t, handler: AnyResult<Data> -> ())
+    func readUntilEnd(#queue: dispatch_queue_t, handler: AnyResult<Data> -> ())
     func close()
     
 }
