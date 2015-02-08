@@ -101,6 +101,22 @@ extension Data {
         let range = Range(start: offset, end: offset + region.endIndex)
         return (region, range)
     }
+    
+    func withUnsafeBufferPointer<R>(body: Buffer -> R) -> R {
+        var ptr = UnsafePointer<Void>.null()
+        var count = UInt(0)
+        let map = dispatch_data_create_map(data, &ptr, &count)
+        return withExtendedLifetime(map) { (_: dispatch_data_t) -> R in
+            let buffer = Buffer(start: Pointer(ptr), count: Int(count))
+            return body(buffer)
+        }
+    }
+    
+    func withMappedSubrange<R>(bounds: Range<Int>, body: Buffer -> R) -> R? {
+        let count = bounds.endIndex - bounds.startIndex
+        let subrange = self[bounds]
+        return subrange.count == count ? subrange.withUnsafeBufferPointer(body) : nil
+    }
 
 }
 
