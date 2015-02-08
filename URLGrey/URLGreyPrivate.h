@@ -19,7 +19,11 @@
 
 extern dispatch_data_t URLGreyCreateDispatchData(NSData *data);
 
+#if OS_OBJECT_USE_OBJC
+
 /// preferring this to unsafeBitcast
 NS_INLINE NSData *URLGreyBridgeDispatchData(dispatch_data_t data) {
     return (NSData *)data;
 }
+
+#endif
