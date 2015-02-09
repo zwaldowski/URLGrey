@@ -7,6 +7,7 @@
 //
 
 import Dispatch
+import Foundation
 
 public final class IOChannel: PipeSource {
     
