@@ -19,8 +19,8 @@ class IOChannelTests: XCTestCase {
     
     func testRead() {
         
-        var pattern: [Byte] = [ 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x12 ]
-        var buffer: [Byte] = Array(count: 1024 * 10, repeatedValue: Byte(0))
+        var pattern: [UInt8] = [ 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x12 ]
+        var buffer: [UInt8] = Array(count: 1024 * 10, repeatedValue: Byte(0))
         memset_pattern8(&buffer, &pattern, UInt(buffer.count))
         
         let queue = dispatch_get_global_queue(0, 0)
