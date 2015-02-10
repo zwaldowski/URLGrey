@@ -91,8 +91,8 @@ extension UTI: Hashable {
             }
         }
         
-        var stringValue: String {
-            return UTCreateStringForOSType(self)!.takeRetainedValue()
+        var stringValue: String! {
+            return UTCreateStringForOSType(self)?.takeRetainedValue() as? String
         }
         
     }
@@ -103,11 +103,11 @@ extension UTI: Hashable {
 
 private extension UTI {
     
-    func preferredTag(kind: String) -> String? {
-        return UTTypeCopyPreferredTagWithClass(identifier, kind)?.takeRetainedValue()
+    func preferredTag(kind: CFString!) -> String? {
+        return UTTypeCopyPreferredTagWithClass(identifier, kind)?.takeRetainedValue() as? String
     }
     
-    func allTags(kind: String) -> [String]? {
+    func allTags(kind: CFString!) -> [String]? {
         return UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() as? [String]
     }
     
