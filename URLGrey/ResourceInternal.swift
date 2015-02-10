@@ -185,19 +185,19 @@ private extension FileType {
             agentName = dictionary[kLSQuarantineAgentNameKey] as? String
             agentBundleIdentifier = dictionary[kLSQuarantineAgentBundleIdentifierKey] as? String
             timestamp = dictionary[kLSQuarantineTimeStampKey] as? NSDate
-            kind = Kind(string: dictionary[kLSQuarantineTypeKey] as? String)
+            kind = Kind(string: dictionary[kLSQuarantineTypeKey] as! String)
             dataURL = dictionary[kLSQuarantineDataURLKey] as? NSURL
             originURL = dictionary[kLSQuarantineOriginURLKey] as? NSURL
         }
         
         var dictionaryValue: [String: AnyObject] {
             var dictionary = [String: AnyObject]()
-            dictionary[kLSQuarantineAgentNameKey] = agentName
-            dictionary[kLSQuarantineAgentBundleIdentifierKey] = agentBundleIdentifier
-            dictionary[kLSQuarantineTimeStampKey] = timestamp
-            dictionary[kLSQuarantineTypeKey] = kind.stringValue
-            dictionary[kLSQuarantineDataURLKey] = dataURL
-            dictionary[kLSQuarantineOriginURLKey] = originURL
+            dictionary[kLSQuarantineAgentNameKey as! String] = agentName
+            dictionary[kLSQuarantineAgentBundleIdentifierKey as! String] = agentBundleIdentifier
+            dictionary[kLSQuarantineTimeStampKey as! String] = timestamp
+            dictionary[kLSQuarantineTypeKey as! String] = kind.stringValue
+            dictionary[kLSQuarantineDataURLKey as! String] = dataURL
+            dictionary[kLSQuarantineOriginURLKey as! String] = originURL
             return dictionary
         }
         
@@ -205,31 +205,27 @@ private extension FileType {
     
     private extension Quarantine.Kind {
         
-        init(string: String?) {
-            if let string = string {
-                switch string {
-                case kLSQuarantineTypeWebDownload: self = .WebDownload
-                case kLSQuarantineTypeOtherDownload: self = .OtherDownload
-                case kLSQuarantineTypeEmailAttachment: self = .EmailAttachment
-                case kLSQuarantineTypeInstantMessageAttachment: self = .InstantMessageAttachment
-                case kLSQuarantineTypeCalendarEventAttachment: self = .CalendarEventAttachment
-                case kLSQuarantineTypeOtherAttachment: self = .OtherAttachment
-                default: self = .Unknown
-                }
-            } else {
-                self = .Unknown
+        init(string: String) {
+            switch string {
+            case kLSQuarantineTypeWebDownload as! String: self = .WebDownload
+            case kLSQuarantineTypeOtherDownload as! String: self = .OtherDownload
+            case kLSQuarantineTypeEmailAttachment as! String: self = .EmailAttachment
+            case kLSQuarantineTypeInstantMessageAttachment as! String: self = .InstantMessageAttachment
+            case kLSQuarantineTypeCalendarEventAttachment as! String: self = .CalendarEventAttachment
+            case kLSQuarantineTypeOtherAttachment as! String: self = .OtherAttachment
+            default: self = .Unknown
             }
         }
         
         var stringValue: String? {
             switch self {
             case .Unknown: return nil
-            case .WebDownload: return kLSQuarantineTypeWebDownload
-            case .OtherDownload: return kLSQuarantineTypeOtherDownload
-            case .EmailAttachment: return kLSQuarantineTypeEmailAttachment
-            case .InstantMessageAttachment: return kLSQuarantineTypeInstantMessageAttachment
-            case .CalendarEventAttachment: return kLSQuarantineTypeCalendarEventAttachment
-            case .OtherAttachment: return kLSQuarantineTypeOtherAttachment
+            case .WebDownload: return kLSQuarantineTypeWebDownload as String
+            case .OtherDownload: return kLSQuarantineTypeOtherDownload as String
+            case .EmailAttachment: return kLSQuarantineTypeEmailAttachment as String
+            case .InstantMessageAttachment: return kLSQuarantineTypeInstantMessageAttachment as String
+            case .CalendarEventAttachment: return kLSQuarantineTypeCalendarEventAttachment as String
+            case .OtherAttachment: return kLSQuarantineTypeOtherAttachment as String
             }
         }
         

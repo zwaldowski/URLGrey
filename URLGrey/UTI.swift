@@ -57,7 +57,7 @@ extension UTI: Printable {
         if dynamic {
             return "Dynamic type (\(identifier))"
         }
-        return UTTypeCopyDescription(identifier).takeRetainedValue()
+        return UTTypeCopyDescription(identifier).takeRetainedValue() as! String
     }
     
 }
@@ -128,10 +128,10 @@ public extension UTI {
         private var kindValue: String {
             #if os(OSX)
                 switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension
-                case .MIME: return kUTTagClassMIMEType
-                case .Pasteboard: return kUTTagClassNSPboardType
-                case .Legacy: return kUTTagClassOSType
+                case .FilenameExtension: return kUTTagClassFilenameExtension as! String
+                case .MIME: return kUTTagClassMIMEType as! String
+                case .Pasteboard: return kUTTagClassNSPboardType as! String
+                case .Legacy: return kUTTagClassOSType as! String
                 }
             #else
                 switch self {
