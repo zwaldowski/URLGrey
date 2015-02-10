@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias Byte = UInt8
-
 public protocol ByteCollection: CollectionType {
     
     typealias Element: UnsignedIntegerType

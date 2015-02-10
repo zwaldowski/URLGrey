@@ -11,8 +11,8 @@ import Dispatch
 /// A read-only construct that conceptually models a buffer of bytes.
 public struct Data {
     
-    public typealias Buffer = UnsafeBufferPointer<Byte>
-    private typealias Pointer = UnsafePointer<Byte>
+    public typealias Buffer = UnsafeBufferPointer<UInt8>
+    private typealias Pointer = UnsafePointer<UInt8>
     private typealias BufferPairs = [(dispatch_data_t, Buffer)]
     
     var data: dispatch_data_t
@@ -151,7 +151,7 @@ extension Data: CollectionType {
         return count
     }
     
-    public subscript (index: Int) -> Byte {
+    public subscript (index: Int) -> UInt8 {
         return apply { range, buffer in
             if range.contains(index) {
                 let local = Int(index - range.start)
@@ -177,7 +177,7 @@ extension Data: Sliceable {
 
 extension Data: ByteCollection {
     
-    public typealias Element = Byte
+    public typealias Element = UInt8
     
     public mutating func append(newData: Data) {
         data = dispatch_data_create_concat(data, newData.data)
@@ -201,7 +201,7 @@ public struct DataGenerator: GeneratorType, SequenceType {
         self.init(buffersGenerator: buffers.generate())
     }
     
-    public mutating func next() -> Byte? {
+    public mutating func next() -> UInt8? {
         if let currentEl = currentGenerator?.next() {
             return currentEl
         }
