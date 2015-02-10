@@ -9,15 +9,15 @@
 import Dispatch
 import Foundation
 
-public final class IOChannel: PipeSource {
+public struct IOChannel: PipeSource {
     
     private let channel: dispatch_io_t
     
-    init(channel: dispatch_io_t) {
+    private init(channel: dispatch_io_t) {
         self.channel = channel
     }
     
-    public convenience init(fileDescriptor fd: Int32, closeWhenDone: Bool = false) {
+    public init(fileDescriptor fd: Int32, closeWhenDone: Bool = false) {
         let queue = dispatch_get_global_queue(0, 0)
         let channel = dispatch_io_create(DISPATCH_IO_STREAM, fd, queue) { error in
             if closeWhenDone {
