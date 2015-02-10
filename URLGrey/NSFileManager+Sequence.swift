@@ -8,32 +8,20 @@
 
 import Foundation
 
-extension NSDirectoryEnumerator: SequenceType {
-    
-    public func generate() -> GeneratorOf<NSURL> {
-        let generator = NSFastGenerator(self)
-        return GeneratorOf {
-            if let object: AnyObject = generator.next() {
-                let ret: NSURL = unsafeDowncast(object)
-                return ret
-            }
-            return nil
-        }
-    }
-    
-}
-
 extension NSFileManager {
     
     public func directory(URL url: NSURL, propertiesForKeys keys: [String]? = nil, options mask: NSDirectoryEnumerationOptions = nil, errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> SequenceOf<NSURL> {
         if let enumerator = enumeratorAtURL(url, includingPropertiesForKeys: keys, options: mask, errorHandler: handler.map {
-            block in return { block($0, $1) }
+            block in { block($0, $1) }
         }) {
-            return SequenceOf(enumerator)
-        } else {
-            return SequenceOf(GeneratorOf<NSURL> {
-                return nil
+            var generator = enumerator.generate()
+            return SequenceOf(GeneratorOf {
+                generator.next().map {
+                    unsafeDowncast($0)
+                }
             })
+        } else {
+            return SequenceOf(EmptyGenerator())
         }
     }
     
