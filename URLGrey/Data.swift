@@ -103,7 +103,7 @@ extension Data {
     }
     
     func withUnsafeBufferPointer<R>(body: Buffer -> R) -> R {
-        var ptr = UnsafePointer<Void>.null()
+        var ptr: UnsafePointer<Void> = nil
         var count = UInt(0)
         let map = dispatch_data_create_map(data, &ptr, &count)
         return withExtendedLifetime(map) { (_: dispatch_data_t) -> R in
