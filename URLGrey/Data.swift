@@ -175,7 +175,7 @@ extension Data: Sliceable {
     
 }
 
-extension Data: ByteCollection {
+extension Data: CollectionType {
     
     public typealias Element = UInt8
     
