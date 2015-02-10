@@ -39,6 +39,16 @@ public struct UTI {
     
 }
 
+// MARK: Legacy
+
+extension UTI {
+
+    public init(_ legacyIdentifier: CFString!) {
+        self.identifier = legacyIdentifier as String
+    }
+
+}
+
 // MARK: Printable
 
 extension UTI: Printable {
