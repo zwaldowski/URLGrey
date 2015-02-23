@@ -65,13 +65,13 @@ class ResultTests: XCTestCase {
     
     func testMapSuccessNewType() {
         let x: AnyResult<String> = success("abcd")
-        let y = x.map { countElements($0) }
+        let y = x.map(count)
         XCTAssertEqual(y.value!, 4)
     }
     
     func testMapFailureNewType() {
         let x: AnyResult<String> = failure(self.err)
-        let y = x.map { countElements($0) }
+        let y = x.map(count)
         XCTAssertEqual(y.error!, self.err)
     }
     
