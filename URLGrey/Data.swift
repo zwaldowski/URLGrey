@@ -56,12 +56,12 @@ extension Data {
     }
     
     private init<T, Owner>(unsafeWithOwnedPointer pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {
-        let count = UInt(sizeof(T) * tCount)
+        let count = sizeof(T) * tCount
         self.init(dispatch_data_create(pointer, count, queue) { [owner] in })
     }
     
     private init<T, Owner>(unsafeWithPointer pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeOwnership = .Copy) {
-        let count = UInt(sizeof(T) * tCount)
+        let count = sizeof(T) * tCount
         let destructor: (() -> ())? = {
             switch behavior {
             case .Copy: return nil
@@ -95,19 +95,18 @@ extension Data {
     }
     
     public func region(#index: Int) -> (data: Data, range: Range<Int>) {
-        var cOffset: UInt = 0
-        let region = Data(dispatch_data_copy_region(data, UInt(index), &cOffset))
-        let offset = Int(cOffset)
+        var offset = 0
+        let region = Data(dispatch_data_copy_region(data, index, &offset))
         let range = Range(start: offset, end: offset + region.endIndex)
         return (region, range)
     }
     
     func withUnsafeBufferPointer<R>(body: Buffer -> R) -> R {
         var ptr: UnsafePointer<Void> = nil
-        var count = UInt(0)
+        var count = 0
         let map = dispatch_data_create_map(data, &ptr, &count)
         return withExtendedLifetime(map) { (_: dispatch_data_t) -> R in
-            let buffer = Buffer(start: Pointer(ptr), count: Int(count))
+            let buffer = Buffer(start: Pointer(ptr), count: count)
             return body(buffer)
         }
     }
@@ -168,8 +167,8 @@ extension Data: Sliceable {
     public typealias SubSlice = Data
 
     public subscript (bounds: Range<Int>) -> SubSlice {
-        let offset = UInt(bounds.startIndex)
-        let length = UInt(bounds.endIndex - bounds.startIndex)
+        let offset = bounds.startIndex
+        let length = bounds.endIndex - bounds.startIndex
         return Data(dispatch_data_create_subrange(data, offset, length))
     }
     

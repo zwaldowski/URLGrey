@@ -42,7 +42,7 @@ public struct IOChannel: PipeSource {
             self.close()
         }
         
-        dispatch_io_read(channel, 0, UInt(length), queue) { (done, dispatchData, posixError) -> Void in
+        dispatch_io_read(channel, 0, length, queue) { (done, dispatchData, posixError) -> Void in
             let userCancelled = progress?.cancelled ?? false
             switch (userCancelled, done, posixError) {
             case (true, _, _):

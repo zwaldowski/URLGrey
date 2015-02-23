@@ -20,15 +20,15 @@ class IOChannelTests: XCTestCase {
     func testRead() {
         
         var pattern: [UInt8] = [ 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x12 ]
-        var buffer: [UInt8] = Array(count: 1024 * 10, repeatedValue: UInt8(0))
-        memset_pattern8(&buffer, &pattern, UInt(buffer.count))
+        var buffer: [UInt8] = Array(count: 1024 * 10, repeatedValue: 0)
+        memset_pattern8(&buffer, &pattern, buffer.count)
         
         let queue = dispatch_get_global_queue(0, 0)
         
         // Set up a socket pair for testing
         let (rfd, wfd) = { _ -> (Int32, Int32) in
             var pair = [Int32](count: 2, repeatedValue: 0)
-            XCTAssertEqual(socketpair(PF_LOCAL, SOCK_STREAM, 0, &pair), Int32(0), "Failed to create socket pair")
+            XCTAssertEqual(socketpair(PF_LOCAL, SOCK_STREAM, 0, &pair), 0, "Failed to create socket pair")
             return (pair[0], pair[1])
         }()
         
@@ -45,7 +45,7 @@ class IOChannelTests: XCTestCase {
                 var res = 0
                 
                 let writeNext = { () -> Bool in
-                    let ret = write(wfd, &buffer + written, UInt(min(length-written, 1024-chunk)))
+                    let ret = write(wfd, &buffer + written, min(length-written, 1024-chunk))
                     res = ret
                     return ret > 0
                 }
