@@ -156,4 +156,32 @@ class ResultTests: XCTestCase {
         XCTAssert(result.description.hasPrefix("Failure: Error Domain=domain Code=1 "))
     }
     
+    func testSuccessEquality() {
+        let result: AnyResult<String> = success("result")
+        let otherResult: AnyResult<String> = success("result")
+        
+        XCTAssert(result == otherResult)
+    }
+
+    func testFailureEquality() {
+        let result: AnyResult<String> = failure(err)
+        let otherResult: AnyResult<String> = failure(err)
+        
+        XCTAssert(result == otherResult)
+    }
+    
+    func testSuccessInequality() {
+        let result: AnyResult<String> = success("result")
+        let otherResult: AnyResult<String> = success("different result")
+        
+        XCTAssert(result != otherResult)
+    }
+    
+    func testFailureInequality() {
+        let result: AnyResult<String> = failure(err)
+        let otherResult: AnyResult<String> = failure(err2)
+        
+        XCTAssert(result != otherResult)
+    }
+    
 }
