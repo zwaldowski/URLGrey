@@ -41,7 +41,7 @@ extension Data {
         self.init(unsafeWithOwnedPointer: &array, count: array.count, owner: array)
     }
     
-    public init<T>(var slice: Slice<T>) {
+    public init<T>(var slice: ArraySlice<T>) {
         self.init(unsafeWithOwnedPointer: &slice, count: slice.count, owner: slice)
     }
     
