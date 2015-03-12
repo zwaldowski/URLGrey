@@ -21,7 +21,7 @@ class ResultTests: XCTestCase {
     let err2 = NSError(domain: "", code: 12, userInfo: nil)
     
     func testSuccessIsSuccess() {
-        let s = success(42)
+        let s: AnyResult<Int> = success(42)
         XCTAssertTrue(s.isSuccess)
     }
     
@@ -124,7 +124,8 @@ class ResultTests: XCTestCase {
     }
     
     func testCoalesceFailure() {
-        let x = failure() ?? 43
+        let r: AnyResult<Int> = failure()
+        let x = r ?? 43
         XCTAssertEqual(x, 43)
     }
     
