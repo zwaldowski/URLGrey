@@ -25,12 +25,7 @@
 		DB8469A01A86A61900C33B93 /* URLGreyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DB8469A21A86AF6A00C33B93 /* Data+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */; };
 		DB8469A31A86AF6A00C33B93 /* Data+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */; };
-		DB94851E1A60578F009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
-		DB9485231A6058D2009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
 		DB9485241A6058FA009B4848 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246051A39272000BF3533 /* URLGrey.framework */; };
-		DB9485251A6058FD009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4471A39698F00780F2F /* LlamaKit.framework */; };
-		DB9485261A605903009B4848 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE245E41A39271000BF3533 /* URLGrey.framework */; };
-		DB9485271A605905009B4848 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC8E4491A39699600780F2F /* LlamaKit.framework */; };
 		DBE2460A1A39272000BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBE2461F1A3927D600BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBE246431A3928FB00BF3533 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463B1A3928FB00BF3533 /* Error.swift */; };
@@ -84,8 +79,6 @@
 		DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLGreyPrivate.h; sourceTree = "<group>"; };
 		DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLGreyPrivate.m; sourceTree = "<group>"; };
 		DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Foundation.swift"; sourceTree = "<group>"; };
-		DBC8E4471A39698F00780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = "<group>"; };
-		DBC8E4491A39699600780F2F /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = "<group>"; };
 		DBE245E41A39271000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE245EF1A39271100BF3533 /* URLGreyTests-Mobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "URLGreyTests-Mobile.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE246051A39272000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB9485231A6058D2009B4848 /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +112,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB9485271A605905009B4848 /* LlamaKit.framework in Frameworks */,
-				DB9485261A605903009B4848 /* URLGrey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +119,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB94851E1A60578F009B4848 /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +127,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB9485241A6058FA009B4848 /* URLGrey.framework in Frameworks */,
-				DB9485251A6058FD009B4848 /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,24 +145,6 @@
 			);
 			name = I/O;
 			sourceTree = "<group>";
-		};
-		DBC8E44B1A3969AC00780F2F /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				DBC8E4491A39699600780F2F /* LlamaKit.framework */,
-			);
-			name = iOS;
-			path = Carthage/Build/iOS;
-			sourceTree = SOURCE_ROOT;
-		};
-		DBC8E44C1A3969B300780F2F /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				DBC8E4471A39698F00780F2F /* LlamaKit.framework */,
-			);
-			name = Mac;
-			path = Carthage/Build/Mac;
-			sourceTree = SOURCE_ROOT;
 		};
 		DBE245DA1A39271000BF3533 = {
 			isa = PBXGroup;
@@ -209,10 +179,10 @@
 				DBEF00A11AC473B000E1E603 /* URLError.swift */,
 				DBE246091A39272000BF3533 /* URLGrey.h */,
 				DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */,
-				DBE246411A3928FB00BF3533 /* UTI.swift */,
-				DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */,
 				DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */,
 				DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */,
+				DBE246411A3928FB00BF3533 /* UTI.swift */,
+				DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */,
 				DBE246071A39272000BF3533 /* Supporting Files */,
 			);
 			path = URLGrey;
@@ -221,8 +191,6 @@
 		DBE246071A39272000BF3533 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DBC8E44B1A3969AC00780F2F /* iOS */,
-				DBC8E44C1A3969B300780F2F /* Mac */,
 				DBE246081A39272000BF3533 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -599,10 +567,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/iOS",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -622,10 +586,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/iOS",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -640,7 +600,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/iOS",
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
@@ -658,7 +617,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/iOS",
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
@@ -677,10 +635,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/Mac",
-					"$(inherited)",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -709,10 +663,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/Mac",
-					"$(inherited)",
-				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -731,7 +681,6 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/Mac",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
@@ -753,7 +702,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Carthage/Build/Mac",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);

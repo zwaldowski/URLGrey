@@ -13,5 +13,4 @@ Pod::Spec.new do |s|
   s.source_files  = "URLGrey/*.swift"
   s.exclude_files = "Classes/Exclude"
   s.source_files  = "URLGrey/*.swift", "URLGrey/URLGreyPrivate.{h,m}"
-  s.dependency "LlamaKit", "~> 0.1.0"
 end
