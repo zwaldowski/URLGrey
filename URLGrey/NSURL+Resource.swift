@@ -10,6 +10,10 @@ import Foundation
 
 public extension NSURL {
     
+    private func noValueError(#key: String) -> NSError {
+        return error(code: URLGreyError.InvalidResourceValue, description: "Retrieving a value for \(key) on \(self) succeeded, but the value was invalid.")
+    }
+
     public func getResourceValue<K, V where K: ReadableResource, V == K.ValueType>(forKey key: K) -> Result<V> {
         var value: AnyObject?
         var error: NSError?
@@ -19,7 +23,7 @@ public extension NSURL {
                     return .Success(Box(ret))
                 }
             }
-            return .None
+            return .Failure(noValueError(key: key.key))
         } else {
             return .Failure(error!)
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0F61D21A38CEC6001911FD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0F61D11A38CEC6001911FD /* Error.swift */; };
 		DB38C05E19F9D6A300E84F18 /* NSFileManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */; };
 		DB38C05F19F9D6A300E84F18 /* NSFileManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */; };
 		DB672F7619F6B9D300E596F7 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DB672F7519F6B9D300E596F7 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +32,8 @@
 		DB672FC019F6E3B600E596F7 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FBE19F6E3B600E596F7 /* Resource.swift */; };
 		DB672FC219F6E43F00E596F7 /* ResourceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FC119F6E43F00E596F7 /* ResourceInternal.swift */; };
 		DB672FC319F6E43F00E596F7 /* ResourceInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB672FC119F6E43F00E596F7 /* ResourceInternal.swift */; };
+		DBEF009D1AC4730200E1E603 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF009C1AC4730200E1E603 /* URLError.swift */; };
+		DBEF009E1AC4730800E1E603 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF009C1AC4730200E1E603 /* URLError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB0F61D11A38CEC6001911FD /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Sequence.swift"; sourceTree = "<group>"; };
 		DB672F7019F6B9D300E596F7 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB672F7419F6B9D300E596F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 		DB672FBB19F6E32E00E596F7 /* ResourceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceProtocols.swift; sourceTree = "<group>"; };
 		DB672FBE19F6E3B600E596F7 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		DB672FC119F6E43F00E596F7 /* ResourceInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceInternal.swift; sourceTree = "<group>"; };
+		DBEF009C1AC4730200E1E603 /* URLError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,16 +132,18 @@
 		DB672F7219F6B9D300E596F7 /* URLGrey */ = {
 			isa = PBXGroup;
 			children = (
-				DB672F7519F6B9D300E596F7 /* URLGrey.h */,
 				DB672FAC19F6BE3400E596F7 /* Box.swift */,
+				DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */,
+				DB672FB819F6E32000E596F7 /* NSURL+Resource.swift */,
+				DB672FBE19F6E3B600E596F7 /* Resource.swift */,
+				DB672FC119F6E43F00E596F7 /* ResourceInternal.swift */,
+				DB672FBB19F6E32E00E596F7 /* ResourceProtocols.swift */,
+				DBEF00A51AC4782600E1E603 /* Result */,
 				DB672FAF19F6BE4B00E596F7 /* Result.swift */,
+				DBEF009C1AC4730200E1E603 /* URLError.swift */,
+				DB672F7519F6B9D300E596F7 /* URLGrey.h */,
 				DB672FB219F6BE9A00E596F7 /* UTI.swift */,
 				DB672FB519F6DDD000E596F7 /* UTI+CoreTypes.swift */,
-				DB672FBB19F6E32E00E596F7 /* ResourceProtocols.swift */,
-				DB672FC119F6E43F00E596F7 /* ResourceInternal.swift */,
-				DB672FBE19F6E3B600E596F7 /* Resource.swift */,
-				DB672FB819F6E32000E596F7 /* NSURL+Resource.swift */,
-				DB38C05D19F9D6A300E84F18 /* NSFileManager+Sequence.swift */,
 				DB672F7319F6B9D300E596F7 /* Supporting Files */,
 			);
 			path = URLGrey;
@@ -165,6 +172,14 @@
 				DB672F8119F6B9D300E596F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DBEF00A51AC4782600E1E603 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				DB0F61D11A38CEC6001911FD /* Error.swift */,
+			);
+			path = Result;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +363,8 @@
 				DB38C05E19F9D6A300E84F18 /* NSFileManager+Sequence.swift in Sources */,
 				DB672FAD19F6BE3400E596F7 /* Box.swift in Sources */,
 				DB672FC219F6E43F00E596F7 /* ResourceInternal.swift in Sources */,
+				DB0F61D21A38CEC6001911FD /* Error.swift in Sources */,
+				DBEF009D1AC4730200E1E603 /* URLError.swift in Sources */,
 				DB672FB319F6BE9A00E596F7 /* UTI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +383,7 @@
 			files = (
 				DB672FBA19F6E32000E596F7 /* NSURL+Resource.swift in Sources */,
 				DB672FB119F6BE4B00E596F7 /* Result.swift in Sources */,
+				DBEF009E1AC4730800E1E603 /* URLError.swift in Sources */,
 				DB672FB719F6DDD000E596F7 /* UTI+CoreTypes.swift in Sources */,
 				DB672FC019F6E3B600E596F7 /* Resource.swift in Sources */,
 				DB672FBD19F6E32E00E596F7 /* ResourceProtocols.swift in Sources */,
