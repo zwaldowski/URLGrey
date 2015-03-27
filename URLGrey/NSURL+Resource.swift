@@ -16,7 +16,7 @@ public extension NSURL {
         var value: AnyObject?
         var fetchError: NSError?
         if !getResourceValue(&value, forKey: key, error: &fetchError) {
-            return K.ReadResult(failure: error(code: URLError.ResourceRead(key), underlying: fetchError))
+            return failure(error(code: URLError.ResourceRead(key), underlying: fetchError))
         }
         return resource.read(value)
     }
