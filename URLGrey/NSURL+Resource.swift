@@ -24,7 +24,7 @@ public extension NSURL {
     public func setValue<K: ResourceWritable, V where K.InputValue == V>(value: V, forResource resource: K) -> VoidResult {
         let key = resource.key
 
-        return resource.write(value).flatMap { finalValue -> VoidResult in
+        return flatMap(resource.write(value)) { finalValue -> VoidResult in
             var saveError: NSError?
             if !self.setResourceValue(finalValue, forKey: key, error: &saveError) {
                 return failure(error(code: URLError.ResourceWrite(key), underlying: saveError))
