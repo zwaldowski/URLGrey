@@ -135,8 +135,8 @@ public extension UTI {
                 }
             #else
                 switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension
-                case .MIME: return kUTTagClassMIMEType
+                case .FilenameExtension: return kUTTagClassFilenameExtension as! String
+                case .MIME: return kUTTagClassMIMEType as! String
                 }
             #endif
         }
