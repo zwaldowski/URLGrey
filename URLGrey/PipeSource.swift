@@ -7,6 +7,7 @@
 //
 
 import Dispatch
+import Lustre
 
 public protocol PipeSource {
 

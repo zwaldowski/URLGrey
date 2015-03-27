@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
+import Lustre
+
 public enum IOError: ErrorRepresentable {
     
     case Unknown
@@ -32,7 +34,7 @@ public enum IOError: ErrorRepresentable {
         return URLGrey.localizedString("The I/O operation failed", comment: "I/O error description")
     }
     
-    public var failureReason: String? {
+    public var failureReason: String {
         switch self {
         case .Unknown: return URLGrey.localizedString("An unknown error occured", comment: "I/O error reason")
         case .Write: return URLGrey.localizedString("A write error occured", comment: "I/O error reason")

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
+import Lustre
+
 public enum URLError: ErrorRepresentable {
     case ResourceRead(String) // getting a resource failed
     case ResourceReadUnavailable // getting a resource succeeded, but it was empty
@@ -31,7 +33,7 @@ public enum URLError: ErrorRepresentable {
         return URLGrey.localizedString("A URL activity failed", comment: "URL error description")
     }
     
-    public var failureReason: String? {
+    public var failureReason: String {
         switch self {
         case .ResourceRead(let key):
             return URLGrey.localizedString("Retrieving a value for \(key) failed", comment: "URL error reason")

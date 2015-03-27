@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Zachary Waldowski. All rights reserved.
 //
 
+import Lustre
+
 // MARK: ResourceReadable
 
 public protocol ResourceReadable {

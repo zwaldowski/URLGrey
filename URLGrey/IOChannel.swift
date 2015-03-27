@@ -8,6 +8,7 @@
 
 import Dispatch
 import Foundation
+import Lustre
 
 public struct IOChannel: PipeSource {
     

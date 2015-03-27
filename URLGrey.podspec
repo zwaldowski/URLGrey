@@ -9,8 +9,7 @@ Pod::Spec.new do |s|
   s.social_media_url = "http://twitter.com/zwaldowski"
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.9"
-  s.source       = { :git => "https://github.com/zwaldowski/URLGrey", :tag => "v#{s.version}" }
-  s.source_files  = "URLGrey/*.swift"
-  s.exclude_files = "Classes/Exclude"
-  s.source_files  = "URLGrey/*.swift", "URLGrey/URLGreyPrivate.{h,m}"
+  s.source           = { :git => "https://github.com/zwaldowski/URLGrey", :tag => "v#{s.version}" }
+  s.source_files     = "URLGrey/*.swift", "URLGrey/URLGreyPrivate.{h,m}"
+  s.dependency "Lustre", "~> 0.5"
 end

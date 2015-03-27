@@ -5,6 +5,9 @@
       location = "group:URLGrey.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Carthage/Checkouts/Lustre/Lustre.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:URLGrey.playground">
    </FileRef>
 </Workspace>
