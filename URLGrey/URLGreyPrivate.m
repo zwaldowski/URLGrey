@@ -46,3 +46,16 @@ dispatch_data_t URLGreyCreateDispatchData(NSData *data) {
     NSData *copied = [data copy];
     return _URLGreyCreateDispatchData(copied, copied != data);
 }
+
+static void cleanupObject(void *objectAsPtr) {
+    if (objectAsPtr == NULL) { return; }
+    CFBridgingRelease(objectAsPtr);
+}
+
+pthread_key_t URLGreyCreateKeyForObject(void) {
+    pthread_key_t key;
+    if (pthread_key_create(&key, cleanupObject) != 0) {
+        assert(false);
+    }
+    return key;
+}

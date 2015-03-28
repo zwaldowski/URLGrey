@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB1F04191AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1F04181AC642EE00578D16 /* ThreadLocalStorage.swift */; };
+		DB1F041A1AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1F04181AC642EE00578D16 /* ThreadLocalStorage.swift */; };
 		DB1F041C1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */; };
 		DB1F041D1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */; };
 		DB37A7C01A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
@@ -72,6 +74,7 @@
 /* Begin PBXFileReference section */
 		DB09669E1A87254E00368038 /* URLGrey.private.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = URLGrey.private.modulemap; sourceTree = "<group>"; };
 		DB09669F1A87255600368038 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = URLGreyPrivate/module.modulemap; sourceTree = "<group>"; };
+		DB1F04181AC642EE00578D16 /* ThreadLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadLocalStorage.swift; sourceTree = "<group>"; };
 		DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Builder.swift"; sourceTree = "<group>"; };
 		DB37A7BF1A5B181A00647B9D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		DB67982E1A617F8500E1F2AF /* IOChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOChannel.swift; sourceTree = "<group>"; };
@@ -201,6 +204,7 @@
 				DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */,
 				DBE246411A3928FB00BF3533 /* UTI.swift */,
 				DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */,
+				DB1F04181AC642EE00578D16 /* ThreadLocalStorage.swift */,
 				DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */,
 				DBE246071A39272000BF3533 /* Supporting Files */,
 			);
@@ -425,6 +429,7 @@
 				DB1F041D1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
 				DBEF00AC1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DB37A7C11A5B181A00647B9D /* Data.swift in Sources */,
+				DB1F041A1AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
 				DB8469A31A86AF6A00C33B93 /* Data+Foundation.swift in Sources */,
 				DB6798301A617F8500E1F2AF /* IOChannel.swift in Sources */,
 				DBE2464E1A3928FB00BF3533 /* ResourceProtocols.swift in Sources */,
@@ -457,6 +462,7 @@
 				DB1F041C1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
 				DBEF00AB1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DB37A7C01A5B181A00647B9D /* Data.swift in Sources */,
+				DB1F04191AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
 				DB8469A21A86AF6A00C33B93 /* Data+Foundation.swift in Sources */,
 				DB67982F1A617F8500E1F2AF /* IOChannel.swift in Sources */,
 				DBE2464D1A3928FB00BF3533 /* ResourceProtocols.swift in Sources */,

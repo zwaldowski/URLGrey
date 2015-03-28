@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
-@import Dispatch;
 @import Foundation;
+@import Darwin;
 
 extern dispatch_data_t URLGreyCreateDispatchData(NSData *data);
 
@@ -19,3 +19,5 @@ NS_INLINE NSData *URLGreyBridgeDispatchData(dispatch_data_t data) {
 }
 
 #endif
+
+extern pthread_key_t URLGreyCreateKeyForObject(void);
