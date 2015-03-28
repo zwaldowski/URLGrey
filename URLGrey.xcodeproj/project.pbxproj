@@ -23,6 +23,8 @@
 		DB67983C1A6181A900E1F2AF /* IOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67983A1A6181A900E1F2AF /* IOError.swift */; };
 		DB76F1631AC5EDF000C068FC /* Lustre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB76F1621AC5EDF000C068FC /* Lustre.framework */; };
 		DB76F1641AC5EDFF00C068FC /* Lustre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB76F1621AC5EDF000C068FC /* Lustre.framework */; };
+		DB83625C1AC634D3006C894C /* NSURL+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */; };
+		DB83625D1AC634D3006C894C /* NSURL+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */; };
 		DB84699C1A86A5FA00C33B93 /* URLGreyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */; };
 		DB84699D1A86A5FB00C33B93 /* URLGreyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */; };
 		DB84699F1A86A61700C33B93 /* URLGreyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -82,6 +84,7 @@
 		DB6798371A61819900E1F2AF /* IOChannelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOChannelTests.swift; sourceTree = "<group>"; };
 		DB67983A1A6181A900E1F2AF /* IOError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOError.swift; sourceTree = "<group>"; };
 		DB76F1621AC5EDF000C068FC /* Lustre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Lustre.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+FileManager.swift"; sourceTree = "<group>"; };
 		DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLGreyPrivate.h; sourceTree = "<group>"; };
 		DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLGreyPrivate.m; sourceTree = "<group>"; };
 		DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Foundation.swift"; sourceTree = "<group>"; };
@@ -204,6 +207,7 @@
 				DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */,
 				DBE246411A3928FB00BF3533 /* UTI.swift */,
 				DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */,
+				DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */,
 				DB1F04181AC642EE00578D16 /* ThreadLocalStorage.swift */,
 				DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */,
 				DBE246071A39272000BF3533 /* Supporting Files */,
@@ -427,6 +431,7 @@
 				DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBE246481A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
 				DB1F041D1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
+				DB83625D1AC634D3006C894C /* NSURL+FileManager.swift in Sources */,
 				DBEF00AC1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DB37A7C11A5B181A00647B9D /* Data.swift in Sources */,
 				DB1F041A1AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
@@ -460,6 +465,7 @@
 				DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBE246471A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
 				DB1F041C1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
+				DB83625C1AC634D3006C894C /* NSURL+FileManager.swift in Sources */,
 				DBEF00AB1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DB37A7C01A5B181A00647B9D /* Data.swift in Sources */,
 				DB1F04191AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
