@@ -10,16 +10,14 @@ import Foundation
 
 extension NSFileManager {
     
-    public func directory(URL url: NSURL, propertiesForKeys keys: [String]? = nil, options mask: NSDirectoryEnumerationOptions = nil, errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> SequenceOf<NSURL> {
-        if let enumerator = enumeratorAtURL(url, includingPropertiesForKeys: keys, options: mask, errorHandler: handler.map {
-            block in { block($0, $1) }
-        }) {
-            var generator = enumerator.generate()
-            return SequenceOf(GeneratorOf {
-                generator.next().map {
-                    unsafeDowncast($0)
-                }
-            })
+    public func directory(URL url: NSURL, fetchResources: [_ResourceReadable]? = nil, options mask: NSDirectoryEnumerationOptions = nil, errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> SequenceOf<NSURL> {
+        let keyStrings = fetchResources?.map { $0.key as NSString }
+        let unsafeHandler = handler.map { block -> (NSURL!, NSError!) -> Bool in
+            { block($0, $1) }
+        }
+        
+        if let enumerator = enumeratorAtURL(url, includingPropertiesForKeys: keyStrings, options: mask, errorHandler: unsafeHandler) {
+            return SequenceOf(lazy(enumerator).map(unsafeDowncast))
         } else {
             return SequenceOf(EmptyGenerator())
         }

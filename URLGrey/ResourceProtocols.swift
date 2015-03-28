@@ -8,22 +8,22 @@
 
 import Lustre
 
+public protocol _ResourceReadable {
+    var key: String { get }
+}
+
 // MARK: ResourceReadable
 
-public protocol ResourceReadable {
+public protocol ResourceReadable: _ResourceReadable {
     typealias ReadResult: ResultType
-    
-    var key: String { get }
     
     func read(_: AnyObject?) -> ReadResult
 }
 
 // MARK: ResourceWritable
 
-public protocol ResourceWritable {
+public protocol ResourceWritable: ResourceReadable {
     typealias InputValue
-    
-    var key: String { get }
     
     func write(_: InputValue) -> ObjectResult<AnyObject>
 }
@@ -39,5 +39,7 @@ public protocol ResourceReadableConvertible {
 // MARK: ResourceWritableConvertible
 
 public protocol ResourceWritableConvertible: ResourceReadableConvertible {
-    var URLResourceValue: AnyObject? { get }
+    typealias ResourceObjectValue: AnyObject
+    
+    var URLResourceValue: ResourceObjectValue? { get }
 }
