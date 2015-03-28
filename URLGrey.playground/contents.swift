@@ -1,14 +1,15 @@
 // Playground - noun: a place where people can play
 
 import URLGrey
+import XCPlayground
 
-let url2 = NSURL(fileURLWithPath: "/System/Library/CoreServices", isDirectory: true)!
-let url = NSURL(fileURLWithPath: "/System/Library/CoreServices/SystemVersion.plist", isDirectory: false)!
-let uti = url.value(forResource: Resource.TypeIdentifier).value
+let coreSvcs = NSURL(fileURLWithPath: "/System/Library/CoreServices", isDirectory: true)!
+let sysVersion = coreSvcs + .File("SystemVersion", UTI.Serialized.PropertyList)
+
+let uti = sysVersion.value(forResource: Resource.TypeIdentifier).value
 let myUTI = UTI(preferredTag: .FilenameExtension("plist"))
 
-let fm = NSFileManager()
-
-for i in fm.directory(URL: url2, fetchResources: [ Resource.TypeIdentifier ], options: .SkipsSubdirectoryDescendants) {
-    println(i)
+for url in coreSvcs.contents(fetchedResources: [ Resource.TypeIdentifier ], options: .SkipsSubdirectoryDescendants) {
+    println(url)
 }
+
