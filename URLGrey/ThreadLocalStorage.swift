@@ -11,10 +11,11 @@ import URLGreyPrivate
 
 final class ThreadLocalStorage<T: AnyObject> {
     
-    private let key: pthread_key_t
+    private let key = URLGreyCreateKeyForObject()
+    private let mainThreadFallback: (() -> T)?
     
-    init() {
-        key = URLGreyCreateKeyForObject()
+    init(mainThreadFallback initializer: (() -> T)? = nil) {
+        self.mainThreadFallback = initializer
     }
     
     deinit {
@@ -22,7 +23,11 @@ final class ThreadLocalStorage<T: AnyObject> {
         pthread_key_delete(key)
     }
     
-    func getValue(@autoclosure initializer:  () -> T) -> T {
+    func getValue(@autoclosure create initializer: () -> T) -> T {
+        if let mainVersion = mainThreadFallback where NSThread.isMainThread() {
+            return mainVersion()
+        }
+        
         if let existing = value {
             return existing
         }

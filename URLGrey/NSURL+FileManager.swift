@@ -9,14 +9,14 @@
 import Foundation
 import Lustre
 
-private extension NSFileManager {
+public extension NSFileManager {
+
+    private static let storage = ThreadLocalStorage<NSFileManager> {
+        NSFileManager.defaultManager()
+    }
     
-    static let storage = ThreadLocalStorage<NSFileManager>()
     static var currentManager: NSFileManager {
-        if NSThread.isMainThread() {
-            return NSFileManager.defaultManager()
-        }
-        return storage.getValue(NSFileManager())
+        return storage.getValue(create: NSFileManager())
     }
     
 }
