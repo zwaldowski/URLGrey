@@ -4,7 +4,7 @@ import URLGrey
 import XCPlayground
 
 let coreSvcs = NSURL(fileURLWithPath: "/System/Library/CoreServices", isDirectory: true)!
-let sysVersion = coreSvcs + .File("SystemVersion", UTI.Serialized.PropertyList)
+let sysVersion = coreSvcs + .File("SystemVersion", .PropertyList)
 
 let uti = sysVersion.value(forResource: Resource.TypeIdentifier).value
 let myUTI = UTI(preferredTag: .FilenameExtension("plist"))

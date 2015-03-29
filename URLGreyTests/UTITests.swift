@@ -18,7 +18,7 @@ import XCTest
 class UTITests: XCTestCase {
     
     func testPreferredTagInitShouldntFail() {
-        let type = UTI(preferredTag: .FilenameExtension("illogicallylongfilenameextension"), conformingTo: UTI.Text.Plain)
+        let type = UTI(preferredTag: .FilenameExtension("illogicallylongfilenameextension"), conformingTo: .Plain)
         XCTAssert(type != nil)
         XCTAssertTrue(type.dynamic)
     }
