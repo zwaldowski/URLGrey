@@ -16,7 +16,7 @@ public struct _Readable<T: _ObjectiveCBridgeable>: ResourceReadable {
     
     public let key: String
     
-    public static func read(input: AnyObject?) -> AnyResult<T> {
+    public func read(input: AnyObject?) -> AnyResult<T> {
         switch input {
         case .Some(let ret as T):
             return success(ret)
@@ -25,10 +25,6 @@ public struct _Readable<T: _ObjectiveCBridgeable>: ResourceReadable {
         case .None:
             return failure(error(code: URLError.ResourceReadUnavailable))
         }
-    }
-    
-    public func read(input: AnyObject?) -> AnyResult<T> {
-        return self.dynamicType.read(input)
     }
     
 }
@@ -38,7 +34,7 @@ public struct _ReadableObject<T: AnyObject>: ResourceReadable {
     
     public let key: String
     
-    public static func read(input: AnyObject?) -> ObjectResult<T> {
+    public func read(input: AnyObject?) -> ObjectResult<T> {
         switch input {
         case .Some(let ret as T):
             return success(ret)
@@ -47,10 +43,6 @@ public struct _ReadableObject<T: AnyObject>: ResourceReadable {
         case .None:
             return failure(error(code: URLError.ResourceReadUnavailable))
         }
-    }
-    
-    public func read(input: AnyObject?) -> ObjectResult<T> {
-        return self.dynamicType.read(input)
     }
     
 }
@@ -61,7 +53,7 @@ public struct _ReadableConvert<T: ResourceReadableConvertible>: ResourceReadable
     
     public let key: String
     
-    public static func read(input: AnyObject?) -> AnyResult<T> {
+    public func read(input: AnyObject?) -> AnyResult<T> {
         switch input {
         case .Some(let value as T.ResourceValue):
             if let ret = T(URLResource: value) {
@@ -74,10 +66,6 @@ public struct _ReadableConvert<T: ResourceReadableConvertible>: ResourceReadable
             return failure(error(code: URLError.ResourceReadUnavailable))
         }
     }
-    
-    public func read(input: AnyObject?) -> AnyResult<T> {
-        return self.dynamicType.read(input)
-    }
 
 }
 
@@ -87,7 +75,7 @@ public struct _Writable<O: _ObjectiveCBridgeable, I: AnyObject>: ResourceReadabl
     public let key: String
     
     public func read(input: AnyObject?) -> AnyResult<O> {
-        return _Readable<O>.read(input)
+        return _Readable<O>(key: key).read(input)
     }
     
     public func write(input: O) -> ObjectResult<AnyObject> {
@@ -105,7 +93,7 @@ public struct _WritableObject<T: AnyObject>: ResourceReadable, ResourceWritable 
     public let key: String
     
     public func read(input: AnyObject?) -> ObjectResult<T> {
-        return _ReadableObject<T>.read(input)
+        return _ReadableObject<T>(key: key).read(input)
     }
     
     public func write(input: T) -> ObjectResult<AnyObject> {
@@ -121,7 +109,7 @@ public struct _WritableConvert<T: ResourceWritableConvertible>: ResourceReadable
     public let key: String
     
     public func read(input: AnyObject?) -> AnyResult<T> {
-        return _ReadableConvert<T>.read(input)
+        return _ReadableConvert<T>(key: key).read(input)
     }
     
     public func write(input: T) -> ObjectResult<AnyObject> {
