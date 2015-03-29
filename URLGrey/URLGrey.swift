@@ -10,7 +10,7 @@ import Foundation
 
 @objc private final class _URLGreyClassForLookup {}
 
-public struct URLGrey {
+internal struct URLGrey {
     
     static var bundle: NSBundle {
         return NSBundle(forClass: _URLGreyClassForLookup.self)
