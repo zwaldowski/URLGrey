@@ -125,18 +125,18 @@ public extension UTI {
             case Legacy(OSType)
         #endif
         
-        private var kindValue: String {
+        private var kindValue: CFString! {
             #if os(OSX)
                 switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension as! String
-                case .MIME: return kUTTagClassMIMEType as! String
-                case .Pasteboard: return kUTTagClassNSPboardType as! String
-                case .Legacy: return kUTTagClassOSType as! String
+                case .FilenameExtension: return kUTTagClassFilenameExtension
+                case .MIME: return kUTTagClassMIMEType
+                case .Pasteboard: return kUTTagClassNSPboardType
+                case .Legacy: return kUTTagClassOSType
                 }
             #else
                 switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension as! String
-                case .MIME: return kUTTagClassMIMEType as! String
+                case .FilenameExtension: return kUTTagClassFilenameExtension
+                case .MIME: return kUTTagClassMIMEType
                 }
             #endif
         }
