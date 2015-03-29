@@ -117,7 +117,7 @@ public extension NSURL {
     
     // MARK: Directory enumeration
     
-    public func contents(fetchedResources: [_ResourceReadable]? = nil, options mask: NSDirectoryEnumerationOptions = nil, errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> SequenceOf<NSURL> {
+    public func contents(fetchedResources: [ResourceType]? = nil, options mask: NSDirectoryEnumerationOptions = nil, errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> SequenceOf<NSURL> {
         return NSFileManager.currentManager.directory(URL: self, fetchResources: fetchedResources, options: mask, errorHandler: handler)
     }
 

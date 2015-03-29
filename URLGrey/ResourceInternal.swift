@@ -273,12 +273,8 @@ extension FileType: ResourceReadableConvertible {
     
     extension Quarantine: ResourceWritableConvertible {
 
-        public init?(URLResource: AnyObject) {
-            if let dictionary = URLResource as? [NSObject: AnyObject] {
-                self.init(dictionary: dictionary)
-            } else {
-                return nil
-            }
+        public init?(URLResource dictionary: [NSObject: AnyObject]) {
+            self.init(dictionary: dictionary)
         }
         
         public var URLResourceValue: AnyObject? {
