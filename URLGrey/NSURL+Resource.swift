@@ -11,7 +11,7 @@ import Lustre
 
 public extension NSURL {
     
-    func value<K: ResourceReadable, R: ResultType where K.ReadResult == R>(forResource resource: K) -> R {
+    func value<K: ResourceReadable>(forResource resource: K) -> K.ReadResult {
         let key = resource.key
         
         var value: AnyObject?
@@ -22,7 +22,7 @@ public extension NSURL {
         return resource.read(value)
     }
     
-    func setValue<K: ResourceWritable, V where K.InputValue == V>(value: V, forResource resource: K) -> VoidResult {
+    func setValue<K: ResourceWritable>(value: K.InputValue, forResource resource: K) -> VoidResult {
         let key = resource.key
 
         return flatMap(resource.write(value)) { finalValue -> VoidResult in
@@ -36,8 +36,8 @@ public extension NSURL {
 
     // MARK: Grouped convenience
     
-    static func values<K: ResourceReadable, R: ResultType where K.ReadResult == R>(forResource resource: K, URLs urls: NSURL...) -> AnyResult<[R.Value]> {
-        var results: [R.Value] = []
+    static func values<K: ResourceReadable>(forResource resource: K, URLs urls: NSURL...) -> AnyResult<[K.ReadResult.Value]> {
+        var results: [K.ReadResult.Value] = []
         results.reserveCapacity(urls.count)
         for url in urls {
             let nextResult = url.value(forResource: resource)
