@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Lustre
 
 @objc private final class _URLGreyClassForLookup {}
 
@@ -20,4 +21,8 @@ internal struct URLGrey {
         return bundle.localizedStringForKey(key, value: tableName, table: nil)
     }
     
+}
+
+func makeError<E: ErrorRepresentable>(@autoclosure getError: () -> E)(underlying: NSError) -> NSError {
+    return error(code: getError(), underlying: underlying)
 }
