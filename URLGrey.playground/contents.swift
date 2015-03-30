@@ -1,9 +1,12 @@
 // Playground - noun: a place where people can play
 
 import URLGrey
+import Lustre
 import XCPlayground
 
-let coreSvcs = NSURL(fileURLWithPath: "/System/Library/CoreServices", isDirectory: true)!
+let fm = NSFileManager()
+let sysLib = fm.URLForDirectory(.LibraryDirectory, inDomain: .SystemDomainMask, appropriateForURL: nil, create: false, error: nil)!
+let coreSvcs = sysLib + .Directory("CoreServices")
 let sysVersion = coreSvcs + .File("SystemVersion", .PropertyList)
 
 let uti = sysVersion.value(forResource: Resource.TypeIdentifier).value
@@ -13,3 +16,6 @@ for url in coreSvcs.contents(fetchedResources: [ Resource.TypeIdentifier ], opti
     println(url)
 }
 
+for i in sysVersion.ancestors {
+    println(i)
+}
