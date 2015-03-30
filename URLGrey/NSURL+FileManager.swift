@@ -67,6 +67,10 @@ public extension NSURL {
         return NSFileManager.currentManager.moveItemAtURL(self, toURL: url, error: error)
     }
     
+    private func replace(item url: NSURL, backupName: String?, options: NSFileManagerItemReplacementOptions)(resultingItemURL: AutoreleasingUnsafeMutablePointer<NSURL?>, error: NSErrorPointer) -> Bool {
+        return NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: resultingItemURL, error: error)
+    }
+
     private func link(toURL url: NSURL)(error: NSErrorPointer) -> Bool {
         return NSFileManager.currentManager.linkItemAtURL(self, toURL: url, error: error)
     }
@@ -75,6 +79,10 @@ public extension NSURL {
         return NSFileManager.currentManager.removeItemAtURL(self, error: error)
     }
     
+    private func trash(resultingItemURL: AutoreleasingUnsafeMutablePointer<NSURL?>, error: NSErrorPointer) -> Bool {
+        return NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: resultingItemURL, error: error)
+    }
+
     func makeDirectory(createIntermediates: Bool = true) -> VoidResult {
         return try(makeDirectory(createIntermediates: createIntermediates))
     }
@@ -88,13 +96,7 @@ public extension NSURL {
     }
     
     func replace(URL url: NSURL, backupName: String? = nil, options: NSFileManagerItemReplacementOptions = nil) -> ObjectResult<NSURL> {
-        var newURL: NSURL?
-        var error: NSError?
-        if NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: &newURL, error: &error) {
-            return success(newURL!)
-        } else {
-            return failure(error!)
-        }
+        return try(replace(item: url, backupName: backupName, options: options))
     }
     
     func link(toURL url: NSURL) -> VoidResult {
@@ -106,13 +108,7 @@ public extension NSURL {
     }
     
     func trash() -> ObjectResult<NSURL> {
-        var newURL: NSURL?
-        var error: NSError?
-        if NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: &newURL, error: &error) {
-            return success(newURL!)
-        } else {
-            return failure(error!)
-        }
+        return try(trash)
     }
     
     // MARK: Directory enumeration
