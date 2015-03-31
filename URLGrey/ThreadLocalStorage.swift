@@ -19,7 +19,11 @@ final class ThreadLocalStorage<T: AnyObject> {
     }
     
     deinit {
-        value = nil
+        let valuePtr = pthread_getspecific(key)
+        if valuePtr != nil {
+            let object = Unmanaged<T>.fromOpaque(COpaquePointer(valuePtr))
+            return object.release()
+        }
         pthread_key_delete(key)
     }
     
@@ -28,38 +32,15 @@ final class ThreadLocalStorage<T: AnyObject> {
             return mainVersion()
         }
         
-        if let existing = value {
-            return existing
+        let ptr = pthread_getspecific(key)
+        if ptr == nil {
+            let ret = initializer()
+            let ptr = Unmanaged.passRetained(ret)
+            pthread_setspecific(key, UnsafePointer(ptr.toOpaque()))
+            return ret
         }
         
-        let ret = initializer()
-        value = ret
-        return ret
+        return Unmanaged.fromOpaque(COpaquePointer(ptr)).takeUnretainedValue()
     }
-    
-    private var value: T? {
-        get {
-            let ptr = pthread_getspecific(key)
-            if ptr == nil { return nil }
-            
-            let object = Unmanaged<T>.fromOpaque(COpaquePointer(ptr))
-            return object.takeUnretainedValue()
-        }
-        set {
-            let old = pthread_getspecific(key)
-            
-            if let new = newValue {
-                let ptr = Unmanaged.passRetained(new)
-                pthread_setspecific(key, UnsafePointer(ptr.toOpaque()))
-            } else {
-                pthread_setspecific(key, nil)
-            }
-            
-            if old != nil {
-                let oldObject = Unmanaged<T>.fromOpaque(COpaquePointer(old))
-                return oldObject.release()
-            }
-        }
-    }
-    
+        
 }
