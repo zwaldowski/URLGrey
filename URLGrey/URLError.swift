@@ -36,7 +36,7 @@ public enum URLError: ErrorRepresentable {
     public var failureReason: String {
         switch self {
         case .ResourceRead(let key):
-            return URLGrey.localizedString("Retrieving a value for \(key) failed", comment: "URL error reason")
+            return URLGrey.localizedString(format: "Retrieving a value for %@ failed", comment: "URL error reason", key)
         case .ResourceReadUnavailable:
             return URLGrey.localizedString("No values for the given resource were available", comment: "URL error reason")
         case .ResourceReadConversion:
@@ -44,7 +44,7 @@ public enum URLError: ErrorRepresentable {
         case .ResourceWriteConversion:
             return URLGrey.localizedString("The value for writing could not be converted to the native type", comment: "URL error reason")
         case .ResourceWrite(let key):
-            return URLGrey.localizedString("Committing a value for \(key) failed", comment: "URL error reason")
+            return URLGrey.localizedString(format: "Committing a value for %@ failed", comment: "URL error reason", key)
         }
     }
     

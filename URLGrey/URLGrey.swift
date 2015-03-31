@@ -21,4 +21,8 @@ internal struct URLGrey {
         return bundle.localizedStringForKey(key, value: tableName, table: nil)
     }
     
+    static func localizedString(#format: String, tableName: String? = nil, value: String = "", comment: String, _ args: CVarArgType...) -> String {
+        return String(format: localizedString(format, tableName: tableName, value: value, comment: comment), arguments: args)
+    }
+    
 }
