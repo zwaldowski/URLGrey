@@ -54,61 +54,47 @@ public extension NSURL {
     }
 
     // MARK: File management
-    
-    private func makeDirectory(#createIntermediates: Bool)(error: NSErrorPointer) -> Bool {
-        return NSFileManager.currentManager.createDirectoryAtURL(self, withIntermediateDirectories: createIntermediates, attributes: nil, error: error)
-    }
-    
-    private func copy(toURL url: NSURL)(error: NSErrorPointer) -> Bool {
-        return NSFileManager.currentManager.copyItemAtURL(self, toURL: url, error: error)
-    }
-    
-    private func move(toURL url: NSURL)(error: NSErrorPointer) -> Bool {
-        return NSFileManager.currentManager.moveItemAtURL(self, toURL: url, error: error)
-    }
-    
-    private func replace(item url: NSURL, backupName: String?, options: NSFileManagerItemReplacementOptions)(resultingItemURL: AutoreleasingUnsafeMutablePointer<NSURL?>, error: NSErrorPointer) -> Bool {
-        return NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: resultingItemURL, error: error)
-    }
-
-    private func link(toURL url: NSURL)(error: NSErrorPointer) -> Bool {
-        return NSFileManager.currentManager.linkItemAtURL(self, toURL: url, error: error)
-    }
-    
-    private func remove(error: NSErrorPointer) -> Bool {
-        return NSFileManager.currentManager.removeItemAtURL(self, error: error)
-    }
-    
-    private func trash(resultingItemURL: AutoreleasingUnsafeMutablePointer<NSURL?>, error: NSErrorPointer) -> Bool {
-        return NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: resultingItemURL, error: error)
-    }
 
     func makeDirectory(createIntermediates: Bool = true) -> VoidResult {
-        return try(makeDirectory(createIntermediates: createIntermediates))
+        return try {
+            NSFileManager.currentManager.createDirectoryAtURL(self, withIntermediateDirectories: createIntermediates, attributes: nil, error: $0)
+        }
     }
     
     func copy(toURL url: NSURL) -> VoidResult {
-        return try(copy(toURL: url))
+        return try {
+            NSFileManager.currentManager.copyItemAtURL(self, toURL: url, error: $0)
+        }
     }
     
     func move(toURL url: NSURL) -> VoidResult {
-        return try(move(toURL: url))
+        return try {
+            NSFileManager.currentManager.moveItemAtURL(self, toURL: url, error: $0)
+        }
     }
     
     func replace(URL url: NSURL, backupName: String? = nil, options: NSFileManagerItemReplacementOptions = nil) -> ObjectResult<NSURL> {
-        return try(replace(item: url, backupName: backupName, options: options))
+        return try {
+            NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: $0, error: $1)
+        }
     }
     
     func link(toURL url: NSURL) -> VoidResult {
-        return try(link(toURL: url))
+        return try {
+            NSFileManager.currentManager.linkItemAtURL(self, toURL: url, error: $0)
+        }
     }
     
     func remove() -> VoidResult {
-        return try(remove)
+        return try {
+            NSFileManager.currentManager.removeItemAtURL(self, error: $0)
+        }
     }
     
     func trash() -> ObjectResult<NSURL> {
-        return try(trash)
+        return try {
+            NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: $0, error: $1)
+        }
     }
     
     // MARK: Directory enumeration
