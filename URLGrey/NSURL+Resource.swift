@@ -22,20 +22,13 @@ public extension NSURL {
         return resource.read(value)
     }
     
-    private func setResourceValue(value: AnyObject, key: String)(error: NSErrorPointer) -> Bool {
-        let toNull: AnyObject?
-        if value === NSNull() {
-            toNull = nil
-        } else {
-            toNull = value
-        }
-        return setResourceValue(toNull, forKey: key, error: error)
-    }
-    
     func setValue<K: ResourceWritable>(value: K.InputValue, forResource resource: K) -> VoidResult {
         let key = resource.key
-        return resource.write(value) >>== {
-            try(makeError: makeError(URLError.ResourceWrite(key)), setResourceValue($0, key: key))
+        return resource.write(value) >>== { obj in
+            return try(makeError: makeError(URLError.ResourceWrite(key))) {
+                let toNull: AnyObject? = (obj !== NSNull()) ? obj : nil
+                return setResourceValue(toNull, forKey: key, error: $0)
+            }
         }
     }
 
