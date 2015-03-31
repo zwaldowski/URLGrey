@@ -25,7 +25,9 @@ public extension NSURL {
     func setValue<K: ResourceWritable>(value: K.InputValue, forResource resource: K) -> VoidResult {
         let key = resource.key
         return resource.write(value) >>== { obj in
-            return try(makeError: makeError(URLError.ResourceWrite(key))) {
+            return try(makeError: {
+                return error(code: URLError.ResourceWrite(key), underlying: $0)
+            }) {
                 let toNull: AnyObject? = (obj !== NSNull()) ? obj : nil
                 return setResourceValue(toNull, forKey: key, error: $0)
             }

@@ -22,7 +22,3 @@ internal struct URLGrey {
     }
     
 }
-
-func makeError<E: ErrorRepresentable>(@autoclosure getError: () -> E)(underlying: NSError) -> NSError {
-    return error(code: getError(), underlying: underlying)
-}
