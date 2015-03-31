@@ -49,10 +49,10 @@ public extension NSURL {
     
     // MARK: Relationships
     
-    // TODO: backport and wrap
-    // func getRelationship(outRelationship: UnsafeMutablePointer<NSURLRelationship>, ofDirectoryAtURL directoryURL: NSURL, toItemAtURL otherURL: NSURL, error: NSErrorPointer) -> Bool
-    // func getRelationship(outRelationship: UnsafeMutablePointer<NSURLRelationship>, ofDirectory directory: NSSearchPathDirectory, inDomain domainMask: NSSearchPathDomainMask, toItemAtURL url: NSURL, error: NSErrorPointer) -> Bool
-    
+    func relationship(with item: NSURL) -> AnyResult<NSURLRelationship> {
+        return NSFileManager.currentManager.relationship(directory: self, toItem: item)
+    }
+
     // MARK: File management
     
     private func makeDirectory(#createIntermediates: Bool)(error: NSErrorPointer) -> Bool {
