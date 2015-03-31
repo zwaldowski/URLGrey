@@ -27,7 +27,7 @@ public protocol ResourceReadable: ResourceType {
 
 /// Common protocol for any resource that can be written
 public protocol ResourceWritable: ResourceReadable {
-    typealias InputValue
+    typealias InputValue = ReadResult.Value
     
     func write(_: InputValue) -> ObjectResult<AnyObject>
 }

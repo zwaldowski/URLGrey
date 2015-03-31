@@ -55,12 +55,10 @@ public struct _ReadableConvert<T: ResourceReadableConvertible>: ResourceReadable
     
     public func read(input: AnyObject?) -> AnyResult<T> {
         switch input {
-        case .Some(let value as T.ResourceValue):
-            if let ret = T(URLResource: value) {
+        case .Some(let value):
+            if let value = value as? T.ResourceValue, ret = T(URLResource: value) {
                 return success(ret)
             }
-            return failure(error(code: URLError.ResourceReadConversion))
-        case .Some:
             return failure(error(code: URLError.ResourceReadConversion))
         case .None:
             return failure(error(code: URLError.ResourceReadUnavailable))
@@ -70,7 +68,7 @@ public struct _ReadableConvert<T: ResourceReadableConvertible>: ResourceReadable
 }
 
 /// Read-write values that can cross the Objective-C bridge (`String`, `Int`)
-public struct _Writable<O: _ObjectiveCBridgeable, I: AnyObject>: ResourceReadable, ResourceWritable {
+public struct _Writable<O: _ObjectiveCBridgeable>: ResourceWritable {
     
     public let key: String
     
@@ -79,7 +77,7 @@ public struct _Writable<O: _ObjectiveCBridgeable, I: AnyObject>: ResourceReadabl
     }
     
     public func write(input: O) -> ObjectResult<AnyObject> {
-        if let ret = input as? I {
+        if let ret: AnyObject = input as? AnyObject {
             return success(ret)
         }
         return failure(error(code: URLError.ResourceWriteConversion))
@@ -129,12 +127,10 @@ public struct _WritableOf<O, I: _ObjectiveCBridgeable>: ResourceReadable, Resour
     
     public func read(input: AnyObject?) -> AnyResult<O> {
         switch input {
-        case .Some(let value as I):
-            if let ret = reading(value) {
+        case .Some(let value):
+            if let converted = value as? I, ret = reading(converted) {
                 return success(ret)
             }
-            return failure(error(code: URLError.ResourceReadConversion))
-        case .Some:
             return failure(error(code: URLError.ResourceReadConversion))
         case .None:
             return failure(error(code: URLError.ResourceReadUnavailable))
@@ -166,6 +162,13 @@ private extension FileType {
     
 }
 
+private func ~=(inner: CFString!, outer: CFString!) -> Bool {
+    if let outer = outer, inner = inner {
+        return CFEqual(outer, inner) == 1
+    }
+    return false
+}
+
 #if os(OSX)
     
     private extension Quarantine {
@@ -174,19 +177,19 @@ private extension FileType {
             agentName = dictionary[kLSQuarantineAgentNameKey] as? String
             agentBundleIdentifier = dictionary[kLSQuarantineAgentBundleIdentifierKey] as? String
             timestamp = dictionary[kLSQuarantineTimeStampKey] as? NSDate
-            kind = Kind(string: dictionary[kLSQuarantineTypeKey] as! String)
+            kind = Kind(string: dictionary[kLSQuarantineTypeKey] as? String)
             dataURL = dictionary[kLSQuarantineDataURLKey] as? NSURL
             originURL = dictionary[kLSQuarantineOriginURLKey] as? NSURL
         }
         
-        var dictionaryValue: [String: AnyObject] {
-            var dictionary = [String: AnyObject]()
-            dictionary[kLSQuarantineAgentNameKey as! String] = agentName
-            dictionary[kLSQuarantineAgentBundleIdentifierKey as! String] = agentBundleIdentifier
-            dictionary[kLSQuarantineTimeStampKey as! String] = timestamp
-            dictionary[kLSQuarantineTypeKey as! String] = kind.stringValue
-            dictionary[kLSQuarantineDataURLKey as! String] = dataURL
-            dictionary[kLSQuarantineOriginURLKey as! String] = originURL
+        var dictionaryValue: [NSObject: AnyObject] {
+            var dictionary = [NSObject: AnyObject]()
+            dictionary[kLSQuarantineAgentNameKey] = agentName
+            dictionary[kLSQuarantineAgentBundleIdentifierKey] = agentBundleIdentifier
+            dictionary[kLSQuarantineTimeStampKey] = timestamp
+            dictionary[kLSQuarantineTypeKey] = kind.stringValue
+            dictionary[kLSQuarantineDataURLKey] = dataURL
+            dictionary[kLSQuarantineOriginURLKey] = originURL
             return dictionary
         }
         
@@ -194,27 +197,27 @@ private extension FileType {
     
     private extension Quarantine.Kind {
         
-        init(string: String) {
+        init(string: CFString!) {
             switch string {
-            case kLSQuarantineTypeWebDownload as! String: self = .WebDownload
-            case kLSQuarantineTypeOtherDownload as! String: self = .OtherDownload
-            case kLSQuarantineTypeEmailAttachment as! String: self = .EmailAttachment
-            case kLSQuarantineTypeInstantMessageAttachment as! String: self = .InstantMessageAttachment
-            case kLSQuarantineTypeCalendarEventAttachment as! String: self = .CalendarEventAttachment
-            case kLSQuarantineTypeOtherAttachment as! String: self = .OtherAttachment
+            case kLSQuarantineTypeWebDownload: self = .WebDownload
+            case kLSQuarantineTypeOtherDownload: self = .OtherDownload
+            case kLSQuarantineTypeEmailAttachment: self = .EmailAttachment
+            case kLSQuarantineTypeInstantMessageAttachment: self = .InstantMessageAttachment
+            case kLSQuarantineTypeCalendarEventAttachment: self = .CalendarEventAttachment
+            case kLSQuarantineTypeOtherAttachment: self = .OtherAttachment
             default: self = .Unknown
             }
         }
         
-        var stringValue: String? {
+        var stringValue: CFString! {
             switch self {
             case .Unknown: return nil
-            case .WebDownload: return kLSQuarantineTypeWebDownload as String
-            case .OtherDownload: return kLSQuarantineTypeOtherDownload as String
-            case .EmailAttachment: return kLSQuarantineTypeEmailAttachment as String
-            case .InstantMessageAttachment: return kLSQuarantineTypeInstantMessageAttachment as String
-            case .CalendarEventAttachment: return kLSQuarantineTypeCalendarEventAttachment as String
-            case .OtherAttachment: return kLSQuarantineTypeOtherAttachment as String
+            case .WebDownload: return kLSQuarantineTypeWebDownload
+            case .OtherDownload: return kLSQuarantineTypeOtherDownload
+            case .EmailAttachment: return kLSQuarantineTypeEmailAttachment
+            case .InstantMessageAttachment: return kLSQuarantineTypeInstantMessageAttachment
+            case .CalendarEventAttachment: return kLSQuarantineTypeCalendarEventAttachment
+            case .OtherAttachment: return kLSQuarantineTypeOtherAttachment
             }
         }
         

@@ -108,7 +108,7 @@ public struct Resource {
     public static var IsWritable:                _Readable<Bool>                 { return _Readable(key: NSURLIsWritableKey) }
     public static var IsExecutable:              _Readable<Bool>                 { return _Readable(key: NSURLIsExecutableKey) }
     public static var FileSecurity:              _WritableObject<NSFileSecurity> { return _WritableObject(key: NSURLFileSecurityKey) }
-    public static var IsExcludedFromBackup:      _Writable<Bool, NSNumber>       { return _Writable(key: NSURLIsExcludedFromBackupKey) }
+    public static var IsExcludedFromBackup:      _Writable<Bool>                 { return _Writable(key: NSURLIsExcludedFromBackupKey) }
     public static var Path:                      _Readable<String>               { return _Readable(key: NSURLPathKey) }
     public static var IsMountTrigger:            _Readable<Bool>                 { return _Readable(key: NSURLIsMountTriggerKey) }
     public static var GenerationIdentifier:      _ReadableObject<OpaqueType>     { return _ReadableObject(key: NSURLGenerationIdentifierKey) }
@@ -117,7 +117,7 @@ public struct Resource {
     public static var FileClass:                 _ReadableConvert<FileType>      { return _ReadableConvert(key: NSURLFileResourceTypeKey) }
     
     #if os(OSX)
-    public static var TagNames:                  _Writable<[String], NSArray> { return _Writable(key: NSURLTagNamesKey) }
+    public static var TagNames:                  _Writable<[String]>          { return _Writable(key: NSURLTagNamesKey) }
     public static var QuarantineAttributes:      _WritableConvert<Quarantine> { return _WritableConvert(key: NSURLQuarantinePropertiesKey) }
     public static var ThumbnailImage:            _ReadableObject<NSImage>     { return _ReadableObject(key: NSURLThumbnailKey) }
     #endif
@@ -135,37 +135,37 @@ public struct Resource {
     }
     
     public struct Volume {
-        public static var LocalizedFormatDescription:  _Readable<String>           { return _Readable(key: NSURLVolumeLocalizedFormatDescriptionKey) }
-        public static var TotalCapacity:               _Readable<Int>              { return _Readable(key: NSURLVolumeTotalCapacityKey) }
-        public static var AvailableCapacity:           _Readable<Int>              { return _Readable(key: NSURLVolumeAvailableCapacityKey) }
-        public static var ResourceCount:               _Readable<Int>              { return _Readable(key: NSURLVolumeResourceCountKey) }
-        public static var SupportsPersistentIDs:       _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsPersistentIDsKey) }
-        public static var SupportsSymbolicLinks:       _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsHardLinksKey) }
-        public static var SupportsHardLinks:           _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsJournalingKey) }
-        public static var SupportsJournaling:          _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsJournalingKey) }
-        public static var IsJournaling:                _Readable<Bool>             { return _Readable(key: NSURLVolumeIsJournalingKey) }
-        public static var SupportsSparseFiles:         _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsSparseFilesKey) }
-        public static var SupportsZeroRuns:            _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsZeroRunsKey) }
-        public static var SupportsCaseSensitiveNames:  _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsCaseSensitiveNamesKey) }
-        public static var SupportsCasePreservedNames:  _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsCasePreservedNamesKey) }
-        public static var SupportsRootDirectoryDates:  _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsRootDirectoryDatesKey) }
-        public static var SupportsVolumeSizes:         _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsVolumeSizesKey) }
-        public static var SupportsRenaming:            _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsRenamingKey) }
-        public static var SupportsAdvisoryFileLocking: _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsAdvisoryFileLockingKey) }
-        public static var SupportsExtendedSecurity:    _Readable<Bool>             { return _Readable(key: NSURLVolumeSupportsExtendedSecurityKey) }
-        public static var IsBrowsable:                 _Readable<Bool>             { return _Readable(key: NSURLVolumeIsBrowsableKey) }
-        public static var MaximumFileSize:             _Readable<Int>              { return _Readable(key: NSURLVolumeMaximumFileSizeKey) }
-        public static var IsEjectable:                 _Readable<Bool>             { return _Readable(key: NSURLVolumeIsEjectableKey) }
-        public static var IsRemovable:                 _Readable<Bool>             { return _Readable(key: NSURLVolumeIsRemovableKey) }
-        public static var IsInternal:                  _Readable<Bool>             { return _Readable(key: NSURLVolumeIsInternalKey) }
-        public static var IsAutomounted:               _Readable<Bool>             { return _Readable(key: NSURLVolumeIsAutomountedKey) }
-        public static var IsLocal:                     _Readable<Bool>             { return _Readable(key: NSURLVolumeIsLocalKey) }
-        public static var IsReadOnly:                  _Readable<Bool>             { return _Readable(key: NSURLVolumeIsReadOnlyKey) }
-        public static var CreationDate:                _ReadableObject<NSDate>     { return _ReadableObject(key: NSURLVolumeCreationDateKey) }
-        public static var URLForRemounting:            _ReadableObject<NSURL>      { return _ReadableObject(key: NSURLVolumeURLForRemountingKey) }
-        public static var UUIDString:                  _Readable<String>           { return _Readable(key: NSURLVolumeUUIDStringKey) }
-        public static var Name:                        _Writable<String, NSString> { return _Writable(key: NSURLVolumeNameKey) }
-        public static var LocalizedName:               _Readable<String>           { return _Readable(key: NSURLVolumeLocalizedNameKey) }
+        public static var LocalizedFormatDescription:  _Readable<String>       { return _Readable(key: NSURLVolumeLocalizedFormatDescriptionKey) }
+        public static var TotalCapacity:               _Readable<Int>          { return _Readable(key: NSURLVolumeTotalCapacityKey) }
+        public static var AvailableCapacity:           _Readable<Int>          { return _Readable(key: NSURLVolumeAvailableCapacityKey) }
+        public static var ResourceCount:               _Readable<Int>          { return _Readable(key: NSURLVolumeResourceCountKey) }
+        public static var SupportsPersistentIDs:       _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsPersistentIDsKey) }
+        public static var SupportsSymbolicLinks:       _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsHardLinksKey) }
+        public static var SupportsHardLinks:           _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsJournalingKey) }
+        public static var SupportsJournaling:          _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsJournalingKey) }
+        public static var IsJournaling:                _Readable<Bool>         { return _Readable(key: NSURLVolumeIsJournalingKey) }
+        public static var SupportsSparseFiles:         _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsSparseFilesKey) }
+        public static var SupportsZeroRuns:            _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsZeroRunsKey) }
+        public static var SupportsCaseSensitiveNames:  _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsCaseSensitiveNamesKey) }
+        public static var SupportsCasePreservedNames:  _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsCasePreservedNamesKey) }
+        public static var SupportsRootDirectoryDates:  _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsRootDirectoryDatesKey) }
+        public static var SupportsVolumeSizes:         _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsVolumeSizesKey) }
+        public static var SupportsRenaming:            _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsRenamingKey) }
+        public static var SupportsAdvisoryFileLocking: _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsAdvisoryFileLockingKey) }
+        public static var SupportsExtendedSecurity:    _Readable<Bool>         { return _Readable(key: NSURLVolumeSupportsExtendedSecurityKey) }
+        public static var IsBrowsable:                 _Readable<Bool>         { return _Readable(key: NSURLVolumeIsBrowsableKey) }
+        public static var MaximumFileSize:             _Readable<Int>          { return _Readable(key: NSURLVolumeMaximumFileSizeKey) }
+        public static var IsEjectable:                 _Readable<Bool>         { return _Readable(key: NSURLVolumeIsEjectableKey) }
+        public static var IsRemovable:                 _Readable<Bool>         { return _Readable(key: NSURLVolumeIsRemovableKey) }
+        public static var IsInternal:                  _Readable<Bool>         { return _Readable(key: NSURLVolumeIsInternalKey) }
+        public static var IsAutomounted:               _Readable<Bool>         { return _Readable(key: NSURLVolumeIsAutomountedKey) }
+        public static var IsLocal:                     _Readable<Bool>         { return _Readable(key: NSURLVolumeIsLocalKey) }
+        public static var IsReadOnly:                  _Readable<Bool>         { return _Readable(key: NSURLVolumeIsReadOnlyKey) }
+        public static var CreationDate:                _ReadableObject<NSDate> { return _ReadableObject(key: NSURLVolumeCreationDateKey) }
+        public static var URLForRemounting:            _ReadableObject<NSURL>  { return _ReadableObject(key: NSURLVolumeURLForRemountingKey) }
+        public static var UUIDString:                  _Readable<String>       { return _Readable(key: NSURLVolumeUUIDStringKey) }
+        public static var Name:                        _Writable<String>       { return _Writable(key: NSURLVolumeNameKey) }
+        public static var LocalizedName:               _Readable<String>       { return _Readable(key: NSURLVolumeLocalizedNameKey) }
     }
     
     public struct UbiquitousItem {
