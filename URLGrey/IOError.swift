@@ -8,6 +8,8 @@
 
 import Lustre
 
+// MARK: I/O Errors
+
 public enum IOError: ErrorRepresentable {
     
     case Unknown

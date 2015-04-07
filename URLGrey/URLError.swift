@@ -8,6 +8,8 @@
 
 import Lustre
 
+// MARK: URL Resource Errors
+
 public enum URLError: ErrorRepresentable {
     case ResourceRead(String) // getting a resource failed
     case ResourceReadUnavailable // getting a resource succeeded, but it was empty

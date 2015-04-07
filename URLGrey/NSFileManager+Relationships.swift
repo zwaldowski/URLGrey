@@ -22,6 +22,8 @@ private extension AnyResult {
     
 }
 
+/// MARK: Relationship Calculating
+
 public extension NSFileManager {
     
     private static let hasNativeGetRelationship: Bool = {

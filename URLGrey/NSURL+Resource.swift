@@ -9,6 +9,8 @@
 import Foundation
 import Lustre
 
+// MARK: Resource Manipulation
+
 public extension NSURL {
     
     func value<K: ResourceReadable>(forResource resource: K) -> K.ReadResult {

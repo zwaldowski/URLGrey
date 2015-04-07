@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: Directory Enumeration
+
 extension NSFileManager {
     
     public func directory(URL url: NSURL, fetchResources: [ResourceType]? = nil, options mask: NSDirectoryEnumerationOptions = nil, errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> SequenceOf<NSURL> {

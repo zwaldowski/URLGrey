@@ -9,6 +9,8 @@
 import Foundation
 import Lustre
 
+// MARK: Result Types
+
 public enum URLAncestorResult: ResultType {
     case Success(NSURL)
     case VolumeRoot(NSURL)
@@ -96,6 +98,8 @@ public struct URLAncestorsSequence: SequenceType {
     }
     
 }
+
+// MARK: URL navigation
 
 public extension NSURL {
     

@@ -8,13 +8,14 @@
 
 import Lustre
 
+// MARK: URL Resources
 
 /// Common protocol for any file resource
 public protocol ResourceType {
     var key: String { get }
 }
 
-// MARK: ResourceReadable
+// MARK: Resource Prototypes
 
 /// Common protocol for any resource that can be read
 public protocol ResourceReadable: ResourceType {
@@ -23,8 +24,6 @@ public protocol ResourceReadable: ResourceType {
     func read(_: AnyObject?) -> ReadResult
 }
 
-// MARK: ResourceWritable
-
 /// Common protocol for any resource that can be written
 public protocol ResourceWritable: ResourceReadable {
     typealias InputValue = ReadResult.Value
@@ -32,7 +31,7 @@ public protocol ResourceWritable: ResourceReadable {
     func write(_: InputValue) -> ObjectResult<AnyObject>
 }
 
-// MARK: ResourceReadableConvertible
+// MARK: Resource Conversion
 
 /// Protocol for custom resource types further refined from Cocoa resources
 public protocol ResourceReadableConvertible {
@@ -40,8 +39,6 @@ public protocol ResourceReadableConvertible {
     
     init?(URLResource: ResourceValue)
 }
-
-// MARK: ResourceWritableConvertible
 
 /// Protocol for custom resource types to be converted back to Cocoa types
 public protocol ResourceWritableConvertible: ResourceReadableConvertible {
