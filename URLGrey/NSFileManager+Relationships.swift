@@ -35,23 +35,24 @@ public extension NSFileManager {
             return try { getRelationship($0, ofDirectoryAtURL: directoryURL, toItemAtURL: itemURL, error: $1) }
         }
         
-        if let isDir = directoryURL.value(forResource: Resource.IsDirectory).bimap({
+        if let isDir = directoryURL.value(forResource: .IsDirectory).bimap({
             $0 ? nil : success(NSURLRelationship.Other)
         }) { return isDir }
         
-        let fileIDs = NSURL.values(forResource: Resource.FileIdentifier, URLs: directoryURL, itemURL)
+        let fileIDs = NSURL.values(forResource: .FileIdentifier, URLs: directoryURL, itemURL)
         if let areSame = fileIDs.bimap({
             return $0[0].isEqual($0[1]) ? success(NSURLRelationship.Same) : nil
         }) { return areSame }
         
         let directoryID = fileIDs.value[0]
         
-        if let sameVolume = NSURL.values(forResource: Resource.VolumeIdentifier, URLs: directoryURL, itemURL).bimap({
+        if let sameVolume = NSURL.values(forResource: .VolumeIdentifier, URLs: directoryURL, itemURL).bimap({
             $0[0].isEqual($0[1]) ? nil : success(NSURLRelationship.Other)
         }) { return sameVolume }
         
         for parentResult in itemURL.ancestors {
-            switch (parentResult, parentResult.value?.value(forResource: Resource.FileIdentifier)) {
+            let identifier = map(parentResult.value) { $0.value(forResource: .FileIdentifier) }
+            switch (parentResult, identifier) {
             case (_, .Some(.Success(let parentID))) where parentID.isEqual(directoryID):
                 return success(.Contains)
             case (.Failure(let error), _):

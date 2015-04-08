@@ -61,7 +61,7 @@ class RelationshipTests: XCTestCase {
     }
     
     func testRelationshipVolume() {
-        let volume = fileURL.value(forResource: Resource.VolumeURL)
+        let volume = fileURL.value(forResource: .VolumeURL)
         XCTAssert(fm.relationship(directory: volume.value, toItem: fileURL) == success(.Contains))
     }
     

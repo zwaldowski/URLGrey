@@ -32,7 +32,7 @@ public extension NSURL {
     }
     
     var isDirectory: Bool {
-        return value(forResource: Resource.IsDirectory).value ?? false
+        return value(forResource: .IsDirectory).value ?? false
     }
     
     func withCurrentDirectory<Result>(body: NSFileManager -> Result) -> Result? {

@@ -66,7 +66,7 @@ public struct URLAncestorsGenerator: GeneratorType {
         if let current = currentURL {
             currentURL = nil
             
-            let currentIsParent = current.value(forResource: Resource.IsVolume)
+            let currentIsParent = current.value(forResource: .IsVolume)
             switch currentIsParent {
             case .Success(let value as Bool) where value == true:
                 return .VolumeRoot(current)
@@ -75,7 +75,7 @@ public struct URLAncestorsGenerator: GeneratorType {
             default: break
             }
             
-            return current.value(forResource: Resource.ParentDirectoryURL) >>== { url -> URLAncestorResult in
+            return current.value(forResource: .ParentDirectoryURL) >>== { url -> URLAncestorResult in
                 self.currentURL = url
                 return .Success(current)
             }
