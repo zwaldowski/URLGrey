@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "URLGrey"
-  s.version = "0.1.0"
+  s.version = "0.2.0"
   s.summary = "Delightful I/O and file management in Swift."
   s.description = "Delightful I/O and file management in Swift, building on Cocoa paradigms and Swift idioms to encourage modern practices for files."
   s.homepage = "https://github.com/zwaldowski/URLGrey"
@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.9"
   s.source = { :git => "https://github.com/zwaldowski/URLGrey.git", :tag => "v#{s.version}" }
   s.source_files = "URLGrey/*.swift", "URLGrey/URLGreyBridged.{h,m}"
-  s.dependency "Lustre", "~> 0.5"
+  s.dependency "Lustre", "~> 0.6"
 end
