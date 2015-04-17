@@ -25,10 +25,10 @@
 		DB76F1641AC5EDFF00C068FC /* Lustre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB76F1621AC5EDF000C068FC /* Lustre.framework */; };
 		DB83625C1AC634D3006C894C /* NSURL+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */; };
 		DB83625D1AC634D3006C894C /* NSURL+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */; };
-		DB84699C1A86A5FA00C33B93 /* URLGreyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */; };
-		DB84699D1A86A5FB00C33B93 /* URLGreyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */; };
-		DB84699F1A86A61700C33B93 /* URLGreyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		DB8469A01A86A61900C33B93 /* URLGreyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		DB84699C1A86A5FA00C33B93 /* URLGreyBridged.m in Sources */ = {isa = PBXBuildFile; fileRef = DB84699B1A86A49B00C33B93 /* URLGreyBridged.m */; };
+		DB84699D1A86A5FB00C33B93 /* URLGreyBridged.m in Sources */ = {isa = PBXBuildFile; fileRef = DB84699B1A86A49B00C33B93 /* URLGreyBridged.m */; };
+		DB84699F1A86A61700C33B93 /* URLGreyBridged.h in Headers */ = {isa = PBXBuildFile; fileRef = DB84699A1A86A49B00C33B93 /* URLGreyBridged.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB8469A01A86A61900C33B93 /* URLGreyBridged.h in Headers */ = {isa = PBXBuildFile; fileRef = DB84699A1A86A49B00C33B93 /* URLGreyBridged.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB8469A21A86AF6A00C33B93 /* Data+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */; };
 		DB8469A31A86AF6A00C33B93 /* Data+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */; };
 		DB9485241A6058FA009B4848 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246051A39272000BF3533 /* URLGrey.framework */; };
@@ -82,8 +82,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DB09669E1A87254E00368038 /* URLGrey.private.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = URLGrey.private.modulemap; sourceTree = "<group>"; };
-		DB09669F1A87255600368038 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = URLGreyPrivate/module.modulemap; sourceTree = "<group>"; };
 		DB1F04181AC642EE00578D16 /* ThreadLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadLocalStorage.swift; sourceTree = "<group>"; };
 		DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Builder.swift"; sourceTree = "<group>"; };
 		DB37A7BF1A5B181A00647B9D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -93,8 +91,8 @@
 		DB67983A1A6181A900E1F2AF /* IOError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOError.swift; sourceTree = "<group>"; };
 		DB76F1621AC5EDF000C068FC /* Lustre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Lustre.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+FileManager.swift"; sourceTree = "<group>"; };
-		DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLGreyPrivate.h; sourceTree = "<group>"; };
-		DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLGreyPrivate.m; sourceTree = "<group>"; };
+		DB84699A1A86A49B00C33B93 /* URLGreyBridged.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLGreyBridged.h; sourceTree = "<group>"; };
+		DB84699B1A86A49B00C33B93 /* URLGreyBridged.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLGreyBridged.m; sourceTree = "<group>"; };
 		DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Foundation.swift"; sourceTree = "<group>"; };
 		DBA522FC1AC8706E00EB5F23 /* NSFileManager+Relationships.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Relationships.swift"; sourceTree = "<group>"; };
 		DBC2ACAF1AC9C7C0000DB65B /* NSURL+Ancestors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Ancestors.swift"; sourceTree = "<group>"; };
@@ -155,14 +153,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DB0966A01A87255800368038 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				DB09669F1A87255600368038 /* module.modulemap */,
-			);
-			name = Private;
-			sourceTree = "<group>";
-		};
 		DB67983D1A6181AD00E1F2AF /* I/O */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,8 +210,8 @@
 				DBEF00A11AC473B000E1E603 /* URLError.swift */,
 				DBE246091A39272000BF3533 /* URLGrey.h */,
 				DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */,
-				DB84699A1A86A49B00C33B93 /* URLGreyPrivate.h */,
-				DB84699B1A86A49B00C33B93 /* URLGreyPrivate.m */,
+				DB84699A1A86A49B00C33B93 /* URLGreyBridged.h */,
+				DB84699B1A86A49B00C33B93 /* URLGreyBridged.m */,
 				DBE246411A3928FB00BF3533 /* UTI.swift */,
 				DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */,
 				DBE246071A39272000BF3533 /* Supporting Files */,
@@ -233,8 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				DB76F1621AC5EDF000C068FC /* Lustre.framework */,
-				DB09669E1A87254E00368038 /* URLGrey.private.modulemap */,
-				DB0966A01A87255800368038 /* Private */,
 				DBE246081A39272000BF3533 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -269,7 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBE2461F1A3927D600BF3533 /* URLGrey.h in Headers */,
-				DB84699F1A86A61700C33B93 /* URLGreyPrivate.h in Headers */,
+				DB84699F1A86A61700C33B93 /* URLGreyBridged.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBE2460A1A39272000BF3533 /* URLGrey.h in Headers */,
-				DB8469A01A86A61900C33B93 /* URLGreyPrivate.h in Headers */,
+				DB8469A01A86A61900C33B93 /* URLGreyBridged.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +431,7 @@
 				DBA522FE1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */,
 				DBE2464A1A3928FB00BF3533 /* Resource.swift in Sources */,
 				DBE246501A3928FB00BF3533 /* UTI.swift in Sources */,
-				DB84699C1A86A5FA00C33B93 /* URLGreyPrivate.m in Sources */,
+				DB84699C1A86A5FA00C33B93 /* URLGreyBridged.m in Sources */,
 				DB6798331A617FD600E1F2AF /* PipeSource.swift in Sources */,
 				DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBCA86571ACC875500894C86 /* ResourceTypes.swift in Sources */,
@@ -481,7 +469,7 @@
 				DBA522FD1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */,
 				DBE246491A3928FB00BF3533 /* Resource.swift in Sources */,
 				DBE2464F1A3928FB00BF3533 /* UTI.swift in Sources */,
-				DB84699D1A86A5FB00C33B93 /* URLGreyPrivate.m in Sources */,
+				DB84699D1A86A5FB00C33B93 /* URLGreyBridged.m in Sources */,
 				DB6798321A617FD600E1F2AF /* PipeSource.swift in Sources */,
 				DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBCA86561ACC875500894C86 /* ResourceTypes.swift in Sources */,
@@ -621,10 +609,8 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_PRIVATE_FILE = "$(SRCROOT)/URLGrey/URLGrey.private.modulemap";
 				PRODUCT_NAME = URLGrey;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/URLGrey";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -641,10 +627,8 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_PRIVATE_FILE = "$(SRCROOT)/URLGrey/URLGrey.private.modulemap";
 				PRODUCT_NAME = URLGrey;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/URLGrey";
 			};
 			name = Release;
 		};
@@ -696,11 +680,9 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MODULEMAP_PRIVATE_FILE = "$(SRCROOT)/URLGrey/URLGrey.private.modulemap";
 				PRODUCT_NAME = URLGrey;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/URLGrey";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -720,11 +702,9 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MODULEMAP_PRIVATE_FILE = "$(SRCROOT)/URLGrey/URLGrey.private.modulemap";
 				PRODUCT_NAME = URLGrey;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/URLGrey";
 			};
 			name = Release;
 		};

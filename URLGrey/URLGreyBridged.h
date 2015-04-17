@@ -1,5 +1,5 @@
 //
-//  URLGreyPrivate.h
+//  URLGreyBridged.h
 //  URLGrey
 //
 //  Created by Zachary Waldowski on 2/7/15.
@@ -7,7 +7,10 @@
 //
 
 @import Foundation;
+@import Dispatch;
 @import Darwin;
+
+NS_ASSUME_NONNULL_BEGIN
 
 extern dispatch_data_t URLGreyCreateDispatchData(NSData *data);
 
@@ -21,3 +24,5 @@ NS_INLINE NSData *URLGreyBridgeDispatchData(dispatch_data_t data) {
 #endif
 
 extern pthread_key_t URLGreyCreateKeyForObject(void);
+
+NS_ASSUME_NONNULL_END

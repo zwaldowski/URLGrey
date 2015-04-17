@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
-import Foundation
-import URLGreyPrivate
-
 final class ThreadLocalStorage<T: AnyObject> {
     
     private let key = URLGreyCreateKeyForObject()

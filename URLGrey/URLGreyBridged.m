@@ -1,12 +1,12 @@
 //
-//  URLGreyPrivate.m
+//  URLGreyBridged.m
 //  URLGrey
 //
 //  Created by Zachary Waldowski on 2/7/15.
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
-#import "URLGreyPrivate.h"
+#import "URLGreyBridged.h"
 
 dispatch_data_t _URLGreyCreateDispatchData(NSData *data, BOOL copy) {
     __block dispatch_data_t ret = nil;
