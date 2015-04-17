@@ -91,11 +91,15 @@ public extension NSURL {
         }
     }
     
+    #if os(OSX)
+    
     func trash() -> ObjectResult<NSURL> {
         return try {
             NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: $0, error: $1)
         }
     }
+    
+    #endif
     
     // MARK: Directory enumeration
     
