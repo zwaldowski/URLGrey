@@ -49,10 +49,10 @@ public extension NSURL {
     func setValue<V>(value: V, forResource resource: WritableResource<V>) -> VoidResult {
         let key = resource.key
         return resource.write(value) >>== { obj in
-            return try(makeError: {
+            return try(wrapError: {
                 error(code: URLError.ResourceWrite(key), underlying: $0)
-                }) {
-                    setResourceValue(obj, forKey: key, error: $0)
+            }) {
+                setResourceValue(obj, forKey: key, error: $0)
             }
         }
     }
@@ -64,11 +64,11 @@ public extension NSURL {
         var results: [Result.Value] = []
         results.reserveCapacity(urls.count)
         for url in urls {
-            let nextResult = url.value(forResource: resource)
-            if nextResult.isSuccess {
-                results.append(nextResult.value)
-            } else {
-                return failure(nextResult.error!)
+            if let error = url.value(forResource: resource).analysis(ifSuccess: {
+                results.append($0)
+                return nil
+            }, ifFailure: { $0 }) {
+                return failure(error)
             }
         }
         return success(results)

@@ -44,21 +44,21 @@ public extension NSFileManager {
             return $0[0].isEqual($0[1]) ? success(NSURLRelationship.Same) : nil
         }) { return areSame }
         
-        let directoryID = fileIDs.value[0]
-        
         if let sameVolume = NSURL.values(forResource: .VolumeIdentifier, URLs: directoryURL, itemURL).bimap({
             $0[0].isEqual($0[1]) ? nil : success(NSURLRelationship.Other)
         }) { return sameVolume }
         
+        let directoryID = fileIDs.map { $0[0] }
         for parentResult in itemURL.ancestors {
-            let identifier = map(parentResult.value) { $0.value(forResource: .FileIdentifier) }
-            switch (parentResult, identifier) {
-            case (_, .Some(.Success(let parentID))) where parentID.isEqual(directoryID):
-                return success(.Contains)
+            let parentID = flatMap(parentResult) { $0.0.value(forResource: .FileIdentifier) }
+            
+            switch (parentResult, parentID) {
             case (.Failure(let error), _):
                 return failure(error)
-            case (_, .Some(.Failure(let error))):
+            case (_, .Failure(let error)):
                 return failure(error)
+            case (_, .Success(let parentID)) where parentID.isEqual(directoryID.value):
+                return success(.Contains)
             default: break
             }
         }

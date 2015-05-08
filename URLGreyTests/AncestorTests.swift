@@ -33,7 +33,7 @@ class AncestorTests: XCTestCase {
     
     // file:///System/Library/CoreServices/SystemVersion.plist is a pretty
     // stable target on Darwin volumes, but not anywhere else. If Swift ever
-    // something else, someone let me know.
+    // runs on something else, someone let me know.
     func testURLParents() {
         let sysLib = fm.URLForDirectory(.LibraryDirectory, inDomain: .SystemDomainMask, appropriateForURL: nil, create: false, error: nil)!
         XCTAssertNotNil(sysLib)
@@ -49,7 +49,7 @@ class AncestorTests: XCTestCase {
             case .VolumeRoot:
                 reachedRoot = true
                 fallthrough
-            case .Success:
+            case .Next:
                 ++validParents
             case .Failure(let error):
                 XCTFail("Encountered error: \(error)")
