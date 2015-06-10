@@ -6,53 +6,15 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
-#import "URLGreyBridged.h"
-
-dispatch_data_t _URLGreyCreateDispatchData(NSData *data, BOOL copy) {
-    __block dispatch_data_t ret = nil;
-    
-    [data enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
-        dispatch_data_t chunk = nil;
-        if (copy) {
-            chunk = dispatch_data_create(bytes, byteRange.length, nil, DISPATCH_DATA_DESTRUCTOR_DEFAULT);
-        } else {
-            CFDataRef innerData = CFBridgingRetain(data);
-            chunk = dispatch_data_create(bytes, byteRange.length, nil, ^{
-                CFRelease(innerData);
-            });
-        }
-        
-        if (ret == nil) {
-            ret = chunk;
-        } else {
-            ret = dispatch_data_create_concat(ret, chunk);
-        }
-    }];
-    
-    return ret ?: dispatch_data_empty;
-}
-
-dispatch_data_t URLGreyCreateDispatchData(NSData *data) {
-    NSData *bridgedDispatchData = (NSData *)dispatch_data_empty;
-    if ([data isMemberOfClass:bridgedDispatchData.class]) {
-        return (dispatch_data_t)data;
-    } else if (!data.length) {
-        return dispatch_data_empty;
-    } else if ([data isKindOfClass:NSMutableData.class]) {
-        // copy all mutables
-        return _URLGreyCreateDispatchData(data, YES);
-    }
-    // if copy == [self retain], reuse the optimization
-    NSData *copied = [data copy];
-    return _URLGreyCreateDispatchData(copied, copied != data);
-}
+@import Foundation;
+@import Darwin;
 
 static void cleanupObject(void *objectAsPtr) {
     if (objectAsPtr == NULL) { return; }
     CFBridgingRelease(objectAsPtr);
 }
 
-pthread_key_t URLGreyCreateKeyForObject(void) {
+__attribute__((used, visibility("hidden"))) pthread_key_t _URLGreyCreateKeyForObject(void) {
     pthread_key_t key;
     if (pthread_key_create(&key, cleanupObject) != 0) {
         assert(false);

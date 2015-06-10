@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
+@asmname("_URLGreyCreateKeyForObject") private func CreateKey() -> pthread_key_t
+
 final class ThreadLocalStorage<T: AnyObject> {
     
-    private let key = URLGreyCreateKeyForObject()
+    private let key = CreateKey()
     private let mainThreadFallback: (() -> T)?
     
     init(mainThreadFallback initializer: (() -> T)? = nil) {
