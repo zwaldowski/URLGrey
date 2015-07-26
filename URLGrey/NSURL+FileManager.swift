@@ -11,9 +11,7 @@ import Lustre
 
 public extension NSFileManager {
 
-    private static let storage = ThreadLocalStorage<NSFileManager> {
-        NSFileManager.defaultManager()
-    }
+    private static let storage = ThreadLocalStorage { NSFileManager.defaultManager() }
     
     static var currentManager: NSFileManager {
         return storage.getValue(create: NSFileManager())

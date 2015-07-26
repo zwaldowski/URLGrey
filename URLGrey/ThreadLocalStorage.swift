@@ -6,40 +6,31 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
-@asmname("_URLGreyCreateKeyForObject") private func CreateKey() -> pthread_key_t
+import Foundation
 
-final class ThreadLocalStorage<T: AnyObject> {
+struct ThreadLocalStorage<T: AnyObject> {
     
-    private let key = CreateKey()
+    private let key = toString(ThreadLocalStorage<T>.self)
     private let mainThreadFallback: (() -> T)?
     
     init(mainThreadFallback initializer: (() -> T)? = nil) {
         self.mainThreadFallback = initializer
     }
     
-    deinit {
-        let valuePtr = pthread_getspecific(key)
-        if valuePtr != nil {
-            let object = Unmanaged<T>.fromOpaque(COpaquePointer(valuePtr))
-            return object.release()
-        }
-        pthread_key_delete(key)
-    }
-    
     func getValue(@autoclosure create initializer: () -> T) -> T {
-        if let mainVersion = mainThreadFallback where NSThread.isMainThread() {
+        if NSThread.isMainThread(), let mainVersion = mainThreadFallback {
             return mainVersion()
         }
         
-        let ptr = pthread_getspecific(key)
-        if ptr == nil {
-            let ret = initializer()
-            let ptr = Unmanaged.passRetained(ret)
-            pthread_setspecific(key, UnsafePointer(ptr.toOpaque()))
-            return ret
+        let threadDictionary = NSThread.currentThread().threadDictionary
+        
+        if let object: AnyObject = threadDictionary[key] {
+            return unsafeDowncast(object)
         }
         
-        return Unmanaged.fromOpaque(COpaquePointer(ptr)).takeUnretainedValue()
+        let ret = initializer()
+        threadDictionary[key] = ret
+        return ret
     }
         
 }
