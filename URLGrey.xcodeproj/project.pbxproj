@@ -25,8 +25,6 @@
 		DB76F1641AC5EDFF00C068FC /* Lustre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB76F1621AC5EDF000C068FC /* Lustre.framework */; };
 		DB83625C1AC634D3006C894C /* NSURL+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */; };
 		DB83625D1AC634D3006C894C /* NSURL+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */; };
-		DB8469A21A86AF6A00C33B93 /* Data+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */; };
-		DB8469A31A86AF6A00C33B93 /* Data+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */; };
 		DB9485241A6058FA009B4848 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE246051A39272000BF3533 /* URLGrey.framework */; };
 		DBA522FD1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA522FC1AC8706E00EB5F23 /* NSFileManager+Relationships.swift */; };
 		DBA522FE1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA522FC1AC8706E00EB5F23 /* NSFileManager+Relationships.swift */; };
@@ -36,6 +34,10 @@
 		DBC2ACB41AC9CDA5000DB65B /* AncestorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC2ACB21AC9CDA5000DB65B /* AncestorTests.swift */; };
 		DBCA86561ACC875500894C86 /* ResourceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA86551ACC875500894C86 /* ResourceTypes.swift */; };
 		DBCA86571ACC875500894C86 /* ResourceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA86551ACC875500894C86 /* ResourceTypes.swift */; };
+		DBDC154D1B65E84E00CB200E /* Data+CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC154B1B65E84E00CB200E /* Data+CollectionType.swift */; };
+		DBDC154E1B65E84E00CB200E /* Data+CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC154B1B65E84E00CB200E /* Data+CollectionType.swift */; };
+		DBDC154F1B65E84E00CB200E /* Data+NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC154C1B65E84E00CB200E /* Data+NSData.swift */; };
+		DBDC15501B65E84E00CB200E /* Data+NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC154C1B65E84E00CB200E /* Data+NSData.swift */; };
 		DBDCEFD01AC99FBC0087958F /* RelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDCEFCF1AC99FBC0087958F /* RelationshipTests.swift */; };
 		DBDCEFD11AC99FBC0087958F /* RelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDCEFCF1AC99FBC0087958F /* RelationshipTests.swift */; };
 		DBE2460A1A39272000BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -85,11 +87,12 @@
 		DB67983A1A6181A900E1F2AF /* IOError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOError.swift; sourceTree = "<group>"; };
 		DB76F1621AC5EDF000C068FC /* Lustre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Lustre.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+FileManager.swift"; sourceTree = "<group>"; };
-		DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Foundation.swift"; sourceTree = "<group>"; };
 		DBA522FC1AC8706E00EB5F23 /* NSFileManager+Relationships.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Relationships.swift"; sourceTree = "<group>"; };
 		DBC2ACAF1AC9C7C0000DB65B /* NSURL+Ancestors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Ancestors.swift"; sourceTree = "<group>"; };
 		DBC2ACB21AC9CDA5000DB65B /* AncestorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AncestorTests.swift; sourceTree = "<group>"; };
 		DBCA86551ACC875500894C86 /* ResourceTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTypes.swift; sourceTree = "<group>"; };
+		DBDC154B1B65E84E00CB200E /* Data+CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CollectionType.swift"; sourceTree = "<group>"; };
+		DBDC154C1B65E84E00CB200E /* Data+NSData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+NSData.swift"; sourceTree = "<group>"; };
 		DBDCEFCF1AC99FBC0087958F /* RelationshipTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipTests.swift; sourceTree = "<group>"; };
 		DBE245E41A39271000BF3533 /* URLGrey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URLGrey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE245EF1A39271100BF3533 /* URLGreyTests-Mobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "URLGreyTests-Mobile.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,10 +151,11 @@
 			isa = PBXGroup;
 			children = (
 				DB37A7BF1A5B181A00647B9D /* Data.swift */,
+				DBDC154B1B65E84E00CB200E /* Data+CollectionType.swift */,
+				DBDC154C1B65E84E00CB200E /* Data+NSData.swift */,
 				DB67982E1A617F8500E1F2AF /* IOChannel.swift */,
 				DB67983A1A6181A900E1F2AF /* IOError.swift */,
 				DB6798311A617FD600E1F2AF /* PipeSource.swift */,
-				DB8469A11A86AF6A00C33B93 /* Data+Foundation.swift */,
 			);
 			name = I/O;
 			sourceTree = "<group>";
@@ -415,12 +419,14 @@
 				DBE246521A3928FB00BF3533 /* UTI+CoreTypes.swift in Sources */,
 				DBEF00A31AC473B000E1E603 /* URLError.swift in Sources */,
 				DBE2464C1A3928FB00BF3533 /* ResourceMeta.swift in Sources */,
+				DBDC15501B65E84E00CB200E /* Data+NSData.swift in Sources */,
 				DB67983C1A6181A900E1F2AF /* IOError.swift in Sources */,
 				DBA522FE1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */,
 				DBE2464A1A3928FB00BF3533 /* Resource.swift in Sources */,
 				DBE246501A3928FB00BF3533 /* UTI.swift in Sources */,
 				DB6798331A617FD600E1F2AF /* PipeSource.swift in Sources */,
 				DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
+				DBDC154E1B65E84E00CB200E /* Data+CollectionType.swift in Sources */,
 				DBCA86571ACC875500894C86 /* ResourceTypes.swift in Sources */,
 				DBE246481A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
 				DB1F041D1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
@@ -428,7 +434,6 @@
 				DBC2ACB11AC9C7C0000DB65B /* NSURL+Ancestors.swift in Sources */,
 				DB37A7C11A5B181A00647B9D /* Data.swift in Sources */,
 				DB1F041A1AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
-				DB8469A31A86AF6A00C33B93 /* Data+Foundation.swift in Sources */,
 				DB6798301A617F8500E1F2AF /* IOChannel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,12 +456,14 @@
 				DBE246511A3928FB00BF3533 /* UTI+CoreTypes.swift in Sources */,
 				DBEF00A21AC473B000E1E603 /* URLError.swift in Sources */,
 				DBE2464B1A3928FB00BF3533 /* ResourceMeta.swift in Sources */,
+				DBDC154F1B65E84E00CB200E /* Data+NSData.swift in Sources */,
 				DB67983B1A6181A900E1F2AF /* IOError.swift in Sources */,
 				DBA522FD1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */,
 				DBE246491A3928FB00BF3533 /* Resource.swift in Sources */,
 				DBE2464F1A3928FB00BF3533 /* UTI.swift in Sources */,
 				DB6798321A617FD600E1F2AF /* PipeSource.swift in Sources */,
 				DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
+				DBDC154D1B65E84E00CB200E /* Data+CollectionType.swift in Sources */,
 				DBCA86561ACC875500894C86 /* ResourceTypes.swift in Sources */,
 				DBE246471A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
 				DB1F041C1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
@@ -464,7 +471,6 @@
 				DBC2ACB01AC9C7C0000DB65B /* NSURL+Ancestors.swift in Sources */,
 				DB37A7C01A5B181A00647B9D /* Data.swift in Sources */,
 				DB1F04191AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
-				DB8469A21A86AF6A00C33B93 /* Data+Foundation.swift in Sources */,
 				DB67982F1A617F8500E1F2AF /* IOChannel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,8 +11,8 @@ import Lustre
 
 public protocol PipeSource {
 
-    func read(length length: Int, queue: dispatch_queue_t, handler: Result<Data> -> ())
-    func readUntilEnd(queue queue: dispatch_queue_t, handler: Result<Data> -> ())
+    func read(length length: Int, queue: dispatch_queue_t, handler: Result<Data<UInt8>> -> ())
+    func readUntilEnd(queue queue: dispatch_queue_t, handler: Result<Data<UInt8>> -> ())
     func close()
     
 }

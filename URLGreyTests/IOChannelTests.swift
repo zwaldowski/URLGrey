@@ -55,7 +55,7 @@ class IOChannelTests: XCTestCase {
         }
         
         let expect = expectationWithDescription("Copy finish")
-        var result = Data()
+        var result = Data<UInt8>()
         
         // Set up reader
         src.readUntilEnd(queue: queue) {

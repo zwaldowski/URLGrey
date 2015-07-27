@@ -31,11 +31,11 @@ public struct IOChannel: PipeSource {
         self.init(channel: channel)
     }
     
-    public func readUntilEnd(queue queue: dispatch_queue_t, handler: Result<Data> -> ()) {
+    public func readUntilEnd(queue queue: dispatch_queue_t, handler: Result<Data<UInt8>> -> ()) {
         read(queue: queue, handler: handler)
     }
     
-    public func read(length length: Int = Int.max, queue: dispatch_queue_t, handler: Result<Data> -> ()) {
+    public func read(length length: Int = Int.max, queue: dispatch_queue_t, handler: Result<Data<UInt8>> -> ()) {
         let progress = NSProgress.currentProgress().map { _ in NSProgress(totalUnitCount: Int64(length)) }
         progress?.kind = NSProgressKindFile
         progress?.setUserInfoObject(NSProgressFileOperationKindReceiving, forKey: NSProgressFileOperationKindKey)
@@ -51,7 +51,7 @@ public struct IOChannel: PipeSource {
             case (false, true, 0):
                 handler(Result.Success(Data()))
             case (false, false, 0):
-                let data = Data(dispatchData)
+                let data = Data<UInt8>(dispatchData)
                 progress?.becomeCurrentWithPendingUnitCount(Int64(data.count))
                 handler(Result.Success(data))
                 progress?.resignCurrent()
