@@ -9,12 +9,6 @@
 import URLGrey
 import XCTest
 
-#if os(OSX)
-import Cocoa
-#elseif os(iOS)
-import UIKit
-#endif
-
 class AncestorTests: XCTestCase {
     
     private var fm: NSFileManager!

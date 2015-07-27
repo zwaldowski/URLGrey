@@ -10,12 +10,6 @@ import XCTest
 import URLGrey
 import Lustre
 
-#if os(OSX)
-import Cocoa
-#elseif os(iOS)
-import UIKit
-#endif
-
 class RelationshipTests: XCTestCase {
     
     private var fm: NSFileManager { return NSFileManager.currentManager }
