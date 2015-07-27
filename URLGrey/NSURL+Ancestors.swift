@@ -11,10 +11,13 @@ import Lustre
 
 // MARK: Result Types
 
-public enum URLAncestorResult: EitherType {
-    case Next(NSURL)
-    case VolumeRoot(NSURL)
+public enum URLAncestorResult {
     case Failure(ErrorType)
+    case Next(NSURL)
+    case Root(NSURL)
+}
+
+extension URLAncestorResult: EitherType {
     
     public typealias Value = (URL: NSURL, isVolumeRoot: Bool)
     
@@ -24,7 +27,7 @@ public enum URLAncestorResult: EitherType {
     
     public init(right: Value) {
         if right.isVolumeRoot {
-            self = .VolumeRoot(right.URL)
+            self = .Root(right.URL)
         } else {
             self = .Next(right.URL)
         }
@@ -32,28 +35,30 @@ public enum URLAncestorResult: EitherType {
     
     public func analysis<Result>(@noescape ifLeft ifLeft: ErrorType -> Result, @noescape ifRight: (URL: NSURL, isVolumeRoot: Bool) -> Result) -> Result {
         switch self {
-        case .Next(let URL): return ifRight(URL: URL, isVolumeRoot: false)
-        case .VolumeRoot(let URL): return ifRight(URL: URL, isVolumeRoot: true)
         case .Failure(let error): return ifLeft(error)
+        case .Next(let URL): return ifRight(URL: URL, isVolumeRoot: false)
+        case .Root(let URL): return ifRight(URL: URL, isVolumeRoot: true)
         }
     }
     
 }
 
-public struct URLAncestorsGenerator: GeneratorType {
+// MARK: Generator
+
+private struct URLAncestorsGenerator: GeneratorType {
     
-    private var nextURL: NSURL?
+    var nextURL: NSURL?
     
-    private init(URL: NSURL) {
+    init(URL: NSURL) {
         self.nextURL = URL
     }
     
-    public mutating func next() -> URLAncestorResult? {
+    private mutating func next() -> URLAncestorResult? {
         guard let current = nextURL else { return nil }
         do {
             if try current.valueForResource(URLResource.IsVolume) {
                 nextURL = nil
-                return .VolumeRoot(current)
+                return .Root(current)
             } else {
                 nextURL = try current.valueForResource(URLResource.ParentDirectoryURL)
                 return .Next(current)
@@ -66,26 +71,14 @@ public struct URLAncestorsGenerator: GeneratorType {
     
 }
 
-public struct URLAncestorsSequence: SequenceType {
-    
-    let URL: NSURL
-    
-    private init(URL: NSURL) {
-        self.URL = URL
-    }
-    
-    public func generate() -> URLAncestorsGenerator {
-        return URLAncestorsGenerator(URL: URL)
-    }
-    
-}
+// MARK: Ancestors extension
 
-// MARK: URL navigation
-
-public extension NSURL {
+extension NSURL {
     
-    public var ancestors: URLAncestorsSequence {
-        return URLAncestorsSequence(URL: self)
+    public var ancestors: AnySequence<URLAncestorResult> {
+        return AnySequence {
+            URLAncestorsGenerator(URL: self)
+        }
     }
     
 }

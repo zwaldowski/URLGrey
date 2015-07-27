@@ -40,7 +40,7 @@ class AncestorTests: XCTestCase {
         
         for i in sysVersion.ancestors {
             switch i {
-            case .VolumeRoot:
+            case .Root:
                 reachedRoot = true
                 fallthrough
             case .Next:
