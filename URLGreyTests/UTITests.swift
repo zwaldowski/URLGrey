@@ -3,7 +3,7 @@
 //  URLGrey
 //
 //  Created by Zachary Waldowski on 12/10/14.
-//  Copyright (c) 2014 Zachary Waldowski. All rights reserved.
+//  Copyright © 2014-2015. Some rights reserved.
 //
 
 import URLGrey

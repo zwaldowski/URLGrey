@@ -3,7 +3,7 @@
 //  URLGrey
 //
 //  Created by Zachary Waldowski on 3/26/15.
-//  Copyright © 2015 Zachary Waldowski. All rights reserved.
+//  Copyright © 2014-2015. Some rights reserved.
 //
 
 public enum URLResourceError: ErrorType {
