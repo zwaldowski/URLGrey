@@ -9,7 +9,7 @@
 import Foundation
 #if os(OSX)
     import CoreServices
-#elseif os(iOS)
+#elseif os(iOS) || os(watchOS)
     import MobileCoreServices
 #endif
 
@@ -54,20 +54,30 @@ public extension UTI {
     /// raw alias data
     public static var AliasRecord:  UTI { return UTI(kUTTypeAliasRecord) }
     /// URL bookmark
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var URLBookmark:  UTI { return UTI("com.apple.bookmark") }
+    public static var URLBookmark:  UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.bookmark")
+            }
+        #endif
+        return UTI(kUTTypeBookmark)
+    }
 
     // MARK: Cocoa
     /// The bytes of a URL
     public static var URL:                     UTI { return UTI(kUTTypeURL) }
     /// The text of a "file:" URL
     public static var FileURL:                 UTI { return UTI(kUTTypeFileURL) }
-    #if os(OSX)
     /// a file url on the pasteboard to a file which does not yet exist
+    @available(OSX 10.6, *)
+    @available(iOS, unavailable)
+    @available(watchOS, unavailable)
     public static var PromisedFileURL:         UTI { return UTI("com.apple.pasteboard.promised-file-url") }
     /// a UTI string describing the type of data to be contained within the promised file
+    @available(OSX 10.6, *)
+    @available(iOS, unavailable)
+    @available(watchOS, unavailable)
     public static var PromisedFileContentType: UTI { return UTI("com.apple.pasteboard.promised-file-content-type") }
-    #endif
     
     // MARK: Text
     /// base type for all text-encoded data,
@@ -83,17 +93,41 @@ public extension UTI {
     /// plain text, UTF-16 encoding, native byte order, optional BOM
     public static var PlainUTF16:         UTI { return UTI(kUTTypeUTF16PlainText) }
     /// text containing delimited values
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Delimited:          UTI { return UTI("public.delimited-values-text") }
+    public static var Delimited:          UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.delimited-values-text")
+            }
+        #endif
+        return UTI(kUTTypeDelimitedText)
+    }
     /// text containing comma-separated values (.csv)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var CommaSeparated:     UTI { return UTI("public.comma-separated-values-text") }
+    public static var CommaSeparated:     UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.comma-separated-values-text")
+            }
+        #endif
+        return UTI(kUTTypeCommaSeparatedText)
+    }
     /// text containing tab-separated values
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var TabSeparated:       UTI { return UTI("public.tab-separated-values-text") }
+    public static var TabSeparated:       UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.tab-separated-values-text")
+            }
+        #endif
+        return UTI(kUTTypeTabSeparatedText)
+    }
     /// UTF-8 encoded text containing tab-separated values
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var TabSeparatedUTF8:   UTI { return UTI("public.utf8-tab-separated-values-text") }
+    public static var TabSeparatedUTF8:   UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.utf8-tab-separated-values-text")
+            }
+        #endif
+        return UTI(kUTTypeUTF8TabSeparatedText)
+    }
     /// Rich Text Format (.rtf)
     public static var Rich:               UTI { return UTI(kUTTypeRTF) }
     
@@ -113,8 +147,14 @@ public extension UTI {
     /// abstract type for source code; any language
     public static var SourceCode: UTI { return UTI(kUTTypeSourceCode) }
     /// assembly language source (.s)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Assembly:   UTI { return UTI("public.assembly-source") }
+    public static var Assembly:   UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.assembly-source")
+            }
+        #endif
+        return UTI(kUTTypeAssemblyLanguageSource)
+    }
     /// C source code (.c)
     public static var C:          UTI { return UTI(kUTTypeCSource) }
     /// Objective-C source code (.m)
@@ -130,7 +170,12 @@ public extension UTI {
     /// Java source code (.java)
     public static var Java:       UTI { return UTI(kUTTypeJavaSource) }
     /// Swift source code (.swift)
-    public static var Swift:      UTI { return UTI("public.swift-source") }
+    public static var Swift:      UTI {
+        guard #available(OSX 10.11, iOS 9.0, watchOS 2.0, *) else {
+            return UTI("public.swift-source")
+        }
+        return UTI(kUTTypeSwiftSource)
+    }
     /// C# source code (.cs)
     public static var CSharp:     UTI { return UTI("com.microsoft.csharp-source") }
     /// Groovy source code (.groovy)
@@ -144,35 +189,95 @@ public extension UTI {
 
     // MARK: Scripts
     /// scripting language source
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Script:       UTI { return UTI("public.script") }
+    public static var Script:       UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.script")
+            }
+        #endif
+        return UTI(kUTTypeScript)
+    }
     /// AppleScript text format (.applescript)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var AppleScript:  UTI { return UTI("com.apple.applescript.text") }
+    public static var AppleScript:  UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.applescript.text")
+            }
+        #endif
+        return UTI(kUTTypeAppleScript)
+    }
     /// Open Scripting Architecture script binary format (.scpt)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var OSABinary:    UTI { return UTI("com.apple.applescript.script") }
+    public static var OSABinary:    UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.applescript.script")
+            }
+        #endif
+        return UTI(kUTTypeOSAScript)
+    }
     /// Open Scripting Architecture script bundle format (.scptd)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var OSABundle:    UTI { return UTI("com.apple.applescript.script-bundle") }
+    public static var OSABundle:    UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.applescript.script-bundle")
+            }
+        #endif
+        return UTI(kUTTypeOSAScriptBundle)
+    }
     /// JavaScript source code (.js)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var JavaScript:   UTI { return UTI("com.netscape.javascript-source") }
+    public static var JavaScript:   UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.netscape.javascript-source")
+            }
+        #endif
+        return UTI(kUTTypeJavaScript)
+    }
     /// base type for shell scripts (.sh)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Shell:        UTI { return UTI("public.shell-script") }
+    public static var Shell:        UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.shell-script")
+            }
+        #endif
+        return UTI(kUTTypeShellScript)
+    }
     /// Perl script (.pl)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Perl:         UTI { return UTI("public.perl-script") }
+    public static var Perl:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.perl-script")
+            }
+        #endif
+        return UTI(kUTTypePerlScript)
+    }
     /// Python script (.py)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Python:       UTI { return UTI("public.python-script") }
+    public static var Python:       UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.python-script")
+            }
+        #endif
+        return UTI(kUTTypePythonScript)
+    }
     /// Ruby script (.rb)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Ruby:         UTI { return UTI("public.ruby-script") }
+    public static var Ruby:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.ruby-script")
+            }
+        #endif
+        return UTI(kUTTypeRubyScript)
+    }
     /// PHP script (.php)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var PHP:          UTI { return UTI("public.php-script") }
+    public static var PHP:          UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.php-script")
+            }
+        #endif
+        return UTI(kUTTypePHPScript)
+    }
     /// ASP script (.asp)
     public static var ASP:          UTI { return UTI("com.microsoft.asp") }
     /// Visual Basic script (.vb)
@@ -192,17 +297,41 @@ public extension UTI {
     /// JavaScript object notation data (.json)
     /// @note JSON almost but doesn't quite conform to JavaScript source
     /// @see UTI.JavaScript
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var JSON:               UTI { return UTI("public.json") }
+    public static var JSON:               UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.json")
+            }
+        #endif
+        return UTI(kUTTypeJSON)
+    }
     /// base type for property lists (.plist)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var PropertyList:       UTI { return UTI("com.apple.property-list") }
+    public static var PropertyList:       UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.property-list")
+            }
+        #endif
+        return UTI(kUTTypePropertyList)
+    }
     /// XML property list
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var PropertyListXML:    UTI { return UTI("com.apple.xml-property-list") }
+    public static var PropertyListXML:    UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.xml-property-list")
+            }
+        #endif
+        return UTI(kUTTypeXMLPropertyList)
+    }
     /// Binary property list
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var PropertyListBinary: UTI { return UTI("com.apple.binary-property-list") }
+    public static var PropertyListBinary: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.binary-property-list")
+            }
+        #endif
+        return UTI(kUTTypeBinaryPropertyList)
+    }
     /// plain text markup for structured data (.yaml)
     public static var YAML:               UTI { return UTI("org.yaml.yaml") }
     /// XML markup for outlines (.opml)
@@ -248,11 +377,23 @@ public extension UTI {
     /// Windows icon data (.ico)
     public static var WindowsIcon:    UTI { return UTI(kUTTypeICO) }
     /// base type for raw image data (.raw)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Raw:            UTI { return UTI("public.camera-raw-image") }
+    public static var Raw:            UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.camera-raw-image")
+            }
+        #endif
+        return UTI(kUTTypeRawImage)
+    }
     /// SVG image (.svg)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var ScalableVector: UTI { return UTI("public.svg-image") }
+    public static var ScalableVector: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.svg-image")
+            }
+        #endif
+        return UTI(kUTTypeScalableVectorGraphics)
+    }
     /// Google WebP image (.webp)
     public static var WebP:           UTI { return UTI("com.google.webp") }
     /// Adobe Photoshop® document (.psd)
@@ -271,14 +412,32 @@ public extension UTI {
     /// QuickTime movie (.mov)
     public static var QuickTime:    UTI { return UTI(kUTTypeQuickTimeMovie) }
     /// MPEG-1 or MPEG-2 movie (,mpeg, ,mpg)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var MPEG:         UTI { return UTI("public.mpeg") }
+    public static var MPEG:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.mpeg")
+            }
+        #endif
+        return UTI(kUTTypeMPEG)
+    }
     /// MPEG-2 video (.mp2)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var MP2:          UTI { return UTI("public.mpeg-2-video") }
+    public static var MP2:          UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.mpeg-2-video")
+            }
+        #endif
+        return UTI(kUTTypeMPEG2Video)
+    }
     /// MPEG-2 Transport Stream movie format (.ts, .m2ts)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var MP2TS:        UTI { return UTI("public.mpeg-2-transport-stream") }
+    public static var MP2TS:        UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.mpeg-2-transport-stream")
+            }
+        #endif
+        return UTI(kUTTypeMPEG2TransportStream)
+    }
     /// MPEG-3 audio (.mp3)
     public static var MP3:          UTI { return UTI(kUTTypeMP3) }
     /// MPEG-4 movie (.mp4)
@@ -286,28 +445,77 @@ public extension UTI {
     /// MPEG-4 audio layer (.m4a)
     public static var M4A:          UTI { return UTI(kUTTypeMPEG4Audio) }
     /// Apple protected iTunes music store format (.m4p)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var M4AProtected: UTI { return UTI("com.apple.protected-mpeg-4-audio") }
+    public static var M4AProtected: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.protected-mpeg-4-audio")
+            }
+        #endif
+        return UTI(kUTTypeAppleProtectedMPEG4Audio)
+    }
     /// Apple protected MPEG-4 movie (.m4v)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var M4VProtected: UTI { return UTI("com.apple.protected-mpeg-4-video") }
+    public static var M4VProtected: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.protected-mpeg-4-video")
+            }
+        #endif
+        return UTI(kUTTypeAppleProtectedMPEG4Video)
+    }
     /// Audio Video Interleaved movie format (.avi)
-    public static var AVI:          UTI { return UTI("public.avi") }
+    public static var AVI:          UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.avi")
+            }
+        #endif
+        return UTI(kUTTypeAVIMovie)
+    }
     /// AIFF audio format (.aiff, .aif)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var AIFF:         UTI { return UTI("public.aiff-audio") }
+    public static var AIFF:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.aiff-audio")
+            }
+        #endif
+        return UTI(kUTTypeAudioInterchangeFileFormat)
+    }
     /// Waveform audio format (.wav)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var WAV:          UTI { return UTI("com.microsoft.waveform-audio") }
+    public static var WAV:          UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.microsoft.waveform-audio")
+            }
+        #endif
+        return UTI(kUTTypeWaveformAudio)
+    }
     /// MIDI audio format (.mid)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var MIDI:         UTI { return UTI("public.midi-audio") }
+    public static var MIDI:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.midi-audio")
+            }
+        #endif
+        return UTI(kUTTypeMIDIAudio)
+    }
     /// base type for playlists
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Playlist:     UTI { return UTI("public.playlist") }
+    public static var Playlist:     UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.playlist")
+            }
+        #endif
+        return UTI(kUTTypePlaylist)
+    }
     /// M3U or M3U8 playlist (.m3u, .m3u8)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var PlaylistM3U:  UTI { return UTI("public.m3u-playlist") }
+    public static var PlaylistM3U:  UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.m3u-playlist")
+            }
+        #endif
+        return UTI(kUTTypeM3UPlaylist)
+    }
     
     // MARK: Folders
     /// a user-browsable directory (i.e., not a package)
@@ -319,17 +527,41 @@ public extension UTI {
     /// a directory conforming to one of the Cocoa bundle layouts (.bundle)
     public static var Bundle:    UTI { return UTI(kUTTypeBundle) }
     /// base type for bundle-based plugins (.plugin)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Plugin:    UTI { return UTI("com.apple.plugin") }
+    public static var Plugin:    UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.plugin")
+            }
+        #endif
+        return UTI(kUTTypePluginBundle)
+    }
     /// a Spotlight metadata importer (.mdimporter)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Spotlight: UTI { return UTI("com.apple.metadata-importer") }
+    public static var Spotlight: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.metadata-importer")
+            }
+        #endif
+        return UTI(kUTTypeSpotlightImporter)
+    }
     /// a QuickLook preview generator (.qlgenerator)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var QuickLook: UTI { return UTI("com.apple.quicklook-generator") }
+    public static var QuickLook: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.quicklook-generator")
+            }
+        #endif
+        return UTI(kUTTypeQuickLookGenerator)
+    }
     /// an XPC service (.xpc)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var XPC:       UTI { return UTI("com.apple.xpc-service") }
+    public static var XPC:       UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.xpc-service")
+            }
+        #endif
+        return UTI(kUTTypeXPCService)
+    }
     /// a Mac OS X framework (.framework)
     public static var Framework: UTI { return UTI(kUTTypeFramework) }
 
@@ -341,31 +573,79 @@ public extension UTI {
     /// a single-file Carbon/Classic application
     public static var AppClassic:     UTI { return UTI(kUTTypeApplicationFile) }
     /// a UNIX executable (flat file)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var AppUnix:        UTI { return UTI("public.unix-executable") }
+    public static var AppUnix:        UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.unix-executable")
+            }
+        #endif
+        return UTI(kUTTypeUnixExecutable)
+    }
     /// a Windows executable (.exe)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var AppWindows:     UTI { return UTI("com.microsoft.windows-executable") }
+    public static var AppWindows:     UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.microsoft.windows-executable")
+            }
+        #endif
+        return UTI(kUTTypeWindowsExecutable)
+    }
     /// a Java class (.class)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var JavaClass:      UTI { return UTI("com.sun.java-class") }
+    public static var JavaClass:      UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.sun.java-class")
+            }
+        #endif
+        return UTI(kUTTypeJavaClass)
+    }
     /// a System Preferences pane (.prefpane)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var PreferencePane: UTI { return UTI("com.apple.systempreference.prefpane") }
+    public static var PreferencePane: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.systempreference.prefpane")
+            }
+        #endif
+        return UTI(kUTTypeSystemPreferencesPane)
+    }
     
     // MARK: Archives
     /// a GNU zip archive (.gz)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Gzip:        UTI { return UTI("org.gnu.gnu-zip-archive") }
+    public static var Gzip:        UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("org.gnu.gnu-zip-archive")
+            }
+        #endif
+        return UTI(kUTTypeGNUZipArchive)
+    }
     /// a bzip2 archive (.bz2)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Bzip:        UTI { return UTI("public.bzip2-archive") }
+    public static var Bzip:        UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.bzip2-archive")
+            }
+        #endif
+        return UTI(kUTTypeBzip2Archive)
+    }
     /// a zip archive (.zip)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Zip:         UTI { return UTI("public.zip-archive") }
+    public static var Zip:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.zip-archive")
+            }
+        #endif
+        return UTI(kUTTypeZipArchive)
+    }
     /// a Java archive (.jar)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var JavaArchive: UTI { return UTI("com.sun.java-archive") }
+    public static var JavaArchive: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.sun.java-archive")
+            }
+        #endif
+        return UTI(kUTTypeJavaArchive)
+    }
     /// a XAR archive (.xar)
     public static var XAR:         UTI { return UTI("com.apple.xar-archive") }
     /// a Stuff-It archive (.sit)
@@ -387,13 +667,32 @@ public extension UTI {
 
     // MARK: Documents
     /// base spreadsheet document type
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Spreadsheet:  UTI { return UTI("public.spreadsheet") }
+    public static var Spreadsheet:  UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.spreadsheet")
+            }
+        #endif
+        return UTI(kUTTypeSpreadsheet)
+    }
     /// base presentation document type
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Presentation: UTI { return UTI("public.presentation") }
+    public static var Presentation: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.presentation")
+            }
+        #endif
+        return UTI(kUTTypePresentation)
+    }
     /// a database store
-    public static var Database:     UTI { return UTI(kUTTypeDatabase) }
+    public static var Database:     UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.database")
+            }
+        #endif
+        return UTI(kUTTypeExecutable)
+    }
     /// legacy Microsoft Word word-processing document .(doc)
     public static var Word:         UTI { return UTI("com.microsoft.word.doc") }
     /// Microsoft Word word-processing document (.docx)
@@ -417,22 +716,52 @@ public extension UTI {
     /// VCard format (.vcard, .vcf)
     public static var VCard:         UTI { return UTI(kUTTypeVCard) }
     /// to-do item
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var ToDo:          UTI { return UTI("public.to-do-item") }
+    public static var ToDo:          UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.to-do-item")
+            }
+        #endif
+        return UTI(kUTTypeToDoItem)
+    }
     /// calendar event (.ical, .ics)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var CalendarEvent: UTI { return UTI("public.calendar-event") }
+    public static var CalendarEvent: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.calendar-event")
+            }
+        #endif
+        return UTI(kUTTypeCalendarEvent)
+    }
     /// e-mail message (.eml)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Mail:          UTI { return UTI("public.email-message") }
+    public static var Mail:          UTI  {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.email-message")
+            }
+        #endif
+        return UTI(kUTTypeEmailMessage)
+    }
     
     // MARK: Internet
     /// base type for Apple Internet locations
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var InternetLocation: UTI { return UTI("com.apple.internet-location") }
+    public static var InternetLocation: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.apple.internet-location")
+            }
+        #endif
+        return UTI(kUTTypeInternetLocation)
+    }
     /// bookmark
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Bookmark:         UTI { return UTI("public.bookmark") }
+    public static var Bookmark:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.bookmark")
+            }
+        #endif
+        return UTI(kUTTypeBookmark)
+    }
     /// WebKit bookmark document (.webbookmark)
     public static var SafariBookmark:   UTI { return UTI("com.apple.safari.bookmark") }
     /// UTF-8 string indicating the title for an attached URL
@@ -453,22 +782,58 @@ public extension UTI {
     /// Opaque InkText data
     public static var InkText:     UTI { return UTI(kUTTypeInkText) }
     /// base type for fonts
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Font:        UTI { return UTI("public.font") }
+    public static var Font:        UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.font")
+            }
+        #endif
+        return UTI(kUTTypeFont)
+    }
     /// base type for 3D content
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var ThreeD:      UTI { return UTI("public.3d-content") }
+    public static var ThreeD:      UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.3d-content")
+            }
+        #endif
+        return UTI(kUTType3DContent)
+    }
     /// PKCS#12 format (.p12)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var PKCS12:      UTI { return UTI("com.rsa.pkcs-12") }
+    public static var PKCS12:      UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("com.rsa.pkcs-12")
+            }
+        #endif
+        return UTI(kUTTypePKCS12)
+    }
     /// X.509 certificate format (.cer)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Certificate: UTI { return UTI("public.x509-certificate") }
+    public static var Certificate: UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.x509-certificate")
+            }
+        #endif
+        return UTI(kUTTypeX509Certificate)
+    }
     /// ePub format (.epub)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var EPub:        UTI { return UTI("org.idpf.epub-container") }
+    public static var EPub:        UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("org.idpf.epub-container")
+            }
+        #endif
+        return UTI(kUTTypeElectronicPublication)
+    }
     /// console log (.log)
-    /// @note: Introduced in 10.10 and soft-backported
-    public static var Log:         UTI { return UTI("public.log") }
+    public static var Log:         UTI {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return UTI("public.log")
+            }
+        #endif
+        return UTI(kUTTypeLog)
+    }
     
 }

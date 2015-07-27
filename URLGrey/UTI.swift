@@ -9,7 +9,7 @@
 import Foundation
 #if os(OSX)
     import CoreServices
-#elseif os(iOS)
+#elseif os(iOS) || os(watchOS)
     import MobileCoreServices
 #endif
 
@@ -25,13 +25,23 @@ public struct UTI {
         return UTTypeConformsTo(identifier, other.identifier) == 1
     }
     
-    @available(OSX 10.10, *)
     public var declared: Bool {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return !dynamic && declaringBundleURL != nil
+            }
+        #endif
+
         return UTTypeIsDeclared(identifier) == 1
     }
     
-    @available(OSX 10.10, *)
     public var dynamic: Bool {
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return identifier.hasPrefix("dyn.")
+            }
+        #endif
+
         return UTTypeIsDynamic(identifier) == 1
     }
     
@@ -45,7 +55,7 @@ public struct UTI {
 
 extension UTI {
 
-    public init(_ legacyIdentifier: CFString!) {
+    public init(_ legacyIdentifier: CFString) {
         self.identifier = legacyIdentifier as String
     }
 
@@ -56,13 +66,15 @@ extension UTI {
 extension UTI: CustomStringConvertible {
     
     public var description: String {
-        // TODO: backport
-        if #available(OSX 10.10, *) {
-            if dynamic {
-                return "Dynamic type (\(identifier))"
-            }
+        guard !dynamic else {
+            return "Dynamic type (\(identifier))"
         }
-        return UTTypeCopyDescription(identifier)?.takeRetainedValue() as! String
+
+        guard let description = UTTypeCopyDescription(identifier)?.takeRetainedValue() else {
+            return "public.unknown"
+        }
+
+        return description as String
     }
     
 }
@@ -96,7 +108,7 @@ extension UTI: Hashable {
             }
         }
         
-        var stringValue: String! {
+        var stringValue: String {
             return UTCreateStringForOSType(self).takeRetainedValue() as String
         }
         
@@ -112,14 +124,13 @@ private extension UTI {
         return UTTypeCopyPreferredTagWithClass(identifier, kind)?.takeRetainedValue() as? String
     }
     
-    // TODO: backport
     func allTags(kind: CFString!) -> [String]? {
-        // TODO: backport
-        if #available(OSX 10.10, *) {
-            return UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() as? [String]
-        } else {
-            return nil
-        }
+        #if os(OSX)
+            guard #available(OSX 10.10, *) else {
+                return preferredTag(kind).map { [ $0 ] }
+            }
+        #endif
+        return UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() as? [String]
     }
     
 }
