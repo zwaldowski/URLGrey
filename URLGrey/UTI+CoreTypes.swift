@@ -292,7 +292,7 @@ public extension UTI {
     /// @note: Introduced in 10.10 and soft-backported
     public static var M4VProtected: UTI { return UTI("com.apple.protected-mpeg-4-video") }
     /// Audio Video Interleaved movie format (.avi)
-    public static var AVI:          UTI { return UTI(kUTTypeAVIMovie) }
+    public static var AVI:          UTI { return UTI("public.avi") }
     /// AIFF audio format (.aiff, .aif)
     /// @note: Introduced in 10.10 and soft-backported
     public static var AIFF:         UTI { return UTI("public.aiff-audio") }
