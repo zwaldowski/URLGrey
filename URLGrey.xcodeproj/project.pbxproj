@@ -15,8 +15,8 @@
 		DB37A7C11A5B181A00647B9D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB37A7BF1A5B181A00647B9D /* Data.swift */; };
 		DB67982F1A617F8500E1F2AF /* IOChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67982E1A617F8500E1F2AF /* IOChannel.swift */; };
 		DB6798301A617F8500E1F2AF /* IOChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67982E1A617F8500E1F2AF /* IOChannel.swift */; };
-		DB6798321A617FD600E1F2AF /* PipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798311A617FD600E1F2AF /* PipeSource.swift */; };
-		DB6798331A617FD600E1F2AF /* PipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798311A617FD600E1F2AF /* PipeSource.swift */; };
+		DB6798321A617FD600E1F2AF /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798311A617FD600E1F2AF /* DataReader.swift */; };
+		DB6798331A617FD600E1F2AF /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798311A617FD600E1F2AF /* DataReader.swift */; };
 		DB6798381A61819900E1F2AF /* IOChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798371A61819900E1F2AF /* IOChannelTests.swift */; };
 		DB6798391A61819900E1F2AF /* IOChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6798371A61819900E1F2AF /* IOChannelTests.swift */; };
 		DB67983B1A6181A900E1F2AF /* IOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67983A1A6181A900E1F2AF /* IOError.swift */; };
@@ -82,7 +82,7 @@
 		DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Builder.swift"; sourceTree = "<group>"; };
 		DB37A7BF1A5B181A00647B9D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		DB67982E1A617F8500E1F2AF /* IOChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOChannel.swift; sourceTree = "<group>"; };
-		DB6798311A617FD600E1F2AF /* PipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PipeSource.swift; sourceTree = "<group>"; };
+		DB6798311A617FD600E1F2AF /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataReader.swift; sourceTree = "<group>"; };
 		DB6798371A61819900E1F2AF /* IOChannelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOChannelTests.swift; sourceTree = "<group>"; };
 		DB67983A1A6181A900E1F2AF /* IOError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOError.swift; sourceTree = "<group>"; };
 		DB76F1621AC5EDF000C068FC /* Lustre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Lustre.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,9 +153,9 @@
 				DB37A7BF1A5B181A00647B9D /* Data.swift */,
 				DBDC154B1B65E84E00CB200E /* Data+CollectionType.swift */,
 				DBDC154C1B65E84E00CB200E /* Data+NSData.swift */,
+				DB6798311A617FD600E1F2AF /* DataReader.swift */,
 				DB67982E1A617F8500E1F2AF /* IOChannel.swift */,
 				DB67983A1A6181A900E1F2AF /* IOError.swift */,
-				DB6798311A617FD600E1F2AF /* PipeSource.swift */,
 			);
 			name = I/O;
 			sourceTree = "<group>";
@@ -424,7 +424,7 @@
 				DBA522FE1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */,
 				DBE2464A1A3928FB00BF3533 /* Resource.swift in Sources */,
 				DBE246501A3928FB00BF3533 /* UTI.swift in Sources */,
-				DB6798331A617FD600E1F2AF /* PipeSource.swift in Sources */,
+				DB6798331A617FD600E1F2AF /* DataReader.swift in Sources */,
 				DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBDC154E1B65E84E00CB200E /* Data+CollectionType.swift in Sources */,
 				DBCA86571ACC875500894C86 /* ResourceTypes.swift in Sources */,
@@ -461,7 +461,7 @@
 				DBA522FD1AC8706E00EB5F23 /* NSFileManager+Relationships.swift in Sources */,
 				DBE246491A3928FB00BF3533 /* Resource.swift in Sources */,
 				DBE2464F1A3928FB00BF3533 /* UTI.swift in Sources */,
-				DB6798321A617FD600E1F2AF /* PipeSource.swift in Sources */,
+				DB6798321A617FD600E1F2AF /* DataReader.swift in Sources */,
 				DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
 				DBDC154D1B65E84E00CB200E /* Data+CollectionType.swift in Sources */,
 				DBCA86561ACC875500894C86 /* ResourceTypes.swift in Sources */,

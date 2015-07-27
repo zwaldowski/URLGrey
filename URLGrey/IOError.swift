@@ -6,22 +6,16 @@
 //  Copyright (c) 2015 Zachary Waldowski. All rights reserved.
 //
 
-import Lustre
-
 // MARK: I/O Errors
 
 /// An I/O operation failed.
 public enum IOError: ErrorType {
     
-    // An unknown error occured.
+    /// An unknown POSIX error occurred in the system framework.
     case Unknown
-    /// A write error occured.
-    case Write
-    /// A read error occured.
-    case Read
     /// An attempt was made to perform I/O on a closed stream.
     case Closed
-    /// Cancelled by user.
+    /// An I/O operation was cancelled by the user.
     case UserCancelled
     /// For a Data<T> instance, the given data was too small for the
     /// parameterized bit type.

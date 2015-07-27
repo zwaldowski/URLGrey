@@ -27,7 +27,7 @@ class IOChannelTests: XCTestCase {
         }()
         
         // Initialize stream
-        let src = IOChannel(fileDescriptor: rfd, closeWhenDone: true)
+        let src = IOChannel<UInt8>(fileDescriptor: rfd, closeWhenDone: true)
         
         // Spawn writer
         dispatch_async(queue) {
