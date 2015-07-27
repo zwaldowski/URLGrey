@@ -14,7 +14,11 @@ class UTITests: XCTestCase {
     func testPreferredTagInitShouldntFail() {
         let type = UTI(preferredTag: .FilenameExtension("illogicallylongfilenameextension"), conformingTo: .Plain)
         XCTAssert(type != nil)
-        XCTAssertTrue(type.dynamic)
+        if #available(OSX 10.10, *) {
+            XCTAssertTrue(type.dynamic)
+        } else {
+            XCTFail("Backport not implemented yet")
+        }
     }
 
 }

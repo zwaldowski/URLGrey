@@ -22,119 +22,119 @@ public extension ReadableResource {
     // MARK: Item resources
     
     /// The resource name provided by the file system.
-    static var Name: ReadableResource<AnyResult<String>> {
+    static var Name: ReadableResource<Result<String>> {
         return readable(NSURLNameKey)
     }
     
     /// Localized or extension-hidden name as displayed to users.
-    static var LocalizedName: ReadableResource<AnyResult<String>> {
+    static var LocalizedName: ReadableResource<Result<String>> {
         return readable(NSURLLocalizedNameKey)
     }
     
     /// True for regular files.
-    static var IsRegularFile: ReadableResource<AnyResult<Bool>> {
+    static var IsRegularFile: ReadableResource<Result<Bool>> {
         return readable(NSURLIsRegularFileKey)
     }
     
     /// True for directories.
-    static var IsDirectory: ReadableResource<AnyResult<Bool>> {
+    static var IsDirectory: ReadableResource<Result<Bool>> {
         return readable(NSURLIsDirectoryKey)
     }
     
     /// True for symlinks.
-    static var IsSymbolicLink: ReadableResource<AnyResult<Bool>> {
+    static var IsSymbolicLink: ReadableResource<Result<Bool>> {
         return readable(NSURLIsSymbolicLinkKey)
     }
     
     /// Whether the URL represents the root directory of a volume.
-    static var IsVolume: ReadableResource<AnyResult<Bool>> {
+    static var IsVolume: ReadableResource<Result<Bool>> {
         return readable(NSURLIsVolumeKey)
     }
     
     /// Whether the URL represents a directory that appears as a file unit.
-    static var IsPackage: ReadableResource<AnyResult<Bool>> {
+    static var IsPackage: ReadableResource<Result<Bool>> {
         return readable(NSURLIsPackageKey)
     }
     
     /// Whether the item cannot be written to by the system.
-    static var IsSystemImmutable: ReadableResource<AnyResult<Bool>> {
+    static var IsSystemImmutable: ReadableResource<Result<Bool>> {
         return readable(NSURLIsSystemImmutableKey)
     }
     
     /// Whether the item cannot be written to by the user.
-    static var IsUserImmutable: ReadableResource<AnyResult<Bool>> {
+    static var IsUserImmutable: ReadableResource<Result<Bool>> {
         return readable(NSURLIsUserImmutableKey)
     }
     
     /// Whether the item is normally not displayed to users.
-    static var IsHidden: ReadableResource<AnyResult<Bool>> {
+    static var IsHidden: ReadableResource<Result<Bool>> {
         return readable(NSURLIsHiddenKey)
     }
     
     /// Whether the filename extension is removed from the localized name.
-    static var HasHiddenExtension: ReadableResource<AnyResult<Bool>> {
+    static var HasHiddenExtension: ReadableResource<Result<Bool>> {
         return readable(NSURLHasHiddenExtensionKey)
     }
     
     /// The date the item was created.
-    static var CreationDate: ReadableResource<ObjectResult<NSDate>> {
+    static var CreationDate: ReadableResource<Result<NSDate>> {
         return readableObject(NSURLCreationDateKey)
     }
     
     /// The date the item was last accessed.
-    static var ContentAccessDate: ReadableResource<ObjectResult<NSDate>> {
+    static var ContentAccessDate: ReadableResource<Result<NSDate>> {
         return readableObject(NSURLContentAccessDateKey)
     }
     
     /// The time the item's content was last modified.
-    static var ContentModificationDate: ReadableResource<ObjectResult<NSDate>> {
+    static var ContentModificationDate: ReadableResource<Result<NSDate>> {
         return readableObject(NSURLContentModificationDateKey)
     }
     
     /// The time the item's attributes were last modified.
-    static var AttributeModificationDate: ReadableResource<ObjectResult<NSDate>> {
+    static var AttributeModificationDate: ReadableResource<Result<NSDate>> {
         return readableObject(NSURLAttributeModificationDateKey)
     }
     
     /// Number of hard links to the item.
-    static var LinkCount: ReadableResource<AnyResult<Int>> {
+    static var LinkCount: ReadableResource<Result<Int>> {
         return readable(NSURLLinkCountKey)
     }
     
     /// The item's parent directory, if any.
-    static var ParentDirectoryURL: ReadableResource<ObjectResult<NSURL>> {
+    static var ParentDirectoryURL: ReadableResource<Result<NSURL>> {
         return readableObject(NSURLParentDirectoryURLKey)
     }
     
     /// URL of the volume on which the item is stored.
-    static var VolumeURL: ReadableResource<ObjectResult<NSURL>> {
+    static var VolumeURL: ReadableResource<Result<NSURL>> {
         return readableObject(NSURLVolumeURLKey)
     }
     
     /// Uniform type identifier (UTI) for the resource.
-    static var TypeIdentifier: ReadableResource<AnyResult<UTI>> {
+    static var TypeIdentifier: ReadableResource<Result<UTI>> {
         return readableConvert(NSURLTypeIdentifierKey)
     }
     
     /// User-visible type or "kind" description.
-    static var LocalizedTypeDescription: ReadableResource<AnyResult<String>> {
+    static var LocalizedTypeDescription: ReadableResource<Result<String>> {
         return readable(NSURLLocalizedTypeDescriptionKey)
     }
     
     /// The icon normally displayed for the resource.
-    static var EffectiveIcon: ReadableResource<ObjectResult<ImageType>> {
+    static var EffectiveIcon: ReadableResource<Result<ImageType>> {
         return readableObject(NSURLEffectiveIconKey)
     }
     
     /// The custom icon assigned to the resource, if any.
     ///
     /// :warning: Currently not implemented in Foundation.
-    @availability(*, unavailable)
-    static var CustomIcon: ReadableResource<ObjectResult<ImageType>> {
+    @available(*, unavailable)
+    static var CustomIcon: ReadableResource<Result<ImageType>> {
         return readableObject(NSURLCustomIconKey)
     }
     
-    static var FileIdentifier: ReadableResource<ObjectResult<OpaqueType>> {
+    static var FileIdentifier: ReadableResource<Result<OpaqueType>> {
         return readableObject(NSURLFileResourceIdentifierKey)
     }
     
@@ -145,43 +145,43 @@ public extension ReadableResource {
     /// and can be compared for equality.
     ///
     /// :note: This identifier is not persistent across system restarts.
-    static var VolumeIdentifier: ReadableResource<ObjectResult<OpaqueType>> {
+    static var VolumeIdentifier: ReadableResource<Result<OpaqueType>> {
         return readableObject(NSURLVolumeIdentifierKey)
     }
     
     /// The optimal block size when reading or writing this file's data.
-    static var PreferredIOBlockSize: ReadableResource<AnyResult<Int>> {
+    static var PreferredIOBlockSize: ReadableResource<Result<Int>> {
         return readable(NSURLPreferredIOBlockSizeKey)
     }
     
     /// Whether this process (as determined by EUID) can read from the URL.
-    static var IsReadable: ReadableResource<AnyResult<Bool>> {
+    static var IsReadable: ReadableResource<Result<Bool>> {
         return readable(NSURLIsReadableKey)
     }
     
     /// Whether this process (as determined by EUID) can write to the URL.
-    static var IsWritable: ReadableResource<AnyResult<Bool>> {
+    static var IsWritable: ReadableResource<Result<Bool>> {
         return readable(NSURLIsWritableKey)
     }
     
     /// Whether this process (as determined by EUID) can execute a file at a
     /// URL or search a directory at a URL.
-    static var IsExecutable: ReadableResource<AnyResult<Bool>> {
+    static var IsExecutable: ReadableResource<Result<Bool>> {
         return readable(NSURLIsExecutableKey)
     }
     
     /// The file system object's security information.
-    static var FileSecurity: ReadableResource<ObjectResult<NSFileSecurity>> {
+    static var FileSecurity: ReadableResource<Result<NSFileSecurity>> {
         return readableObject(NSURLFileSecurityKey)
     }
     
     /// Whether resource should be excluded from backups.
-    static var IsExcludedFromBackup: ReadableResource<AnyResult<Bool>> {
+    static var IsExcludedFromBackup: ReadableResource<Result<Bool>> {
         return readable(NSURLIsExcludedFromBackupKey)
     }
     
     /// The URL's path as a file system path.
-    static var Path: ReadableResource<AnyResult<String>> {
+    static var Path: ReadableResource<Result<String>> {
         return readable(NSURLPathKey)
     }
     
@@ -191,7 +191,7 @@ public extension ReadableResource {
     /// mount a file system on the trigger directory.
     ///
     /// :availability: Mac OS X 10.10 and iOS 8.0
-    static var IsMountTrigger: ReadableResource<AnyResult<Bool>> {
+    static var IsMountTrigger: ReadableResource<Result<Bool>> {
         return readable(NSURLIsMountTriggerKey)
     }
     
@@ -213,7 +213,8 @@ public extension ReadableResource {
     ///
     /// :note: This resource is not supported by all volumes.
     /// :availability: Mac OS X 10.10 and iOS 8.0
-    static var GenerationIdentifier: ReadableResource<ObjectResult<OpaqueType>> {
+    @available(OSX 10.10, *)
+    static var GenerationIdentifier: ReadableResource<Result<OpaqueType>> {
         return readableObject(NSURLGenerationIdentifierKey)
     }
     
@@ -229,7 +230,8 @@ public extension ReadableResource {
     ///
     /// :note: This resource is not supported by all volumes.
     /// :availability: Mac OS X 10.10 and iOS 8.0
-    static var DocumentIdentifier: ReadableResource<ObjectResult<OpaqueType>> {
+    @available(OSX 10.10, *)
+    static var DocumentIdentifier: ReadableResource<Result<OpaqueType>> {
         return readableObject(NSURLDocumentIdentifierKey)
     }
     
@@ -241,34 +243,37 @@ public extension ReadableResource {
     ///
     /// :note: This resource is not supported by all volumes.
     /// :availability: Mac OS X 10.10 and iOS 8.0
-    static var AddedToDirectoryDate: ReadableResource<ObjectResult<NSDate>> {
+    @available(OSX 10.10, *)
+    static var AddedToDirectoryDate: ReadableResource<Result<NSDate>> {
         return readableObject(NSURLAddedToDirectoryDateKey)
     }
     
     /// The file system object type.
     ///
     /// :see: FileType
-    static var FileClass: ReadableResource<AnyResult<FileType>> {
+    static var FileClass: ReadableResource<Result<FileType>> {
         return readableConvert(NSURLFileResourceTypeKey)
     }
     
     #if os(OSX)
     
     /// The array of Tag names.
-    static var TagNames: ReadableResource<AnyResult<[String]>> {
+    static var TagNames: ReadableResource<Result<[String]>> {
         return readable( NSURLTagNamesKey)
     }
     
     // The quarantine properties as defined in `LaunchServices.LSQuarantine`.
     // To remove quarantine information from a file, pass NSNull as the value when setting this property. (Read-write, value type NSDictionary)
-    static var QuarantineAttributes: ReadableResource<AnyResult<Quarantine>> {
+    @available(OSX 10.10, *)
+    static var QuarantineAttributes: ReadableResource<Result<Quarantine>> {
         return readableConvert(NSURLQuarantinePropertiesKey)
     }
     
     /// All thumbnails as a single multi-representation `NSImage`.
     ///
     /// :availability: Mac OS X 10.10
-    static var ThumbnailImage: ReadableResource<ObjectResult<NSImage>> {
+    @available(OSX 10.10, *)
+    static var ThumbnailImage: ReadableResource<Result<NSImage>> {
         return readableObject(NSURLThumbnailKey)
     }
     
@@ -277,28 +282,29 @@ public extension ReadableResource {
     /// Dictionary of `NSImage` or `UIImage` objects keyed by size.
     ///
     /// :availability: Mac OS X 10.10 and iOS 8.0
-    public static var Thumbnails: ReadableResource<AnyResult<[ThumbnailSize: ImageType]>> {
+    @available(OSX 10.10, *)
+    public static var Thumbnails: ReadableResource<Result<[ThumbnailSize: ImageType]>> {
         return readableOf(NSURLThumbnailDictionaryKey, reader: ThumbnailSize.readDictionary)
     }
     
     // MARK: File resources
     
     /// Total file size in bytes.
-    static var FileSize: ReadableResource<AnyResult<Int>> {
+    static var FileSize: ReadableResource<Result<Int>> {
         return readable(NSURLFileSizeKey)
     }
     
     /// Total size allocated on disk for the file in bytes.
     ///
     /// This value is equivalent to number of blocks times block size.
-    static var FileAllocatedSize: ReadableResource<AnyResult<Int>> {
+    static var FileAllocatedSize: ReadableResource<Result<Int>> {
         return readable(NSURLFileAllocatedSizeKey)
     }
     
     /// Total displayable size of the file in bytes.
     ///
     /// This may include space used by metadata.
-    static var TotalFileSize: ReadableResource<AnyResult<Int>> {
+    static var TotalFileSize: ReadableResource<Result<Int>> {
         return readable(NSURLTotalFileSizeKey)
     }
     
@@ -306,50 +312,50 @@ public extension ReadableResource {
     ///
     /// This value may include space used by metadata. It maybe can be
     /// less than the total file size if the resource is compressed.
-    static var TotalFileAllocatedSize: ReadableResource<AnyResult<Int>> {
+    static var TotalFileAllocatedSize: ReadableResource<Result<Int>> {
         return readable(NSURLTotalFileAllocatedSizeKey)
     }
     
     /// Whether the resource is a Finder alias file or a symbolic link.
-    static var FileIsAlias: ReadableResource<AnyResult<Bool>> {
+    static var FileIsAlias: ReadableResource<Result<Bool>> {
         return readable(NSURLIsAliasFileKey)
     }
     
     // MARK: Volume resources
     
     /// The user-visible localized volume format.
-    static var VolumeLocalizedFormatDescription: ReadableResource<AnyResult<String>> {
+    static var VolumeLocalizedFormatDescription: ReadableResource<Result<String>> {
         return readable(NSURLVolumeLocalizedFormatDescriptionKey)
     }
     
     /// Total volume capacity in bytes.
-    static var VolumeTotalCapacity: ReadableResource<AnyResult<Int>> {
+    static var VolumeTotalCapacity: ReadableResource<Result<Int>> {
         return readable(NSURLVolumeTotalCapacityKey)
     }
     
     /// Total volume free space in bytes.
-    static var VolumeAvailableCapacity: ReadableResource<AnyResult<Int>> {
+    static var VolumeAvailableCapacity: ReadableResource<Result<Int>> {
         return readable(NSURLVolumeAvailableCapacityKey)
     }
     
     /// Total number of resources on the volume.
-    static var VolumeResourceCount: ReadableResource<AnyResult<Int>> {
+    static var VolumeResourceCount: ReadableResource<Result<Int>> {
         return readable(NSURLVolumeResourceCountKey)
     }
     
     /// Whether the volume format supports persistent object identifiers
     /// and can look up file system objects by their IDs.
-    static var VolumeSupportsPersistentIDs: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsPersistentIDs: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsPersistentIDsKey)
     }
     
     /// Whether the volume format supports symbolic links.
-    static var VolumeSupportsSymbolicLinks: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsSymbolicLinks: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsHardLinksKey)
     }
     
     /// Whether the volume format supports hard links.
-    static var VolumeSupportsHardLinks: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsHardLinks: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsJournalingKey)
     }
     
@@ -358,13 +364,13 @@ public extension ReadableResource {
     /// does not necessarily mean the volume is actively using a journal.
     ///
     /// :see: VolumeIsJournaling
-    static var VolumeSupportsJournaling: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsJournaling: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsJournalingKey)
     }
     
     /// Whether the volume is currently using a journal for speedy recovery
     /// after an unplanned restart.
-    static var VolumeIsJournaling: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsJournaling: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsJournalingKey)
     }
     
@@ -373,7 +379,7 @@ public extension ReadableResource {
     /// Sparse files can have 'holes' that have never been written to, and
     /// thus do not consume space on disk. A sparse file may have an
     /// allocated size on disk that is less than its logical length.
-    static var VolumeSupportsSparseFiles: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsSparseFiles: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsSparseFilesKey)
     }
     
@@ -383,7 +389,7 @@ public extension ReadableResource {
     ///
     /// For security reasons, parts of a file (runs) that have never been
     /// written to must appear to contain zeroes.
-    static var VolumeSupportsZeroRuns: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsZeroRuns: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsZeroRunsKey)
     }
     
@@ -393,7 +399,7 @@ public extension ReadableResource {
     /// If the volume is not case-aware, an upper case character is
     /// equivalent to a lower case character, and you can't have two names
     /// that differ solely in the case of the characters.
-    static var SupportsCaseSensitiveNames: ReadableResource<AnyResult<Bool>> {
+    static var SupportsCaseSensitiveNames: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsCaseSensitiveNamesKey)
     }
     
@@ -402,13 +408,13 @@ public extension ReadableResource {
     ///
     /// If the volume does not preserve case, it may change the case of some
     /// characters (typically making them all upper or all lower case).
-    static var VolumeSupportsCasePreservedNames: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsCasePreservedNames: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsCasePreservedNamesKey)
     }
     
     /// Whether the volume supports reliable storage of times for the root
     /// directory.
-    static var VolumeSupportsRootDirectoryDates: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsRootDirectoryDates: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsRootDirectoryDatesKey)
     }
     
@@ -416,48 +422,48 @@ public extension ReadableResource {
     ///
     /// :see: VolumeTotalCapacity
     /// :see: VolumeAvailableCapacity
-    static var VolumeSupportsVolumeSizes: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsVolumeSizes: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsVolumeSizesKey)
     }
     
     /// Whether the volume can be renamed.
-    static var VolumeSupportsRenaming: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsRenaming: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsRenamingKey)
     }
     /// Whether the volume implements whole-file `flock(2)`-style advisory
     /// locks, and the `O_EXLOCK` and `O_SHLOCK` flags of the `open(2)`
     /// call.
-    static var VolumeSupportsAdvisoryFileLocking: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsAdvisoryFileLocking: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsAdvisoryFileLockingKey)
     }
     /// Whether the volume implements extended security (ACLs).
-    static var VolumeSupportsExtendedSecurity: ReadableResource<AnyResult<Bool>> {
+    static var VolumeSupportsExtendedSecurity: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeSupportsExtendedSecurityKey)
     }
     /// Whether the volume should be visible via the GUI, such as on the
     /// Desktop in the Finder.
-    static var VolumeIsBrowsable: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsBrowsable: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsBrowsableKey)
     }
     
     /// The largest file size (in bytes) supported by this file system.
-    static var VolumeMaximumFileSize: ReadableResource<AnyResult<Int>> {
+    static var VolumeMaximumFileSize: ReadableResource<Result<Int>> {
         return readable(NSURLVolumeMaximumFileSizeKey)
     }
     
     /// Whether the volume's media is ejectable from the drive mechanism
     /// under software control.
-    static var VolumeIsEjectable: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsEjectable: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsEjectableKey)
     }
     
     /// Whether the volume's media is removable from the drive mechanism.
-    static var VolumeIsRemovable: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsRemovable: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsRemovableKey)
     }
     
     /// Whether the volume's device is connected to an internal bus.
-    static var VolumeIsInternal: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsInternal: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsInternalKey)
     }
     
@@ -466,32 +472,32 @@ public extension ReadableResource {
     /// :note: Not to be mistaken for the volume being browsable; the
     ///        volume may be mounted but not visible to the user.
     /// :see: VolumeIsBrowsable
-    static var VolumeIsAutomounted: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsAutomounted: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsAutomountedKey)
     }
     
     /// Whether the volume is stored on a local device.
-    static var VolumeIsLocal: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsLocal: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsLocalKey)
     }
     
     /// Whether the volume is read-only.
-    static var VolumeIsReadOnly: ReadableResource<AnyResult<Bool>> {
+    static var VolumeIsReadOnly: ReadableResource<Result<Bool>> {
         return readable(NSURLVolumeIsReadOnlyKey)
     }
     
     /// The volume's creation date.
-    static var VolumeCreationDate: ReadableResource<ObjectResult<NSDate>> {
+    static var VolumeCreationDate: ReadableResource<Result<NSDate>> {
         return readableObject(NSURLVolumeCreationDateKey)
     }
     
     /// The URL needed to remount a network volume.
-    static var VolumeURLForRemounting: ReadableResource<ObjectResult<NSURL>> {
+    static var VolumeURLForRemounting: ReadableResource<Result<NSURL>> {
         return readableObject(NSURLVolumeURLForRemountingKey)
     }
     
     /// The volume's persistent UUID.
-    static var VolumeUUID: ReadableResource<AnyResult<String>> {
+    static var VolumeUUID: ReadableResource<Result<String>> {
         return readable(NSURLVolumeUUIDStringKey)
     }
     
@@ -501,57 +507,57 @@ public extension ReadableResource {
     /// renaming, writes will always fail.
     ///
     /// :see: VolumeSupportsRenaming
-    static var VolumeName: ReadableResource<AnyResult<String>> {
+    static var VolumeName: ReadableResource<Result<String>> {
         return readable(NSURLVolumeNameKey)
     }
     
     /// The user-friendly presentable name of the volume.
-    static var VolumeLocalizedName: ReadableResource<AnyResult<String>> {
+    static var VolumeLocalizedName: ReadableResource<Result<String>> {
         return readable(NSURLVolumeLocalizedNameKey)
     }
     
     // MARK: Ubiquitous item resources
     
     /// Whether this item is synced to the cloud or is only a local file.
-    static var IsUbiquitous: ReadableResource<AnyResult<Bool>> {
+    static var IsUbiquitous: ReadableResource<Result<Bool>> {
         return readable(NSURLIsUbiquitousItemKey)
     }
     
     /// Whether this item has conflicts outstanding.
-    static var UbiquityHasUnresolvedConflicts: ReadableResource<AnyResult<Bool>> {
+    static var UbiquityHasUnresolvedConflicts: ReadableResource<Result<Bool>> {
         return readable(NSURLUbiquitousItemHasUnresolvedConflictsKey)
     }
     
     /// Whether data is being downloaded for this item.
-    static var UbiquityIsDownloading: ReadableResource<AnyResult<Bool>> {
+    static var UbiquityIsDownloading: ReadableResource<Result<Bool>> {
         return readable(NSURLUbiquitousItemIsDownloadingKey)
     }
     
     /// Whether there is data present in the cloud for this item.
-    static var UbiquityIsUploaded: ReadableResource<AnyResult<Bool>> {
+    static var UbiquityIsUploaded: ReadableResource<Result<Bool>> {
         return readable(NSURLUbiquitousItemIsUploadedKey)
     }
     
     /// Whether data is being uploaded for this item.
-    static var UbiquityIsUploading: ReadableResource<AnyResult<Bool>> {
+    static var UbiquityIsUploading: ReadableResource<Result<Bool>> {
         return readable(NSURLUbiquitousItemIsUploadingKey)
     }
     /// The download status of this item.
-    static var UbiquityDownloadingStatus: ReadableResource<AnyResult<UbiquitousStatus>> {
+    static var UbiquityDownloadingStatus: ReadableResource<Result<UbiquitousStatus>> {
         return readableConvert(NSURLUbiquitousItemDownloadingStatusKey)
     }
     
     /// The error when downloading the item from iCloud failed.
     ///
     /// See the `NSUbiquitousFile` section in `Foundation.FoundationErrors`.
-    static var UbiquityDownloadingError: ReadableResource<ObjectResult<NSError>> {
+    static var UbiquityDownloadingError: ReadableResource<Result<NSError>> {
         return readableObject(NSURLUbiquitousItemDownloadingErrorKey)
     }
     
     /// The error when uploading the item to iCloud failed.
     ///
     /// See the `NSUbiquitousFile` section in `Foundation.FoundationErrors`.
-    static var UbiquityUploadingError: ReadableResource<ObjectResult<NSError>> {
+    static var UbiquityUploadingError: ReadableResource<Result<NSError>> {
         return readableObject(NSURLUbiquitousItemUploadingErrorKey)
     }
     
@@ -559,14 +565,16 @@ public extension ReadableResource {
     /// API like `-startDownloadingUbiquitousItemAtURL:error:.`
     ///
     /// :availability: Mac OS X 10.10 and iOS 8.0
-    static var UbiquityDownloadRequested: ReadableResource<AnyResult<Bool>> {
+    @available(OSX 10.10, *)
+    static var UbiquityDownloadRequested: ReadableResource<Result<Bool>> {
         return readable(NSURLUbiquitousItemDownloadRequestedKey)
     }
     
     /// The name of this item's container as displayed to users.
     ///
     /// :availability: Mac OS X 10.10 and iOS 8.0
-    static var UbiquityContainerDisplayName: ReadableResource<AnyResult<Bool>> {
+    @available(OSX 10.10, *)
+    static var UbiquityContainerDisplayName: ReadableResource<Result<Bool>> {
         return readable(NSURLUbiquitousItemContainerDisplayNameKey)
     }
     
@@ -598,7 +606,7 @@ public extension WritableResource {
     /// The custom icon assigned to the resource, if any.
     ///
     /// :warning: Currently not implemented in Foundation.
-    @availability(*, unavailable)
+    @available(*, unavailable)
     static var CustomIcon: WritableResource<ImageType> {
         return writableObject(NSURLCustomIconKey)
     }
@@ -622,6 +630,7 @@ public extension WritableResource {
     
     // The quarantine properties as defined in `LaunchServices.LSQuarantine`.
     // To remove quarantine information from a file, pass NSNull as the value when setting this property. (Read-write, value type NSDictionary)
+    @available(OSX 10.10, *)
     static var QuarantineAttributes: WritableResource<Quarantine> {
         return writableConvert(NSURLQuarantinePropertiesKey)
     }
@@ -631,6 +640,7 @@ public extension WritableResource {
     /// Dictionary of `NSImage` or `UIImage` objects keyed by size.
     ///
     /// :availability: Mac OS X 10.10 and iOS 8.0
+    @available(OSX 10.10, *)
     static var Thumbnails: WritableResource<[ThumbnailSize: ImageType]> {
         return writableOf(NSURLThumbnailDictionaryKey, writer: ThumbnailSize.writeDictionary)
     }

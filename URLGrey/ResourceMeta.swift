@@ -45,7 +45,7 @@ public protocol ResourceType {
 }
 
 /// Prototypes for resources that may be fetched from URLs.
-public struct ReadableResource<ReadResult: ResultType>: ResourceType {
+public struct ReadableResource<ReadResult: EitherType where ReadResult.LeftType == ErrorType>: ResourceType {
     
     /// A string key describing how to access this resource via Foundation API.
     public let key: String
@@ -64,60 +64,60 @@ public struct ReadableResource<ReadResult: ResultType>: ResourceType {
     }
     
     /// Read-only values that can cross the Objective-C bridge (`String`, `Int`)
-    static func readable<U: _ObjectiveCBridgeable>(key: String) -> ReadableResource<AnyResult<U>> {
-        return ReadableResource<AnyResult<U>>(key: key) {
+    static func readable<U: _ObjectiveCBridgeable>(key: String) -> ReadableResource<Result<U>> {
+        return ReadableResource<Result<U>>(key: key) {
             switch $0 {
             case .Some(let ret as U):
-                return success(ret)
+                return Result.Success(ret)
             case .Some:
-                return failure(error(code: URLError.ResourceReadConversion))
+                return Result.Failure(URLError.ResourceReadConversion)
             case .None:
-                return failure(error(code: URLError.ResourceReadUnavailable))
+                return Result.Failure(URLError.ResourceReadUnavailable)
             }
         }
     }
     
     /// Read-only types that come out exactly as we want them (`NSURL`, `NSDate`)
-    static func readableObject<U: AnyObject>(key: String) -> ReadableResource<ObjectResult<U>> {
-        return ReadableResource<ObjectResult<U>>(key: key) {
+    static func readableObject<U: AnyObject>(key: String) -> ReadableResource<Result<U>> {
+        return ReadableResource<Result<U>>(key: key) {
             switch $0 {
             case .Some(let ret as U):
-                return success(ret)
+                return Result.Success(ret)
             case .Some:
-                return failure(error(code: URLError.ResourceReadConversion))
+                return Result.Failure(URLError.ResourceReadConversion)
             case .None:
-                return failure(error(code: URLError.ResourceReadUnavailable))
+                return Result.Failure(URLError.ResourceReadUnavailable)
             }
         }
     }
     
     /// Read-only type that must be converted after being bridged to some native
     /// type (i.e., `String`->`URLGrey.UTI`)
-    static func readableConvert<U: ResourceConvertible>(key: String) -> ReadableResource<AnyResult<U>> {
-        return ReadableResource<AnyResult<U>>(key: key) {
+    static func readableConvert<U: ResourceConvertible>(key: String) -> ReadableResource<Result<U>> {
+        return ReadableResource<Result<U>>(key: key) {
             switch $0 {
             case .Some(let value):
                 if let value = value as? U.ResourceValue, ret = U(URLResource: value) {
-                    return success(ret)
+                    return Result.Success(ret)
                 }
-                return failure(error(code: URLError.ResourceReadConversion))
+                return Result.Failure(URLError.ResourceReadConversion)
             case .None:
-                return failure(error(code: URLError.ResourceReadUnavailable))
+                return Result.Failure(URLError.ResourceReadUnavailable)
             }
         }
     }
     
     /// Read-only values that must undergo arbitrary conversion
-    static func readableOf<U: _ObjectiveCBridgeable, V>(key: String, reader: U -> V?) -> ReadableResource<AnyResult<V>> {
-        return ReadableResource<AnyResult<V>>(key: key) {
+    static func readableOf<U: _ObjectiveCBridgeable, V>(key: String, reader: U -> V?) -> ReadableResource<Result<V>> {
+        return ReadableResource<Result<V>>(key: key) {
             switch $0 {
             case .Some(let value):
                 if let converted = value as? U, ret = reader(converted) {
-                    return success(ret)
+                    return Result.Success(ret)
                 }
-                return failure(error(code: URLError.ResourceReadConversion))
+                return Result.Failure(URLError.ResourceReadConversion)
             case .None:
-                return failure(error(code: URLError.ResourceReadUnavailable))
+                return Result.Failure(URLError.ResourceReadUnavailable)
             }
         }
     }
@@ -130,7 +130,7 @@ public struct WritableResource<T>: ResourceType {
     /// A string key describing how to access this resource via Foundation API.
     public let key: String
     
-    private typealias Writer = T -> ObjectResult<AnyObject>
+    private typealias Writer = T -> Result<AnyObject>
     private let impl: Writer
     
     private init(key: String, impl: Writer) {
@@ -139,7 +139,7 @@ public struct WritableResource<T>: ResourceType {
     }
     
     /// Convert the native Swift type back for Foundation to write.
-    func write(input: T) -> ObjectResult<AnyObject> {
+    func write(input: T) -> Result<AnyObject> {
         return impl(input)
     }
     
@@ -147,30 +147,30 @@ public struct WritableResource<T>: ResourceType {
     static func writable<U: _ObjectiveCBridgeable>(key: String) -> WritableResource<U> {
         return WritableResource<U>(key: key) {
             if let ret: AnyObject = $0 as? AnyObject {
-                return success(ret)
+                return Result.Success(ret)
             }
-            return failure(error(code: URLError.ResourceWriteConversion))
+            return Result.Failure(URLError.ResourceWriteConversion)
         }
     }
     
     /// Writable values that are already exactly as we want them (`NSDate`)
     static func writableObject<U: AnyObject>(key: String) -> WritableResource<U> {
-        return WritableResource<U>(key: key) { success($0) }
+        return WritableResource<U>(key: key) { Result.Success($0) }
     }
     
     /// Writable values that must be converted before being expressed as a Cocoa type
     static func writableConvert<U: ResourceRepresentable>(key: String) -> WritableResource<U> {
         return WritableResource<U>(key: key) {
             if let ret: AnyObject = $0.URLResourceValue {
-                return success(ret)
+                return Result.Success(ret)
             }
-            return failure(error(code: URLError.ResourceWriteConversion))
+            return Result.Failure(URLError.ResourceWriteConversion)
         }
     }
     
     /// Writable values that must undergo arbitrary conversion
     static func writableOf<U, V: AnyObject>(key: String, writer: U -> V) -> WritableResource<U> {
-        return WritableResource<U>(key: key) { success(writer($0)) }
+        return WritableResource<U>(key: key) { Result.Success(writer($0)) }
     }
     
 }

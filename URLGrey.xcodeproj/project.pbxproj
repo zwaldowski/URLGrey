@@ -56,8 +56,6 @@
 		DBE246571A392B9500BF3533 /* UTITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE246551A392B9500BF3533 /* UTITests.swift */; };
 		DBEF00A21AC473B000E1E603 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00A11AC473B000E1E603 /* URLError.swift */; };
 		DBEF00A31AC473B000E1E603 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00A11AC473B000E1E603 /* URLError.swift */; };
-		DBEF00AB1AC47DAA00E1E603 /* URLGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */; };
-		DBEF00AC1AC47DAA00E1E603 /* URLGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +107,6 @@
 		DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UTI+CoreTypes.swift"; sourceTree = "<group>"; };
 		DBE246551A392B9500BF3533 /* UTITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTITests.swift; sourceTree = "<group>"; };
 		DBEF00A11AC473B000E1E603 /* URLError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
-		DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLGrey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +200,6 @@
 				DB1F04181AC642EE00578D16 /* ThreadLocalStorage.swift */,
 				DBEF00A11AC473B000E1E603 /* URLError.swift */,
 				DBE246091A39272000BF3533 /* URLGrey.h */,
-				DBEF00AA1AC47DAA00E1E603 /* URLGrey.swift */,
 				DBE246411A3928FB00BF3533 /* UTI.swift */,
 				DBE246421A3928FB00BF3533 /* UTI+CoreTypes.swift */,
 				DBE246071A39272000BF3533 /* Supporting Files */,
@@ -341,8 +337,9 @@
 		DBE245DB1A39271000BF3533 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Zachary Waldowski";
 				TargetAttributes = {
 					DBE245E31A39271000BF3533 = {
@@ -428,7 +425,6 @@
 				DBE246481A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
 				DB1F041D1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
 				DB83625D1AC634D3006C894C /* NSURL+FileManager.swift in Sources */,
-				DBEF00AC1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DBC2ACB11AC9C7C0000DB65B /* NSURL+Ancestors.swift in Sources */,
 				DB37A7C11A5B181A00647B9D /* Data.swift in Sources */,
 				DB1F041A1AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
@@ -465,7 +461,6 @@
 				DBE246471A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
 				DB1F041C1AC64E1C00578D16 /* NSURL+Builder.swift in Sources */,
 				DB83625C1AC634D3006C894C /* NSURL+FileManager.swift in Sources */,
-				DBEF00AB1AC47DAA00E1E603 /* URLGrey.swift in Sources */,
 				DBC2ACB01AC9C7C0000DB65B /* NSURL+Ancestors.swift in Sources */,
 				DB37A7C01A5B181A00647B9D /* Data.swift in Sources */,
 				DB1F04191AC642EE00578D16 /* ThreadLocalStorage.swift in Sources */,
@@ -522,6 +517,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 0.2.0;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -598,6 +594,7 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.URLGrey;
 				PRODUCT_NAME = URLGrey;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -616,6 +613,7 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.URLGrey;
 				PRODUCT_NAME = URLGrey;
 				SKIP_INSTALL = YES;
 			};
@@ -634,6 +632,7 @@
 				);
 				INFOPLIST_FILE = "URLGreyTests/Info-Mobile.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.waldowski.URLGrey.Tests-Mobile";
 				PRODUCT_NAME = "URLGreyTests-Mobile";
 			};
 			name = Debug;
@@ -647,6 +646,7 @@
 				);
 				INFOPLIST_FILE = "URLGreyTests/Info-Mobile.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.waldowski.URLGrey.Tests-Mobile";
 				PRODUCT_NAME = "URLGreyTests-Mobile";
 			};
 			name = Release;
@@ -669,6 +669,7 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.URLGrey;
 				PRODUCT_NAME = URLGrey;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -691,6 +692,7 @@
 				INFOPLIST_FILE = URLGrey/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.URLGrey;
 				PRODUCT_NAME = URLGrey;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -711,6 +713,7 @@
 				);
 				INFOPLIST_FILE = URLGreyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.URLGrey.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -727,6 +730,7 @@
 				);
 				INFOPLIST_FILE = URLGreyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.waldowski.URLGrey.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};

@@ -29,9 +29,10 @@ public extension NSURL {
         let key = resource.key
         
         var value: AnyObject?
-        var fetchError: NSError?
-        if !getResourceValue(&value, forKey: key, error: &fetchError) {
-            return failure(error(code: URLError.ResourceRead(key), underlying: fetchError))
+        do {
+            try getResourceValue(&value, forKey: key)
+        } catch {
+            return Result(left: URLError.ResourceRead(key))
         }
         return resource.read(value)
     }
@@ -46,13 +47,14 @@ public extension NSURL {
         :param: resource One of the URL’s resource keys.
         :returns: A result type appropriate for an empty data set.
     **/
-    func setValue<V>(value: V, forResource resource: WritableResource<V>) -> VoidResult {
+    func setValue<V>(value: V, forResource resource: WritableResource<V>) -> Result<Void> {
         let key = resource.key
-        return resource.write(value) >>== { obj in
-            return try(wrapError: {
-                error(code: URLError.ResourceWrite(key), underlying: $0)
-            }) {
-                setResourceValue(obj, forKey: key, error: $0)
+        return resource.write(value).flatMap { obj in
+            do {
+                try setResourceValue(obj, forKey: key)
+                return Result.Success(())
+            } catch {
+                return Result.Failure(URLError.ResourceWrite(key))
             }
         }
     }
@@ -60,18 +62,18 @@ public extension NSURL {
     // MARK: Grouped convenience
 
     /// Returns values for the given resources based on the given URLs.
-    static func values<Result>(forResource resource: ReadableResource<Result>, URLs urls: NSURL...) -> AnyResult<[Result.Value]> {
-        var results: [Result.Value] = []
+    static func values<Result>(forResource resource: ReadableResource<Result>, URLs urls: NSURL...) -> Lustre.Result<[Result.RightType]> {
+        var results: [Result.RightType] = []
         results.reserveCapacity(urls.count)
         for url in urls {
-            if let error = url.value(forResource: resource).analysis(ifSuccess: {
+            if let error = url.value(forResource: resource).analysis(ifLeft: { Optional.Some($0) }, ifRight: {
                 results.append($0)
                 return nil
-            }, ifFailure: { $0 }) {
-                return failure(error)
+            }) {
+                return Lustre.Result.Failure(error)
             }
         }
-        return success(results)
+        return Lustre.Result.Success(results)
     }
     
 }

@@ -25,10 +25,12 @@ public struct UTI {
         return UTTypeConformsTo(identifier, other.identifier) == 1
     }
     
+    @available(OSX 10.10, *)
     public var declared: Bool {
         return UTTypeIsDeclared(identifier) == 1
     }
     
+    @available(OSX 10.10, *)
     public var dynamic: Bool {
         return UTTypeIsDynamic(identifier) == 1
     }
@@ -51,13 +53,16 @@ extension UTI {
 
 // MARK: Printable
 
-extension UTI: Printable {
+extension UTI: CustomStringConvertible {
     
     public var description: String {
-        if dynamic {
-            return "Dynamic type (\(identifier))"
+        // TODO: backport
+        if #available(OSX 10.10, *) {
+            if dynamic {
+                return "Dynamic type (\(identifier))"
+            }
         }
-        return UTTypeCopyDescription(identifier).takeRetainedValue() as! String
+        return UTTypeCopyDescription(identifier)?.takeRetainedValue() as! String
     }
     
 }
@@ -92,7 +97,7 @@ extension UTI: Hashable {
         }
         
         var stringValue: String! {
-            return UTCreateStringForOSType(self)?.takeRetainedValue() as? String
+            return UTCreateStringForOSType(self).takeRetainedValue() as String
         }
         
     }
@@ -107,8 +112,14 @@ private extension UTI {
         return UTTypeCopyPreferredTagWithClass(identifier, kind)?.takeRetainedValue() as? String
     }
     
+    // TODO: backport
     func allTags(kind: CFString!) -> [String]? {
-        return UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() as? [String]
+        // TODO: backport
+        if #available(OSX 10.10, *) {
+            return UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() as? [String]
+        } else {
+            return nil
+        }
     }
     
 }

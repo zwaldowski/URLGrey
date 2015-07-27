@@ -10,13 +10,12 @@ import Foundation
 import Lustre
 
 // TODO: consider moving this to Lustre
-private extension AnyResult {
+private extension Result {
     
-    func bimap<RR: ResultType>(@noescape transform: T -> RR?) -> RR? {
+    func bimap<RR: EitherType where RR.LeftType == ErrorType>(@noescape transform: T -> RR?) -> RR? {
         switch self {
-        case .Success(let value as T): return transform(value)
-        case .Success:                 return nil
-        case .Failure(let error):      return .Some(failure(error))
+        case .Success(let value): return transform(value)
+        case .Failure(let error): return .Some(RR(left: error))
         }
     }
     
@@ -30,50 +29,62 @@ public extension NSFileManager {
         NSFileManager.instancesRespondToSelector("getRelationship:ofDirectoryAtURL:toItemAtURL:error:")
     }()
     
-    func relationship(directory directoryURL: NSURL, toItem itemURL: NSURL) -> AnyResult<NSURLRelationship> {
+    // TODO: fix this availability, just for NSURLRelationship
+    @available(OSX 10.10, *)
+    func relationship(directory directoryURL: NSURL, toItem itemURL: NSURL) -> Result<NSURLRelationship> {
         if NSFileManager.hasNativeGetRelationship {
-            return try { getRelationship($0, ofDirectoryAtURL: directoryURL, toItemAtURL: itemURL, error: $1) }
+            return Result {
+                var relationship = NSURLRelationship.Other
+                try getRelationship(&relationship, ofDirectoryAtURL: directoryURL, toItemAtURL: itemURL)
+                return relationship
+            }
         }
         
         if let isDir = directoryURL.value(forResource: .IsDirectory).bimap({
-            $0 ? nil : success(NSURLRelationship.Other)
+            $0 ? nil : Result.Success(NSURLRelationship.Other)
         }) { return isDir }
         
         let fileIDs = NSURL.values(forResource: .FileIdentifier, URLs: directoryURL, itemURL)
         if let areSame = fileIDs.bimap({
-            return $0[0].isEqual($0[1]) ? success(NSURLRelationship.Same) : nil
+            return $0[0].isEqual($0[1]) ? Result.Success(NSURLRelationship.Same) : nil
         }) { return areSame }
         
         if let sameVolume = NSURL.values(forResource: .VolumeIdentifier, URLs: directoryURL, itemURL).bimap({
-            $0[0].isEqual($0[1]) ? nil : success(NSURLRelationship.Other)
+            $0[0].isEqual($0[1]) ? nil : Result.Success(NSURLRelationship.Other)
         }) { return sameVolume }
         
         let directoryID = fileIDs.map { $0[0] }
         for parentResult in itemURL.ancestors {
-            let parentID = flatMap(parentResult) { $0.0.value(forResource: .FileIdentifier) }
+            let parentID = parentResult.flatMap { $0.0.value(forResource: .FileIdentifier) }
             
             switch (parentResult, parentID) {
             case (.Failure(let error), _):
-                return failure(error)
+                return Result.Failure(error)
             case (_, .Failure(let error)):
-                return failure(error)
+                return Result.Failure(error)
             case (_, .Success(let parentID)) where parentID.isEqual(directoryID.value):
-                return success(.Contains)
+                return Result.Success(.Contains)
             default: break
             }
         }
         
-        return success(.Other)
+        return Result.Success(.Other)
     }
     
-    func relationship(directory directoryType: NSSearchPathDirectory, inDomain domain: NSSearchPathDomainMask = .UserDomainMask, toItem itemURL: NSURL) -> AnyResult<NSURLRelationship> {
+    // TODO: fix this availability, just for NSURLRelationship
+    @available(OSX 10.10, *)
+    func relationship(directory directoryType: NSSearchPathDirectory, inDomain domain: NSSearchPathDomainMask = .UserDomainMask, toItem itemURL: NSURL) -> Result<NSURLRelationship> {
         if NSFileManager.hasNativeGetRelationship {
-            return try { getRelationship($0, ofDirectory: directoryType, inDomain: domain, toItemAtURL: itemURL, error: $1) }
+            return Result {
+                var relationship = NSURLRelationship.Other
+                try getRelationship(&relationship, ofDirectory: directoryType, inDomain: domain, toItemAtURL: itemURL)
+                return relationship
+            }
         }
         
-        return try { error in
-            URLForDirectory(directoryType, inDomain: domain, appropriateForURL: domain == nil ? itemURL : nil, create: false, error: error)
-        } >>== {
+        return Result<NSURL> {
+            try URLForDirectory(directoryType, inDomain: domain, appropriateForURL: domain == [] ? itemURL : nil, create: false)
+        }.flatMap {
             relationship(directory: $0, toItem: itemURL)
         }
     }

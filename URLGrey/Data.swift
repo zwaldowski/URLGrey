@@ -57,10 +57,10 @@ extension Data {
     
     private init<T, Owner>(unsafeWithOwnedPointer pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {
         let count = sizeof(T) * tCount
-        self.init(dispatch_data_create(pointer, count, queue) { [owner] in })
+        self.init(dispatch_data_create(pointer, count, queue) { _ = owner })
     }
     
-    private init<T, Owner>(unsafeWithPointer pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeOwnership = .Copy) {
+    private init<T>(unsafeWithPointer pointer: UnsafePointer<T>, count tCount: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeOwnership = .Copy) {
         let count = sizeof(T) * tCount
         let destructor: (() -> ())? = {
             switch behavior {
@@ -94,7 +94,7 @@ extension Data {
         return ret
     }
     
-    public func region(#index: Int) -> (data: Data, range: Range<Int>) {
+    public func region(index index: Int) -> (data: Data, range: Range<Int>) {
         var offset = 0
         let region = Data(dispatch_data_copy_region(data, index, &offset))
         let range = Range(start: offset, end: offset + region.endIndex)
@@ -134,8 +134,8 @@ extension Data: SequenceType {
         return DataGenerator(buffers: buffersArray)
     }
     
-    public func buffers() -> SequenceOf<Buffer> {
-        return SequenceOf(lazy(buffersArray).map { $0.1 })
+    public func buffers() -> AnySequence<Buffer> {
+        return AnySequence(lazy(buffersArray).map { $0.1 })
     }
     
 }
@@ -160,10 +160,6 @@ extension Data: CollectionType {
         }!
     }
     
-}
-
-extension Data: Sliceable {
-    
     public typealias SubSlice = Data
 
     public subscript (bounds: Range<Int>) -> SubSlice {
@@ -172,11 +168,6 @@ extension Data: Sliceable {
         return Data(dispatch_data_create_subrange(data, offset, length))
     }
     
-}
-
-extension Data: CollectionType {
-    
-    public typealias Element = UInt8
     
     public mutating func append(newData: Data) {
         data = dispatch_data_create_concat(data, newData.data)

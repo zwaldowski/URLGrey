@@ -10,7 +10,7 @@ import Foundation
 
 struct ThreadLocalStorage<T: AnyObject> {
     
-    private let key = toString(ThreadLocalStorage<T>.self)
+    private let key = String(ThreadLocalStorage<T>.self)
     private let mainThreadFallback: (() -> T)?
     
     init(mainThreadFallback initializer: (() -> T)? = nil) {

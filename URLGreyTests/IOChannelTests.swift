@@ -60,16 +60,14 @@ class IOChannelTests: XCTestCase {
         // Set up reader
         src.readUntilEnd(queue: queue) {
             switch $0 {
-            case .Success(let newData as Data):
+            case .Success(let newData):
                 result += newData
                 if newData.isEmpty {
-                    XCTAssert(equal(result, buffer), "The data was corrupted during the copy")
+                    XCTAssert(result.elementsEqual(buffer), "The data was corrupted during the copy")
                     expect.fulfill()
                 }
             case .Failure(let error):
                 XCTFail("Read failed: \(error)")
-            default:
-                XCTFail("Read failed")
             }
         }
         

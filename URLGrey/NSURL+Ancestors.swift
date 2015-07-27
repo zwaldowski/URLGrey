@@ -11,50 +11,31 @@ import Lustre
 
 // MARK: Result Types
 
-public enum URLAncestorResult: ResultType {
+public enum URLAncestorResult: EitherType {
     case Next(NSURL)
     case VolumeRoot(NSURL)
-    case Failure(NSError)
+    case Failure(ErrorType)
     
     public typealias Value = (URL: NSURL, isVolumeRoot: Bool)
     
-    public init(_ value: Value) {
-        if value.isVolumeRoot {
-            self = .VolumeRoot(value.URL)
+    public init(left: ErrorType) {
+        self = .Failure(left)
+    }
+    
+    public init(right: Value) {
+        if right.isVolumeRoot {
+            self = .VolumeRoot(right.URL)
         } else {
-            self = .Next(value.URL)
+            self = .Next(right.URL)
         }
     }
     
-    public init(failure error: NSError) {
-        self = .Failure(error)
-    }
-    
-    public func analysis<R>(@noescape #ifSuccess: Value -> R, @noescape ifFailure: NSError -> R) -> R {
+    public func analysis<Result>(@noescape ifLeft ifLeft: ErrorType -> Result, @noescape ifRight: (URL: NSURL, isVolumeRoot: Bool) -> Result) -> Result {
         switch self {
-        case .Next(let URL): return ifSuccess((URL, false))
-        case .VolumeRoot(let URL): return ifSuccess((URL, true))
-        case .Failure(let error): return ifFailure(error)
+        case .Next(let URL): return ifRight(URL: URL, isVolumeRoot: false)
+        case .VolumeRoot(let URL): return ifRight(URL: URL, isVolumeRoot: true)
+        case .Failure(let error): return ifLeft(error)
         }
-    }
-    
-    public var value: Value? {
-        return unbox(self)
-    }
-    
-    public var error: NSError? {
-        return errorOf(self)
-    }
-    
-    /// Return the Result of mapping `transform` over `self`.
-    public func flatMap<Result: ResultType>(@noescape transform: Value -> Result) -> Result {
-        return Lustre.flatMap(self, transform)
-    }
-    
-    /// Returns a new Result by mapping success cases using `transform`, or
-    /// re-wrapping the error.
-    public func map<Result: ResultType>(@noescape transform: Value -> Result.Value) -> Result {
-        return Lustre.map(self, transform)
     }
     
 }
@@ -73,16 +54,19 @@ public struct URLAncestorsGenerator: GeneratorType {
             
             let currentIsParent = current.value(forResource: .IsVolume)
             switch currentIsParent {
-            case .Success(let value as Bool) where value == true:
+            case .Success(let value) where value == true:
                 return .VolumeRoot(current)
             case .Failure(let error):
                 return .Failure(error)
             default: break
             }
             
-            return current.value(forResource: .ParentDirectoryURL) >>== { url -> URLAncestorResult in
+            switch current.value(forResource: .ParentDirectoryURL) {
+            case .Success(let url):
                 self.currentURL = url
                 return .Next(current)
+            case .Failure(let error):
+                return .Failure(error)
             }
         }
         return nil

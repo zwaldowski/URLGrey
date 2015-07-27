@@ -47,53 +47,59 @@ public extension NSURL {
     
     // MARK: Relationships
     
-    func relationship(with item: NSURL) -> AnyResult<NSURLRelationship> {
+    // TODO: fix availability with backport
+    @available(OSX 10.10, *)
+    func relationship(with item: NSURL) -> Result<NSURLRelationship> {
         return NSFileManager.currentManager.relationship(directory: self, toItem: item)
     }
 
     // MARK: File management
 
-    func makeDirectory(createIntermediates: Bool = true) -> VoidResult {
-        return try {
-            NSFileManager.currentManager.createDirectoryAtURL(self, withIntermediateDirectories: createIntermediates, attributes: nil, error: $0)
+    func makeDirectory(createIntermediates: Bool = true) -> Result<Void> {
+        return Result {
+            try NSFileManager.currentManager.createDirectoryAtURL(self, withIntermediateDirectories: createIntermediates, attributes: nil)
         }
     }
     
-    func copy(toURL url: NSURL) -> VoidResult {
-        return try {
-            NSFileManager.currentManager.copyItemAtURL(self, toURL: url, error: $0)
+    func copy(toURL url: NSURL) -> Result<Void> {
+        return Result {
+            try NSFileManager.currentManager.copyItemAtURL(self, toURL: url)
         }
     }
     
-    func move(toURL url: NSURL) -> VoidResult {
-        return try {
-            NSFileManager.currentManager.moveItemAtURL(self, toURL: url, error: $0)
+    func move(toURL url: NSURL) -> Result<Void> {
+        return Result {
+            try NSFileManager.currentManager.moveItemAtURL(self, toURL: url)
         }
     }
     
-    func replace(URL url: NSURL, backupName: String? = nil, options: NSFileManagerItemReplacementOptions = nil) -> ObjectResult<NSURL> {
-        return try {
-            NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: $0, error: $1)
+    func replace(URL url: NSURL, backupName: String? = nil, options: NSFileManagerItemReplacementOptions = []) -> Result<NSURL> {
+        return Result {
+            var resultingURL: NSURL?
+            try NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: &resultingURL)
+            return resultingURL!
         }
     }
     
-    func link(toURL url: NSURL) -> VoidResult {
-        return try {
-            NSFileManager.currentManager.linkItemAtURL(self, toURL: url, error: $0)
+    func link(toURL url: NSURL) -> Result<Void> {
+        return Result {
+            try NSFileManager.currentManager.linkItemAtURL(self, toURL: url)
         }
     }
     
-    func remove() -> VoidResult {
-        return try {
-            NSFileManager.currentManager.removeItemAtURL(self, error: $0)
+    func remove() -> Result<Void> {
+        return Result {
+            try NSFileManager.currentManager.removeItemAtURL(self)
         }
     }
     
     #if os(OSX)
     
-    func trash() -> ObjectResult<NSURL> {
-        return try {
-            NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: $0, error: $1)
+    func trash() -> Result<NSURL> {
+        return Result {
+            var resultingURL: NSURL?
+            try NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: &resultingURL)
+            return resultingURL!
         }
     }
     
@@ -101,7 +107,7 @@ public extension NSURL {
     
     // MARK: Directory enumeration
     
-    public func contents(fetchedResources: [ResourceType]? = nil, options mask: NSDirectoryEnumerationOptions = nil, errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> SequenceOf<NSURL> {
+    public func contents(fetchedResources: [ResourceType]? = nil, options mask: NSDirectoryEnumerationOptions = [], errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> AnySequence<NSURL> {
         return NSFileManager.currentManager.directory(URL: self, fetchResources: fetchedResources, options: mask, errorHandler: handler)
     }
 

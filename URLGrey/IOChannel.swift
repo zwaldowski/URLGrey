@@ -31,11 +31,11 @@ public struct IOChannel: PipeSource {
         self.init(channel: channel)
     }
     
-    public func readUntilEnd(#queue: dispatch_queue_t, handler: AnyResult<Data> -> ()) {
+    public func readUntilEnd(queue queue: dispatch_queue_t, handler: Result<Data> -> ()) {
         read(queue: queue, handler: handler)
     }
     
-    public func read(length: Int = Int.max, queue: dispatch_queue_t, handler: AnyResult<Data> -> ()) {
+    public func read(length length: Int = Int.max, queue: dispatch_queue_t, handler: Result<Data> -> ()) {
         let progress = NSProgress.currentProgress().map { _ in NSProgress(totalUnitCount: Int64(length)) }
         progress?.kind = NSProgressKindFile
         progress?.setUserInfoObject(NSProgressFileOperationKindReceiving, forKey: NSProgressFileOperationKindKey)
@@ -47,20 +47,22 @@ public struct IOChannel: PipeSource {
             let userCancelled = progress?.cancelled ?? false
             switch (userCancelled, done, posixError) {
             case (true, _, _):
-                handler(failure(error(code: IOError.UserCancelled)))
+                handler(Result.Failure(IOError.UserCancelled))
             case (false, true, 0):
-                handler(success(Data()))
+                handler(Result.Success(Data()))
             case (false, false, 0):
                 let data = Data(dispatchData)
                 progress?.becomeCurrentWithPendingUnitCount(Int64(data.count))
-                handler(success(data))
+                handler(Result.Success(data))
                 progress?.resignCurrent()
+            case (false, _, ECANCELED):
+                handler(Result.Failure(IOError.Closed))
             case (false, _, let posixCode):
-                let code = posixCode == ECANCELED ? IOError.Closed : IOError.Read
-                let underlying = NSError(domain: NSPOSIXErrorDomain, code: Int(posixCode), userInfo: nil)
-                let err = error(code: code, underlying: underlying)
-                handler(failure(err))
-            default: break
+                if let error = POSIXError(rawValue: posixCode) {
+                    handler(Result.Failure(error))
+                } else {
+                    handler(Result.Failure(IOError.Read))
+                }
             }
         }
     }

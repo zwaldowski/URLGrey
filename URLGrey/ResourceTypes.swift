@@ -199,6 +199,7 @@ public typealias ImageType = NSImage
 public typealias ImageType = UIImage
 #endif
 
+@available(OSX 10.10, *)
 public enum ThumbnailSize: ResourceConvertible {
     
     case W1024

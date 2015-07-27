@@ -29,7 +29,7 @@ class AncestorTests: XCTestCase {
     // stable target on Darwin volumes, but not anywhere else. If Swift ever
     // runs on something else, someone let me know.
     func testURLParents() {
-        let sysLib = fm.URLForDirectory(.LibraryDirectory, inDomain: .SystemDomainMask, appropriateForURL: nil, create: false, error: nil)!
+        let sysLib = try! fm.URLForDirectory(.LibraryDirectory, inDomain: .SystemDomainMask, appropriateForURL: nil, create: false)
         XCTAssertNotNil(sysLib)
         
         let sysVersion = sysLib + .Directory("CoreServices") + .File("SystemVersion", .PropertyList)

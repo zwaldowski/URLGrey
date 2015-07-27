@@ -36,8 +36,8 @@ extension Data {
     
     public init(data: NSData) {
         let dispatchData: dispatch_data_t
-        if data.dynamicType === Data().objectValue.dynamicType {
-            dispatchData = data as dispatch_data_t
+        if let data = data as? dispatch_data_t {
+            dispatchData = data
         } else if data.length == 0 {
             dispatchData = dispatch_data_empty
         } else if data is NSMutableData {
