@@ -9,9 +9,10 @@
 import Dispatch
 import Lustre
 
-public struct IOChannel<T: UnsignedIntegerType>: DataReader {
+public final class IOChannel<T: UnsignedIntegerType>: DataReader {
     
     private let channel: dispatch_io_t
+    private var partialData: Data<UInt8>?
     
     private init(channel: dispatch_io_t) {
         self.channel = channel
@@ -30,14 +31,13 @@ public struct IOChannel<T: UnsignedIntegerType>: DataReader {
             progress.cancellationHandler = self.close
         }
         
-        var partialData: Data<UInt8>? = nil
         dispatch_io_read(channel, 0, length, queue) { (done, dispatchData, errno) in
             let userCancelled = progress?.cancelled ?? false
             switch (userCancelled, done, errno) {
             case (false, true, 0):
                 handler(Result.Success(Data()))
             case (false, false, 0):
-                let data = Data<T>(dispatchData, partial: &partialData)
+                let data = Data<T>(dispatchData, partial: &self.partialData)
                 progress?.becomeCurrentWithPendingUnitCount(numericCast(data.count))
                 handler(Result.Success(data))
                 progress?.resignCurrent()
@@ -72,7 +72,7 @@ private var IOChannelQueue: dispatch_queue_t {
 
 extension IOChannel {
     
-    public init(fileDescriptor fd: Int32, closeWhenDone: Bool = false, queue: dispatch_queue_t = IOChannelQueue) {
+    public convenience init(fileDescriptor fd: Int32, closeWhenDone: Bool = false, queue: dispatch_queue_t = IOChannelQueue) {
         let queue = dispatch_get_global_queue(0, 0)
         let channel = dispatch_io_create(DISPATCH_IO_STREAM, fd, queue) { error in
             if closeWhenDone {
@@ -85,7 +85,7 @@ extension IOChannel {
         self.init(channel: channel)
     }
     
-    public init(URL: NSURL, queue: dispatch_queue_t = IOChannelQueue) {
+    public convenience init(URL: NSURL, queue: dispatch_queue_t = IOChannelQueue) {
         let channel = dispatch_io_create_with_path(DISPATCH_IO_STREAM, URL.fileSystemRepresentation, O_RDONLY, 0, queue) { error in
             assert(error == 0, "Unhandled error in dispatch file source: \(strerror(error))")
         }
