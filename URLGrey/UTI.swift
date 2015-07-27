@@ -99,17 +99,10 @@ extension UTI: Hashable {
 
     private extension OSType {
         
-        init?(string: String!) {
+        init?(fourCharString string: String) {
             let type = UTGetOSTypeFromString(string)
-            if (type == 0) {
-                self = type
-            } else {
-                return nil
-            }
-        }
-        
-        var stringValue: String {
-            return UTCreateStringForOSType(self).takeRetainedValue() as String
+            guard type != 0 else { return nil }
+            self = type
         }
         
     }
@@ -120,17 +113,19 @@ extension UTI: Hashable {
 
 private extension UTI {
     
-    func preferredTag(kind: CFString!) -> String? {
-        return UTTypeCopyPreferredTagWithClass(identifier, kind)?.takeRetainedValue() as? String
+    func preferredTag(kind: CFString) -> String? {
+        guard let cfString = UTTypeCopyPreferredTagWithClass(identifier, kind)?.takeRetainedValue() else { return nil }
+        return cfString as String
     }
     
-    func allTags(kind: CFString!) -> [String]? {
+    func allTags(kind: CFString) -> [String] {
         #if os(OSX)
             guard #available(OSX 10.10, *) else {
-                return preferredTag(kind).map { [ $0 ] }
+                return preferredTag(kind).map { [ $0 ] } ?? []
             }
         #endif
-        return UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() as? [String]
+        guard let cfTags = UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() else { return [] }
+        return (cfTags as NSArray) as! [String]
     }
     
 }
@@ -147,18 +142,24 @@ public extension UTI {
             case Legacy(OSType)
         #endif
         
-        private var kindValue: CFString! {
+        private var kindValue: CFString {
             #if os(OSX)
                 switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension
-                case .MIME: return kUTTagClassMIMEType
-                case .Pasteboard: return kUTTagClassNSPboardType
-                case .Legacy: return kUTTagClassOSType
+                case .FilenameExtension:
+                    return kUTTagClassFilenameExtension
+                case .MIME:
+                    return kUTTagClassMIMEType
+                case .Pasteboard:
+                    return kUTTagClassNSPboardType
+                case .Legacy:
+                    return kUTTagClassOSType
                 }
             #else
                 switch self {
-                case .FilenameExtension: return kUTTagClassFilenameExtension
-                case .MIME: return kUTTagClassMIMEType
+                case .FilenameExtension:
+                    return kUTTagClassFilenameExtension
+                case .MIME:
+                    return kUTTagClassMIMEType
                 }
             #endif
         }
@@ -166,15 +167,21 @@ public extension UTI {
         private var stringValue: String {
             #if os(OSX)
                 switch self {
-                case .FilenameExtension(let ext): return ext
-                case .MIME(let mime): return mime
-                case .Pasteboard(let UTI): return UTI
-                case .Legacy(let osType): return osType.stringValue
+                case .FilenameExtension(let ext):
+                    return ext
+                case .MIME(let mime):
+                    return mime
+                case .Pasteboard(let UTI):
+                    return UTI
+                case .Legacy(let osType):
+                    return UTCreateStringForOSType(osType).takeRetainedValue() as String
                 }
             #else
                 switch self {
-                case .FilenameExtension(let ext): return ext
-                case .MIME(let mime): return mime
+                case .FilenameExtension(let ext):
+                    return ext
+                case .MIME(let mime):
+                    return mime
                 }
             #endif
         }
@@ -183,35 +190,29 @@ public extension UTI {
     
     public init!(preferredTag tag: Tag, conformingTo parent: UTI? = nil) {
         let parentUTI = parent?.identifier
-        if let preferredIdentifier = UTTypeCreatePreferredIdentifierForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() {
-            self.init(preferredIdentifier)
-        } else {
-            return nil
-        }
+        guard let UTI = UTTypeCreatePreferredIdentifierForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() else { return nil }
+        self.init(UTI)
     }
     
-    public static func allIdentifiers(tag: Tag, conformingTo parent: UTI? = nil) -> [UTI]? {
+    public static func allIdentifiersForTag(tag: Tag, conformingTo parent: UTI? = nil) -> [UTI] {
         let parentUTI = parent?.identifier
-        if let all = UTTypeCreateAllIdentifiersForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() as? [String] {
-            return all.map { UTI($0) }
-        } else {
-            return nil
-        }
+        guard let cfUTIs = UTTypeCreateAllIdentifiersForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() else { return [] }
+        return lazy(cfUTIs as NSArray).map(unsafeDowncast).map(UTI.init).array
     }
     
     public var preferredPathExtension: String? {
         return preferredTag(kUTTagClassFilenameExtension)
     }
     
+    public var pathExtensions: [String] {
+        return allTags(kUTTagClassFilenameExtension)
+    }
+    
     public var preferredMIMEType: String? {
         return preferredTag(kUTTagClassMIMEType)
     }
     
-    public var pathExtensions: [String]? {
-        return allTags(kUTTagClassFilenameExtension)
-    }
-    
-    public var MIMETypes: [String]? {
+    public var MIMETypes: [String] {
         return allTags(kUTTagClassMIMEType)
     }
     
@@ -222,15 +223,15 @@ public extension UTI {
         }
         
         public var preferredLegacyType: OSType? {
-            return preferredTag(kUTTagClassOSType).map { OSType(string: $0)! }
+            return preferredTag(kUTTagClassOSType).flatMap(OSType.init)
         }
-        
-        public var pasteboardTypes: [String]? {
+    
+        public var pasteboardTypes: [String] {
             return allTags(kUTTagClassNSPboardType)
         }
-        
+    
         public var preferredLegacyTypes: [OSType]? {
-            return allTags(kUTTagClassOSType)?.map { OSType(string: $0)! }
+            return allTags(kUTTagClassOSType).flatMap(OSType.init)
         }
     
     #endif
