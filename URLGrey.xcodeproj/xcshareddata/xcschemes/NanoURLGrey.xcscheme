@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBA832791B65FA45003E0E23"
+               BlueprintIdentifier = "DBA832B41B65FA7E003E0E23"
                BuildableName = "URLGrey.framework"
-               BlueprintName = "URLGrey"
-               ReferencedContainer = "container:URLGrey.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBA832DF1B65FB0C003E0E23"
-               BuildableName = "URLGreyTests.xctest"
-               BlueprintName = "URLGreyTests"
+               BlueprintName = "NanoURLGrey"
                ReferencedContainer = "container:URLGrey.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,29 +26,9 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBA832DF1B65FB0C003E0E23"
-               BuildableName = "URLGreyTests.xctest"
-               BlueprintName = "URLGreyTests"
-               ReferencedContainer = "container:URLGrey.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBA832791B65FA45003E0E23"
-            BuildableName = "URLGrey.framework"
-            BlueprintName = "URLGrey"
-            ReferencedContainer = "container:URLGrey.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -79,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBA832791B65FA45003E0E23"
+            BlueprintIdentifier = "DBA832B41B65FA7E003E0E23"
             BuildableName = "URLGrey.framework"
-            BlueprintName = "URLGrey"
+            BlueprintName = "NanoURLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -97,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBA832791B65FA45003E0E23"
+            BlueprintIdentifier = "DBA832B41B65FA7E003E0E23"
             BuildableName = "URLGrey.framework"
-            BlueprintName = "URLGrey"
+            BlueprintName = "NanoURLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

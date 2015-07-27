@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBE245E31A39271000BF3533"
+               BlueprintIdentifier = "DBA832981B65FA77003E0E23"
                BuildableName = "URLGrey.framework"
                BlueprintName = "MobileURLGrey"
                ReferencedContainer = "container:URLGrey.xcodeproj">
@@ -25,11 +25,11 @@
             buildForRunning = "YES"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBE245EE1A39271100BF3533"
-               BuildableName = "URLGreyTests-Mobile.xctest"
+               BlueprintIdentifier = "DBA832EE1B65FB21003E0E23"
+               BuildableName = "MobileURLGreyTests.xctest"
                BlueprintName = "MobileURLGreyTests"
                ReferencedContainer = "container:URLGrey.xcodeproj">
             </BuildableReference>
@@ -40,14 +40,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBE245EE1A39271100BF3533"
-               BuildableName = "URLGreyTests-Mobile.xctest"
+               BlueprintIdentifier = "DBA832EE1B65FB21003E0E23"
+               BuildableName = "MobileURLGreyTests.xctest"
                BlueprintName = "MobileURLGreyTests"
                ReferencedContainer = "container:URLGrey.xcodeproj">
             </BuildableReference>
@@ -56,7 +57,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBE245E31A39271000BF3533"
+            BlueprintIdentifier = "DBA832981B65FA77003E0E23"
             BuildableName = "URLGrey.framework"
             BlueprintName = "MobileURLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">
@@ -78,7 +79,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBE245E31A39271000BF3533"
+            BlueprintIdentifier = "DBA832981B65FA77003E0E23"
             BuildableName = "URLGrey.framework"
             BlueprintName = "MobileURLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">
@@ -96,7 +97,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBE245E31A39271000BF3533"
+            BlueprintIdentifier = "DBA832981B65FA77003E0E23"
             BuildableName = "URLGrey.framework"
             BlueprintName = "MobileURLGrey"
             ReferencedContainer = "container:URLGrey.xcodeproj">

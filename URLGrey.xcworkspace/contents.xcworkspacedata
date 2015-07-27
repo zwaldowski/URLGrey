@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:URLGrey.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Carthage/Checkouts/Lustre/Lustre.xcodeproj">
+      location = "container:URLGrey.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:URLGrey.playground">
