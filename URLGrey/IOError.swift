@@ -23,5 +23,8 @@ public enum IOError: ErrorType {
     case Closed
     /// Cancelled by user.
     case UserCancelled
+    /// For a Data<T> instance, the given data was too small for the
+    /// parameterized bit type.
+    case PartialData
     
 }

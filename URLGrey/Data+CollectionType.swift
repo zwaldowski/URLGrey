@@ -29,7 +29,7 @@ extension Data {
             }
         }()
         
-        self.init(dispatch_data_create(baseAddress, bytes, queue, destructor))
+        self.init(unsafe: dispatch_data_create(baseAddress, bytes, queue, destructor))
     }
     
     private init<Owner: CollectionType>(unsafeWithOwnedPointer pointer: UnsafePointer<T>, count: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {

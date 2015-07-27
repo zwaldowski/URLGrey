@@ -13,12 +13,38 @@ public struct Data<T: UnsignedIntegerType> {
     
     public let data: dispatch_data_t
     
-    public init() {
-        self.data = dispatch_data_empty
+    init(unsafe data: dispatch_data_t) {
+        self.data = data
     }
     
-    public init(_ data: dispatch_data_t) {
-        self.data = data
+    init(safe data: dispatch_data_t, withPartialData: Data<UInt8> throws -> ()) rethrows {
+        let size = dispatch_data_get_size(data)
+        let remainder = size % sizeof(T)
+        if remainder == 0 {
+            self.init(unsafe: data)
+        } else {
+            let wholeData = dispatch_data_create_subrange(data, 0, size - remainder)
+            let partialData = dispatch_data_create_subrange(data, size - remainder, remainder)
+            let partial = Data<UInt8>(unsafe: partialData)
+            try withPartialData(partial)
+            self.init(unsafe: wholeData)
+        }
+    }
+    
+    init(_ data: dispatch_data_t, inout partial: Data<UInt8>?) {
+        try! self.init(safe: data) { data in
+            partial += data
+        }
+    }
+    
+    public init() {
+        self.init(unsafe: dispatch_data_empty)
+    }
+    
+    public init(_ data: dispatch_data_t) throws {
+        try self.init(safe: data) { _ in
+            throw IOError.PartialData
+        }
     }
     
 }
@@ -111,7 +137,7 @@ extension Data: CollectionType {
     public subscript (bounds: Range<Int>) -> Data<T> {
         let offset = toBytes(bounds.startIndex)
         let length = toBytes(bounds.endIndex - bounds.startIndex)
-        return Data(dispatch_data_create_subrange(data, offset, length))
+        return Data(unsafe: dispatch_data_create_subrange(data, offset, length))
     }
     
 }
@@ -127,11 +153,19 @@ extension Data {
 }
 
 public func +<T: UnsignedIntegerType>(lhs: Data<T>, rhs: Data<T>) -> Data<T> {
-    return Data(dispatch_data_create_concat(lhs.data, rhs.data))
+    return Data(unsafe: dispatch_data_create_concat(lhs.data, rhs.data))
 }
 
 public func +=<T: UnsignedIntegerType>(inout lhs: Data<T>, rhs: Data<T>) {
     lhs = lhs + rhs
+}
+
+public func +=<T: UnsignedIntegerType>(inout lhs: Data<T>?, rhs: Data<T>) {
+    if let currentData = lhs {
+        lhs = currentData + rhs
+    } else {
+        lhs = rhs
+    }
 }
 
 // MARK: Mapped access
@@ -258,12 +292,17 @@ extension Data: _ObjectiveCBridgeable {
     }
     
     public static func _forceBridgeFromObjectiveC(source: dispatch_data_t, inout result: Data?) {
-        result = Data(source)
+        result = try! Data(source)
     }
     
     public static func _conditionallyBridgeFromObjectiveC(source: dispatch_data_t, inout result: Data?) -> Bool {
-        result = Data(source)
-        return true
+        do {
+            result = try Data(source)
+            return true
+        } catch {
+            result = nil
+            return false
+        }
     }
     
 }

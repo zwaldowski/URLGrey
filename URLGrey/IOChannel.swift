@@ -51,7 +51,7 @@ public struct IOChannel: PipeSource {
             case (false, true, 0):
                 handler(Result.Success(Data()))
             case (false, false, 0):
-                let data = Data<UInt8>(dispatchData)
+                let data = try! Data<UInt8>(dispatchData)
                 progress?.becomeCurrentWithPendingUnitCount(Int64(data.count))
                 handler(Result.Success(data))
                 progress?.resignCurrent()
