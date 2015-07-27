@@ -51,35 +51,35 @@ public struct Data<T: UnsignedIntegerType> {
 
 // MARK: Internal
 
-private extension Data {
+extension Data {
     
-    typealias Bytes = UnsafeBufferPointer<UInt8>
+    static func toBytes(i: Int) -> Int {
+        return i / sizeof(T)
+    }
     
-    var startByte: Int {
+    static func fromBytes(i: Int) -> Int {
+        return i * sizeof(T)
+    }
+    
+    private typealias Bytes = UnsafeBufferPointer<UInt8>
+    
+    private var startByte: Int {
         return 0
     }
     
-    var endByte: Int {
+    private var endByte: Int {
         return dispatch_data_get_size(data)
     }
     
-    func apply(function: (data: dispatch_data_t, range: HalfOpenInterval<Int>, buffer: Bytes) -> Bool) {
+    private func apply(function: (data: dispatch_data_t, range: HalfOpenInterval<Int>, buffer: Bytes) -> Bool) {
         dispatch_data_apply(data) { (data, offset, ptr, count) -> Bool in
             let buffer = Bytes(start: UnsafePointer(ptr), count: count)
             return function(data: data, range: offset..<offset+count, buffer: buffer)
         }
     }
     
-    func toBytes(i: Int) -> Int {
-        return i / sizeof(T)
-    }
-    
-    func fromBytes(i: Int) -> Int {
-        return i * sizeof(T)
-    }
-    
-    func byteRangeForIndex(i: Int) -> HalfOpenInterval<Int> {
-        let byteStart = fromBytes(i)
+    private func byteRangeForIndex(i: Int) -> HalfOpenInterval<Int> {
+        let byteStart = Data.fromBytes(i)
         let byteEnd = byteStart + sizeof(T)
         return byteStart ..< byteEnd
     }
@@ -103,11 +103,11 @@ extension Data: SequenceType {
 extension Data: Indexable {
     
     public var startIndex: Int {
-        return toBytes(startByte)
+        return Data.toBytes(startByte)
     }
     
     public var endIndex: Int {
-        return toBytes(endByte)
+        return Data.toBytes(endByte)
     }
     
     public subscript(i: Int) -> T {
@@ -135,8 +135,8 @@ extension Data: Indexable {
 extension Data: CollectionType {
     
     public subscript (bounds: Range<Int>) -> Data<T> {
-        let offset = toBytes(bounds.startIndex)
-        let length = toBytes(bounds.endIndex - bounds.startIndex)
+        let offset = Data.toBytes(bounds.startIndex)
+        let length = Data.toBytes(bounds.endIndex - bounds.startIndex)
         return Data(unsafe: dispatch_data_create_subrange(data, offset, length))
     }
     
@@ -176,7 +176,7 @@ extension Data {
         var ptr: UnsafePointer<Void> = nil
         var byteCount = 0
         let map = dispatch_data_create_map(data, &ptr, &byteCount)
-        let count = fromBytes(byteCount)
+        let count = Data.fromBytes(byteCount)
         return withExtendedLifetime(map) {
             let buffer = UnsafeBufferPointer<T>(start: UnsafePointer(ptr), count: count)
             return body(buffer)
