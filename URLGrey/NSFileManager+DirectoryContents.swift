@@ -1,5 +1,5 @@
 //
-//  NSFileManager+Sequence.swift
+//  NSFileManager+DirectoryContents.swift
 //  URLGrey
 //
 //  Created by Zachary Waldowski on 10/23/14.

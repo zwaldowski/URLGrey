@@ -44,8 +44,8 @@
 		DBDCEFD11AC99FBC0087958F /* RelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDCEFCF1AC99FBC0087958F /* RelationshipTests.swift */; };
 		DBE2460A1A39272000BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBE2461F1A3927D600BF3533 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE246091A39272000BF3533 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */; };
-		DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */; };
+		DBE246451A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463C1A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift */; };
+		DBE246461A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463C1A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift */; };
 		DBE246471A3928FB00BF3533 /* NSURL+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */; };
 		DBE246481A3928FB00BF3533 /* NSURL+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */; };
 		DBE246491A3928FB00BF3533 /* URLResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE2463E1A3928FB00BF3533 /* URLResource.swift */; };
@@ -103,7 +103,7 @@
 		DBE2460F1A39272000BF3533 /* URLGreyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLGreyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE246151A39272000BF3533 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBE246201A39280800BF3533 /* Info-Mobile.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Mobile.plist"; sourceTree = "<group>"; };
-		DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Sequence.swift"; sourceTree = "<group>"; };
+		DBE2463C1A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+DirectoryContents.swift"; sourceTree = "<group>"; };
 		DBE2463D1A3928FB00BF3533 /* NSURL+Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Resource.swift"; sourceTree = "<group>"; };
 		DBE2463E1A3928FB00BF3533 /* URLResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLResource.swift; sourceTree = "<group>"; };
 		DBE2463F1A3928FB00BF3533 /* URLResourceMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLResourceMeta.swift; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 			children = (
 				DB67983D1A6181AD00E1F2AF /* I/O */,
 				DBA522FC1AC8706E00EB5F23 /* NSFileManager+Relationships.swift */,
-				DBE2463C1A3928FB00BF3533 /* NSFileManager+Sequence.swift */,
+				DBE2463C1A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift */,
 				DBC2ACAF1AC9C7C0000DB65B /* NSURL+Ancestors.swift */,
 				DB1F041B1AC64E1C00578D16 /* NSURL+Builder.swift */,
 				DB83625B1AC634D3006C894C /* NSURL+FileManager.swift */,
@@ -424,7 +424,7 @@
 				DBE2464A1A3928FB00BF3533 /* URLResource.swift in Sources */,
 				DBE246501A3928FB00BF3533 /* UTI.swift in Sources */,
 				DB6798331A617FD600E1F2AF /* DataReader.swift in Sources */,
-				DBE246461A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
+				DBE246461A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift in Sources */,
 				DBDC154E1B65E84E00CB200E /* Data+CollectionType.swift in Sources */,
 				DBCA86571ACC875500894C86 /* URLResourceTypes.swift in Sources */,
 				DBE246481A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
@@ -461,7 +461,7 @@
 				DBE246491A3928FB00BF3533 /* URLResource.swift in Sources */,
 				DBE2464F1A3928FB00BF3533 /* UTI.swift in Sources */,
 				DB6798321A617FD600E1F2AF /* DataReader.swift in Sources */,
-				DBE246451A3928FB00BF3533 /* NSFileManager+Sequence.swift in Sources */,
+				DBE246451A3928FB00BF3533 /* NSFileManager+DirectoryContents.swift in Sources */,
 				DBDC154D1B65E84E00CB200E /* Data+CollectionType.swift in Sources */,
 				DBCA86561ACC875500894C86 /* URLResourceTypes.swift in Sources */,
 				DBE246471A3928FB00BF3533 /* NSURL+Resource.swift in Sources */,
