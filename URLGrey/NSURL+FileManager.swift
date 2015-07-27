@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Lustre
 
 public extension NSFileManager {
 
@@ -55,52 +54,38 @@ public extension NSURL {
 
     // MARK: File management
 
-    func makeDirectory(createIntermediates: Bool = true) -> Result<Void> {
-        return Result {
-            try NSFileManager.currentManager.createDirectoryAtURL(self, withIntermediateDirectories: createIntermediates, attributes: nil)
-        }
+    func makeDirectory(createIntermediates: Bool = true) throws {
+        try NSFileManager.currentManager.createDirectoryAtURL(self, withIntermediateDirectories: createIntermediates, attributes: nil)
     }
     
-    func copy(toURL url: NSURL) -> Result<Void> {
-        return Result {
-            try NSFileManager.currentManager.copyItemAtURL(self, toURL: url)
-        }
+    func copy(toURL url: NSURL) throws {
+        try NSFileManager.currentManager.copyItemAtURL(self, toURL: url)
     }
     
-    func move(toURL url: NSURL) -> Result<Void> {
-        return Result {
-            try NSFileManager.currentManager.moveItemAtURL(self, toURL: url)
-        }
+    func move(toURL url: NSURL) throws {
+        try NSFileManager.currentManager.moveItemAtURL(self, toURL: url)
     }
     
-    func replace(URL url: NSURL, backupName: String? = nil, options: NSFileManagerItemReplacementOptions = []) -> Result<NSURL> {
-        return Result {
-            var resultingURL: NSURL?
-            try NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: &resultingURL)
-            return resultingURL!
-        }
+    func replace(URL url: NSURL, backupName: String? = nil, options: NSFileManagerItemReplacementOptions = []) throws -> NSURL {
+        var resultingURL: NSURL?
+        try NSFileManager.currentManager.replaceItemAtURL(url, withItemAtURL: self, backupItemName: backupName, options: options, resultingItemURL: &resultingURL)
+        return unsafeUnwrap(resultingURL)
     }
     
-    func link(toURL url: NSURL) -> Result<Void> {
-        return Result {
-            try NSFileManager.currentManager.linkItemAtURL(self, toURL: url)
-        }
+    func link(toURL url: NSURL) throws {
+        try NSFileManager.currentManager.linkItemAtURL(self, toURL: url)
     }
     
-    func remove() -> Result<Void> {
-        return Result {
-            try NSFileManager.currentManager.removeItemAtURL(self)
-        }
+    func remove() throws {
+        try NSFileManager.currentManager.removeItemAtURL(self)
     }
     
     #if os(OSX)
     
-    func trash() -> Result<NSURL> {
-        return Result {
-            var resultingURL: NSURL?
-            try NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: &resultingURL)
-            return resultingURL!
-        }
+    func trash() throws -> NSURL {
+        var resultingURL: NSURL?
+        try NSFileManager.currentManager.trashItemAtURL(self, resultingItemURL: &resultingURL)
+        return unsafeUnwrap(resultingURL)
     }
     
     #endif

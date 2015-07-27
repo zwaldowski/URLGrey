@@ -27,14 +27,14 @@ class RelationshipTests: XCTestCase {
         let root = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         
         baseURL = root + .Directory("\(NSStringFromClass(self.dynamicType))_\(NSUserName())_\(NSProcessInfo.processInfo().globallyUniqueString)")
-        baseURL.remove()
-        baseURL.makeDirectory()
+        try! baseURL.remove()
+        try! baseURL.makeDirectory()
         
         dirURL = baseURL + .Directory("folder")
-        dirURL.makeDirectory()
+        try! dirURL.makeDirectory()
         
         dirURL2 = baseURL + .Directory("otherFolder")
-        dirURL2.makeDirectory()
+        try! dirURL2.makeDirectory()
         
         fileURL = dirURL + .File("file", .Plain)
         "This is a test".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)?.writeToURL(fileURL, atomically: false)
