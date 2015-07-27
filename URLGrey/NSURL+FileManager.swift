@@ -49,10 +49,8 @@ public extension NSURL {
     
     // MARK: Relationships
     
-    // TODO: fix availability with backport
-    @available(OSX 10.10, *)
-    func relationship(with item: NSURL) -> Result<NSURLRelationship> {
-        return NSFileManager.currentManager.relationship(directory: self, toItem: item)
+    func relationship(with item: NSURL) throws -> URLRelationship {
+        return try NSFileManager.currentManager.relationship(directory: self, toItem: item)
     }
 
     // MARK: File management

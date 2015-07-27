@@ -46,55 +46,41 @@ class RelationshipTests: XCTestCase {
     }
 
     func testRelationships() {
-        if #available(OSX 10.10, *) {
-            XCTAssert(fm.relationship(directory: baseURL, toItem: fileURL) == Result.Success(.Contains))
-            XCTAssert(fm.relationship(directory: dirURL, toItem: fileURL) == Result.Success(.Contains))
-            XCTAssert(fm.relationship(directory: baseURL, toItem: baseURL) == Result.Success(.Same))
-            XCTAssert(fm.relationship(directory: dirURL, toItem: fileURL2) == Result.Success(.Other))
-            XCTAssert(fm.relationship(directory: fileURL, toItem: baseURL) == Result.Success(.Other))
-            XCTAssert(fm.relationship(directory: fileURL, toItem: fileURL) == Result.Success(.Other))
-        } else {
-            XCTFail("Backport not implemented yet")
-        }
+        XCTAssert(try! fm.relationship(directory: baseURL, toItem: fileURL) == .Contains)
+        XCTAssert(try! fm.relationship(directory: dirURL, toItem: fileURL)  == .Contains)
+        XCTAssert(try! fm.relationship(directory: baseURL, toItem: baseURL) == .Same)
+        XCTAssert(try! fm.relationship(directory: dirURL, toItem: fileURL2) == .Other)
+        XCTAssert(try! fm.relationship(directory: fileURL, toItem: baseURL) == .Other)
+        XCTAssert(try! fm.relationship(directory: fileURL, toItem: fileURL) == .Other)
     }
     
     func testRelationshipVolume() {
         let volume = try! fileURL.valueForResource(URLResource.VolumeURL)
-        if #available(OSX 10.10, *) {
-            XCTAssert(fm.relationship(directory: volume, toItem: fileURL) == Result.Success(.Contains))
-        } else {
-            XCTFail("Backport not implemented yet")
-        }
+        XCTAssert(try! fm.relationship(directory: volume, toItem: fileURL) == .Contains)
     }
     
     // it's always sad when a relationship fails
     func testRelationshipFailures() {
-        if #available(OSX 10.10, *) {
-            XCTAssert(fm.relationship(directory: baseURL, toItem: badURL).error != nil)
-            XCTAssert(fm.relationship(directory: badURL, toItem: fileURL).error != nil)
-        } else {
-            XCTFail("Backport not implemented yet")
-        }
+        do {
+            let _ = try fm.relationship(directory: baseURL, toItem: badURL)
+            XCTFail()
+            let _ = try fm.relationship(directory: badURL, toItem: fileURL)
+            XCTFail()
+        } catch {}
     }
     
     func testSearchPathRelationships() {
-        if #available(OSX 10.10, *) {
-            let appSupport = try! fm.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-            XCTAssertNotNil(appSupport)
-            
-            XCTAssert(fm.relationship(directory: .LibraryDirectory, inDomain: .UserDomainMask, toItem: appSupport) == Result.Success(.Contains))
-            XCTAssert(fm.relationship(directory: .CachesDirectory, inDomain: .UserDomainMask, toItem: appSupport) == Result.Success(.Other))
-        } else {
-            XCTFail("Backport not implemented yet")
-        }
+        let appSupport = try! fm.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        
+        XCTAssert(try! fm.relationship(directory: .LibraryDirectory, inDomain: .UserDomainMask, toItem: appSupport) == .Contains)
+        XCTAssert(try! fm.relationship(directory: .CachesDirectory, inDomain: .UserDomainMask, toItem: appSupport) == .Other)
     }
     
     func testSearchPathRelationshipFailure() {
-        if #available(OSX 10.10, *) {
-            XCTAssert(fm.relationship(directory: .LibraryDirectory, inDomain: .UserDomainMask, toItem: badURL).error != nil)
-        } else {
-            XCTFail("Backport not implemented yet")
-        }
+        do {
+            let _ = try fm.relationship(directory: .LibraryDirectory, inDomain: .UserDomainMask, toItem: badURL)
+            XCTFail()
+        } catch {}
     }
 
 }
