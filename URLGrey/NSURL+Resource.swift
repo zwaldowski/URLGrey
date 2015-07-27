@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Lustre
 
 // MARK: Resource Manipulation
 
@@ -25,16 +24,10 @@ public extension NSURL {
         :param: resource One of the URL’s resource keys.
         :returns: A result type appropriate for the resource's value type.
     **/
-    func value<Result>(forResource resource: ReadableResource<Result>) -> Result {
-        let key = resource.key
-        
-        var value: AnyObject?
-        do {
-            try getResourceValue(&value, forKey: key)
-        } catch {
-            return Result(left: URLError.ResourceRead(key))
-        }
-        return resource.read(value)
+    func valueForResource<Prototype: URLResourceReadable>(resource: Prototype) throws -> Prototype.Value {
+        var object: AnyObject?
+        try getResourceValue(&object, forKey: resource.key)
+        return try resource.convertFromInput(object)
     }
     
     /**
@@ -47,33 +40,21 @@ public extension NSURL {
         :param: resource One of the URL’s resource keys.
         :returns: A result type appropriate for an empty data set.
     **/
-    func setValue<V>(value: V, forResource resource: WritableResource<V>) -> Result<Void> {
-        let key = resource.key
-        return resource.write(value).flatMap { obj in
-            do {
-                try setResourceValue(obj, forKey: key)
-                return Result.Success(())
-            } catch {
-                return Result.Failure(URLError.ResourceWrite(key))
-            }
-        }
+    func setValue<Prototype: URLResourceWritable>(value: Prototype.Value, forResource resource: Prototype) throws {
+        let object = resource.convertToOutput(value)
+        try setResourceValue(object, forKey: resource.key)
     }
-
+    
     // MARK: Grouped convenience
 
     /// Returns values for the given resources based on the given URLs.
-    static func values<Result>(forResource resource: ReadableResource<Result>, URLs urls: NSURL...) -> Lustre.Result<[Result.RightType]> {
-        var results: [Result.RightType] = []
+    static func valuesForResource<Prototype: URLResourceReadable>(resource: Prototype, URLs urls: NSURL...) throws -> [Prototype.Value] {
+        var results = Array<Prototype.Value>()
         results.reserveCapacity(urls.count)
         for url in urls {
-            if let error = url.value(forResource: resource).analysis(ifLeft: { Optional.Some($0) }, ifRight: {
-                results.append($0)
-                return nil
-            }) {
-                return Lustre.Result.Failure(error)
-            }
+            try results.append(url.valueForResource(resource))
         }
-        return Lustre.Result.Success(results)
+        return results
     }
     
 }
