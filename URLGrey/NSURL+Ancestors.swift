@@ -42,34 +42,26 @@ public enum URLAncestorResult: EitherType {
 
 public struct URLAncestorsGenerator: GeneratorType {
     
-    private var currentURL: NSURL?
+    private var nextURL: NSURL?
     
     private init(URL: NSURL) {
-        self.currentURL = URL
+        self.nextURL = URL
     }
     
     public mutating func next() -> URLAncestorResult? {
-        if let current = currentURL {
-            currentURL = nil
-            
-            let currentIsParent = current.value(forResource: .IsVolume)
-            switch currentIsParent {
-            case .Success(let value) where value == true:
+        guard let current = nextURL else { return nil }
+        do {
+            if try current.valueForResource(URLResource.IsVolume) {
+                nextURL = nil
                 return .VolumeRoot(current)
-            case .Failure(let error):
-                return .Failure(error)
-            default: break
-            }
-            
-            switch current.value(forResource: .ParentDirectoryURL) {
-            case .Success(let url):
-                self.currentURL = url
+            } else {
+                nextURL = try current.valueForResource(URLResource.ParentDirectoryURL)
                 return .Next(current)
-            case .Failure(let error):
-                return .Failure(error)
             }
+        } catch {
+            nextURL = nil
+            return .Failure(error)
         }
-        return nil
     }
     
 }

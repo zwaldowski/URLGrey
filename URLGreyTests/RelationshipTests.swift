@@ -59,9 +59,9 @@ class RelationshipTests: XCTestCase {
     }
     
     func testRelationshipVolume() {
-        let volume = fileURL.value(forResource: .VolumeURL)
+        let volume = try! fileURL.valueForResource(URLResource.VolumeURL)
         if #available(OSX 10.10, *) {
-            XCTAssert(fm.relationship(directory: volume.value!, toItem: fileURL) == Result.Success(.Contains))
+            XCTAssert(fm.relationship(directory: volume, toItem: fileURL) == Result.Success(.Contains))
         } else {
             XCTFail("Backport not implemented yet")
         }

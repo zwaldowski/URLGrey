@@ -30,7 +30,11 @@ public extension NSURL {
     }
     
     var isDirectory: Bool {
-        return value(forResource: .IsDirectory).value ?? false
+        do {
+            return try valueForResource(URLResource.IsDirectory)
+        } catch {
+            return false
+        }
     }
     
     func withCurrentDirectory<Result>(@noescape body: NSFileManager -> Result) -> Result? {
@@ -105,8 +109,8 @@ public extension NSURL {
     
     // MARK: Directory enumeration
     
-    public func contents(fetchedResources: [ResourceType]? = nil, options mask: NSDirectoryEnumerationOptions = [], errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> AnySequence<NSURL> {
-        return NSFileManager.currentManager.directory(URL: self, fetchResources: fetchedResources, options: mask, errorHandler: handler)
+    public func contents(fetchResources fetchResources: [URLResourceType] = [], options mask: NSDirectoryEnumerationOptions = [], errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> AnySequence<NSURL> {
+        return NSFileManager.currentManager.directory(URL: self, fetchResources: fetchResources, options: mask, errorHandler: handler)
     }
 
 }

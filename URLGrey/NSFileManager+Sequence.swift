@@ -12,8 +12,8 @@ import Foundation
 
 extension NSFileManager {
     
-    public func directory(URL url: NSURL, fetchResources: [ResourceType]? = nil, options mask: NSDirectoryEnumerationOptions = [], errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> AnySequence<NSURL> {
-        let keyStrings = fetchResources?.map { $0.key }
+    public func directory(URL url: NSURL, fetchResources: [URLResourceType] = [], options mask: NSDirectoryEnumerationOptions = [], errorHandler handler: ((NSURL, NSError) -> Bool)? = nil) -> AnySequence<NSURL> {
+        let keyStrings = fetchResources.map { $0.key }
         let unsafeHandler = handler.map { block -> (NSURL!, NSError!) -> Bool in
             { block($0, $1) }
         }

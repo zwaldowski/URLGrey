@@ -9,18 +9,6 @@
 import Foundation
 import Lustre
 
-// TODO: consider moving this to Lustre
-private extension Result {
-    
-    func bimap<RR: EitherType where RR.LeftType == ErrorType>(@noescape transform: T -> RR?) -> RR? {
-        switch self {
-        case .Success(let value): return transform(value)
-        case .Failure(let error): return .Some(RR(left: error))
-        }
-    }
-    
-}
-
 /// MARK: Relationship Calculating
 
 public extension NSFileManager {
@@ -40,31 +28,43 @@ public extension NSFileManager {
             }
         }
         
-        if let isDir = directoryURL.value(forResource: .IsDirectory).bimap({
-            $0 ? nil : Result.Success(NSURLRelationship.Other)
-        }) { return isDir }
+        let isDirectory: Bool
+        do {
+            isDirectory = try directoryURL.valueForResource(URLResource.IsDirectory)
+        } catch {
+            return Result.Failure(error)
+        }
         
-        let fileIDs = NSURL.values(forResource: .FileIdentifier, URLs: directoryURL, itemURL)
-        if let areSame = fileIDs.bimap({
-            return $0[0].isEqual($0[1]) ? Result.Success(NSURLRelationship.Same) : nil
-        }) { return areSame }
+        guard isDirectory else { return Result.Success(NSURLRelationship.Other) }
         
-        if let sameVolume = NSURL.values(forResource: .VolumeIdentifier, URLs: directoryURL, itemURL).bimap({
-            $0[0].isEqual($0[1]) ? nil : Result.Success(NSURLRelationship.Other)
-        }) { return sameVolume }
+        let fileIDs: [OpaqueType]
+        do {
+            fileIDs = try NSURL.valuesForResource(URLResource.FileIdentifier, URLs: directoryURL, itemURL)
+        } catch {
+            return Result.Failure(error)
+        }
         
-        let directoryID = fileIDs.map { $0[0] }
+        guard !fileIDs[0].isEqual(fileIDs[1]) else { return Result.Success(NSURLRelationship.Same) }
+
+        let volIDs: [OpaqueType]
+        do {
+            volIDs = try NSURL.valuesForResource(URLResource.VolumeIdentifier, URLs: directoryURL, itemURL)
+        } catch {
+            return Result.Failure(error)
+        }
+
+        guard volIDs[0].isEqual(volIDs[1]) else { return Result.Success(NSURLRelationship.Other) }
+        
+        let directoryID = fileIDs[0]
         for parentResult in itemURL.ancestors {
-            let parentID = parentResult.flatMap { $0.0.value(forResource: .FileIdentifier) }
-            
-            switch (parentResult, parentID) {
-            case (.Failure(let error), _):
+            do {
+                let (parent, _) = try parentResult.evaluate()
+                let parentID = try parent.valueForResource(URLResource.FileIdentifier)
+                if parentID.isEqual(directoryID) {
+                    return Result.Success(NSURLRelationship.Contains)
+                }
+            } catch {
                 return Result.Failure(error)
-            case (_, .Failure(let error)):
-                return Result.Failure(error)
-            case (_, .Success(let parentID)) where parentID.isEqual(directoryID.value):
-                return Result.Success(.Contains)
-            default: break
             }
         }
         
