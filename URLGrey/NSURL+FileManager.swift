@@ -33,16 +33,14 @@ public extension NSURL {
         return value(forResource: .IsDirectory).value ?? false
     }
     
-    func withCurrentDirectory<Result>(body: NSFileManager -> Result) -> Result? {
-        if let path = path {
-            let fm = NSFileManager.currentManager
-            let oldPath = fm.currentDirectoryPath
-            fm.changeCurrentDirectoryPath(path)
-            let ret = body(fm)
-            fm.changeCurrentDirectoryPath(oldPath)
-            return ret
-        }
-        return nil
+    func withCurrentDirectory<Result>(@noescape body: NSFileManager -> Result) -> Result? {
+        guard let path = path else { return nil }
+        let fm = NSFileManager.currentManager
+        let oldPath = fm.currentDirectoryPath
+        fm.changeCurrentDirectoryPath(path)
+        let ret = body(fm)
+        fm.changeCurrentDirectoryPath(oldPath)
+        return ret
     }
     
     // MARK: Relationships
