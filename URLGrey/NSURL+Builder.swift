@@ -18,18 +18,9 @@ public enum PathComponent {
 public func +(lhs: NSURL, rhs: PathComponent) -> NSURL {
     switch rhs {
     case .Extension(let uti):
-        if let ext = uti.preferredPathExtension {
-            return lhs.URLByAppendingPathExtension(ext)
-        } else {
-            return lhs
-        }
+        return uti.preferredPathExtension.map(lhs.URLByAppendingPathExtension) ?? lhs
     case .File(let name, let uti):
-        let withName = lhs.URLByAppendingPathComponent(name, isDirectory: false)
-        if let ext = uti.preferredPathExtension {
-            return withName.URLByAppendingPathExtension(ext)
-        } else {
-            return withName
-        }
+        return lhs.URLByAppendingPathComponent(name, isDirectory: false) + .Extension(uti)
     case .Filename(let name):
         return lhs.URLByAppendingPathComponent(name, isDirectory: false)
     case .Directory(let dir):
@@ -47,5 +38,4 @@ public func +=(inout lhs: NSURL, rhs: PathComponent) {
 
 public func +=(inout lhs: NSURL, rhs: String) {
     lhs = lhs + rhs
-    
 }
