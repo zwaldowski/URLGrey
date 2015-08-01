@@ -6,8 +6,9 @@
 //  Copyright © 2014-2015. Some rights reserved.
 //
 
-import URLGrey
 import XCTest
+import URLGrey
+import Lustre
 
 class IOChannelTests: XCTestCase {
     
@@ -59,15 +60,11 @@ class IOChannelTests: XCTestCase {
         
         // Set up reader
         src.readUntilEnd(queue: queue) {
-            switch $0 {
-            case .Success(let newData):
-                result += newData
-                if newData.isEmpty {
-                    XCTAssert(result.elementsEqual(buffer), "The data was corrupted during the copy")
-                    expect.fulfill()
-                }
-            case .Failure(let error):
-                XCTFail("Read failed: \(error)")
+            let newData = try! $0.extract()
+            result += newData
+            if newData.isEmpty {
+                XCTAssert(result.elementsEqual(buffer), "The data was corrupted during the copy")
+                expect.fulfill()
             }
         }
         

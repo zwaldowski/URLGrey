@@ -39,15 +39,9 @@ class AncestorTests: XCTestCase {
         var reachedRoot = false
         
         for i in sysVersion.ancestors {
-            switch i {
-            case .Root:
-                reachedRoot = true
-                fallthrough
-            case .Next:
-                ++validParents
-            case .Failure(let error):
-                XCTFail("Encountered error: \(error)")
-            }
+            let (_, isRoot) = try! i.extract()
+            reachedRoot = reachedRoot || isRoot
+            ++validParents
         }
         
         XCTAssert(reachedRoot)
