@@ -11,7 +11,7 @@ import Foundation
 private extension NSData {
     
     private func wrapToDispatchData(copy copy: Bool) -> dispatch_data_t {
-        var ret: dispatch_data_t?
+        var ret = dispatch_data_empty
         enumerateByteRangesUsingBlock { (bytes, byteRange, _) in
             let chunk: dispatch_data_t
             if copy {
@@ -22,14 +22,9 @@ private extension NSData {
                     innerData.release()
                 }
             }
-            
-            if let current = ret {
-                ret = dispatch_data_create_concat(current, chunk)
-            } else {
-                ret = chunk
-            }
+            ret = dispatch_data_create_concat(ret, chunk)
         }
-        return ret ?? dispatch_data_empty
+        return ret
     }
     
     @nonobjc var dispatchValue: dispatch_data_t {
@@ -49,8 +44,8 @@ private extension NSData {
 
 extension Data {
     
-    public init(_ data: NSData) throws {
-        try self.init(data.dispatchValue)
+    public init(_ data: NSData) {
+        try! self.init(data.dispatchValue)
     }
     
 }
