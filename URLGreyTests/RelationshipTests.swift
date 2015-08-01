@@ -69,6 +69,9 @@ class RelationshipTests: XCTestCase {
         do {
             let _ = try fm.relationship(directory: baseURL, toItem: badURL)
             XCTFail()
+        } catch {}
+        
+        do {
             let _ = try fm.relationship(directory: badURL, toItem: fileURL)
             XCTFail()
         } catch {}
