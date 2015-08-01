@@ -32,7 +32,7 @@ extension NSFileManager {
                 
                 let directoryID = fileIDs[0]
                 for parentResult in itemURL.ancestors {
-                    let (parent, _) = try parentResult.evaluate()
+                    let (parent, _) = try parentResult.extract()
                     let parentID = try parent.valueForResource(URLResource.FileIdentifier)
                     if parentID.isEqual(directoryID) {
                         return .Contains
