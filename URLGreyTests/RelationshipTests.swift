@@ -27,7 +27,6 @@ class RelationshipTests: XCTestCase {
         let root = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         
         baseURL = root + .Directory("\(NSStringFromClass(self.dynamicType))_\(NSUserName())_\(NSProcessInfo.processInfo().globallyUniqueString)")
-        try! baseURL.remove()
         try! baseURL.makeDirectory()
         
         dirURL = baseURL + .Directory("folder")
@@ -43,6 +42,12 @@ class RelationshipTests: XCTestCase {
         "Ce ne est pas un test.".dataUsingEncoding(NSUTF16StringEncoding, allowLossyConversion: false)?.writeToURL(fileURL2, atomically: false)
         
         badURL = baseURL + .Filename("fake")
+    }
+    
+    override func tearDown() {
+        try! baseURL.remove()
+        
+        super.tearDown()
     }
 
     func testRelationships() {
