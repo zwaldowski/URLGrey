@@ -8,7 +8,7 @@
 
 import Dispatch
 
-/// A read-only construct that conceptually models a buffer of numeric unets.
+/// A read-only construct that conceptually models a buffer of numeric units.
 public struct Data<T: UnsignedIntegerType> {
     
     public let data: dispatch_data_t
