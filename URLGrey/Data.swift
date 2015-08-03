@@ -31,7 +31,7 @@ public struct Data<T: UnsignedIntegerType> {
         }
     }
     
-    init(_ data: dispatch_data_t, inout partial: Data<UInt8>?) {
+    public init(_ data: dispatch_data_t, inout partial: Data<UInt8>?) {
         try! self.init(safe: data) { data in
             partial += data
         }
