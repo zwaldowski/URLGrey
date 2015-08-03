@@ -32,8 +32,9 @@ public struct Data<T: UnsignedIntegerType> {
     }
     
     public init(_ data: dispatch_data_t, inout partial: Data<UInt8>?) {
-        try! self.init(safe: data) { data in
-            partial += data
+        let combined = partial.map { dispatch_data_create_concat($0.data, data)! } ?? data
+        try! self.init(safe: combined) { data in
+            partial = data
         }
     }
     
