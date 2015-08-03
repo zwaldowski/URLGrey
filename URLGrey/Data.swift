@@ -274,6 +274,16 @@ public struct DataGenerator<T: UnsignedIntegerType>: GeneratorType, SequenceType
     
 }
 
+// MARK: Description
+
+extension Data: CustomStringConvertible {
+    
+    public var description: String {
+        return data.description
+    }
+    
+}
+
 // MARK: AnyObject bridging
 
 extension Data: _ObjectiveCBridgeable {
