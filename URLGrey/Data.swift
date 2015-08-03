@@ -274,12 +274,23 @@ public struct DataGenerator<T: UnsignedIntegerType>: GeneratorType, SequenceType
     
 }
 
-// MARK: Description
+// MARK: Introspection
 
 extension Data: CustomStringConvertible {
     
     public var description: String {
         return data.description
+    }
+    
+}
+
+extension Data: CustomReflectable {
+    
+    public func customMirror() -> Mirror {
+        // Appears as an array of the integer type, as suggested in the docs
+        // for Mirror.init(_:unlabeledChildren:displayStyle:ancestorRepresentation:).
+        // An improved version might show regions and/or segmented hex values.
+        return Mirror(self, unlabeledChildren: self, displayStyle: .Collection)
     }
     
 }
