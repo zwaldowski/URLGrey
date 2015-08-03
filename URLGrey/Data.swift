@@ -17,7 +17,7 @@ public struct Data<T: UnsignedIntegerType> {
         self.data = data
     }
     
-    init(safe data: dispatch_data_t, withPartialData: Data<UInt8> throws -> ()) rethrows {
+    init(safe data: dispatch_data_t, @noescape withPartialData: Data<UInt8> throws -> ()) rethrows {
         let size = dispatch_data_get_size(data)
         let remainder = size % sizeof(T)
         if remainder == 0 {
