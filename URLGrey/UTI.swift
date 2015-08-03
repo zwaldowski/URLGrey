@@ -125,7 +125,7 @@ private extension UTI {
             }
         #endif
         guard let cfTags = UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() else { return [] }
-        return (cfTags as NSArray) as! [String]
+        return lazy(cfTags as [AnyObject]).map { $0 as! String }
     }
     
 }
@@ -190,14 +190,19 @@ public extension UTI {
     
     public init!(preferredTag tag: Tag, conformingTo parent: UTI? = nil) {
         let parentUTI = parent?.identifier
-        guard let UTI = UTTypeCreatePreferredIdentifierForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() else { return nil }
+        guard let UTI = UTTypeCreatePreferredIdentifierForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() else {
+            return nil
+        }
         self.init(UTI)
     }
     
-    public static func allIdentifiersForTag(tag: Tag, conformingTo parent: UTI? = nil) -> [UTI] {
+    public static func allIdentifiersForTag(tag: Tag, conformingTo parent: UTI? = nil) -> AnyRandomAccessCollection<UTI> {
         let parentUTI = parent?.identifier
-        guard let cfUTIs = UTTypeCreateAllIdentifiersForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() else { return [] }
-        return lazy(cfUTIs as NSArray).map(unsafeDowncast).map(UTI.init).array
+        guard let cfUTIs = UTTypeCreateAllIdentifiersForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() else {
+            return AnyRandomAccessCollection(EmptyCollection())
+        }
+        let lazyUTIs = lazy(cfUTIs as [AnyObject]).map(unsafeDowncast).map(UTI.init)
+        return AnyRandomAccessCollection(lazyUTIs)
     }
     
     public var preferredPathExtension: String? {
