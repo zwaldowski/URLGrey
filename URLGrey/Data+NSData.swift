@@ -44,8 +44,8 @@ private extension NSData {
 
 extension Data {
     
-    public init(_ data: NSData) {
-        try! self.init(data.dispatchValue)
+    public init(_ data: NSData) throws {
+        try self.init(data.dispatchValue)
     }
     
 }
