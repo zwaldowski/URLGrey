@@ -200,7 +200,7 @@ public struct DataRegionsGenerator: GeneratorType, SequenceType {
     private var region = dispatch_data_empty
     private var nextByteOffset = 0
     
-    public init(data: dispatch_data_t) {
+    private init(data: dispatch_data_t) {
         self.data = data
     }
     
