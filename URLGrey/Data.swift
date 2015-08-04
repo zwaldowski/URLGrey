@@ -11,6 +11,7 @@ import Dispatch
 /// A read-only construct that conceptually models a buffer of numeric units.
 public struct Data<T: UnsignedIntegerType> {
     
+    /// The `dispatch_data_t` byte buffer representation.
     public let data: dispatch_data_t
     
     init(unsafe data: dispatch_data_t) {
@@ -38,10 +39,13 @@ public struct Data<T: UnsignedIntegerType> {
         }
     }
     
+    /// Create an empty data.
     public init() {
         self.init(unsafe: dispatch_data_empty)
     }
     
+    /// Create data from `dispatch_data_t`. If the bytes cannot be represented
+    /// by a whole number of elements, the initializer will throw.
     public init(_ data: dispatch_data_t) throws {
         try self.init(safe: data) { _ in
             throw IOError.PartialData
@@ -91,10 +95,14 @@ extension Data {
 
 extension Data: SequenceType {
     
+    /// A collection view representing the underlying contiguous byte buffers
+    /// making up the data. Enumerating through this collection is useful
+    /// for feeding an iterative API, such as crypto routines.
     public var byteRegions: DataRegions {
         return DataRegions(data: data)
     }
     
+    /// Return a *generator* over the `T`s that comprise this *data*.
     public func generate() -> DataGenerator<T> {
         return DataGenerator(regions: byteRegions.generate())
     }
@@ -103,14 +111,24 @@ extension Data: SequenceType {
 
 extension Data: Indexable {
     
+    /// The position of the first element in the data.
+    ///
+    /// In empty data, `startIndex == endIndex`.
     public var startIndex: Int {
         return Data.toBytes(startByte)
     }
     
+    /// The data's "past the end" position.
+    ///
+    /// `endIndex` is not a valid argument to `subscript`, and is always
+    /// reachable from `startIndex` by zero or more applications of
+    /// `successor()`.
     public var endIndex: Int {
         return Data.toBytes(endByte)
     }
     
+    /// This subscript is not performance-friendly, and will always underperform
+    /// enumeration of the `Data` or application accross its `byteRegions`.
     public subscript(i: Int) -> T {
         let byteRange = byteRangeForIndex(i)
         assert(byteRange.end < endByte, "Data index out of range")
@@ -147,16 +165,19 @@ extension Data: CollectionType {
 
 extension Data {
     
+    /// Combine the recieving data with the given data in constant time.
     public mutating func extend(newData: Data<T>) {
         self += newData
     }
     
 }
 
+/// Combine `lhs` and `rhs` into a new buffer in constant time.
 public func +<T: UnsignedIntegerType>(lhs: Data<T>, rhs: Data<T>) -> Data<T> {
     return Data(unsafe: dispatch_data_create_concat(lhs.data, rhs.data))
 }
 
+/// Operator form of `Data<T>.extend`.
 public func +=<T: UnsignedIntegerType>(inout lhs: Data<T>, rhs: Data<T>) {
     lhs = lhs + rhs
 }
@@ -165,6 +186,9 @@ public func +=<T: UnsignedIntegerType>(inout lhs: Data<T>, rhs: Data<T>) {
 
 extension Data {
     
+    /// Call `body(p)`, where `p` is a pointer to the data represented as
+    /// contiguous storage. If the data is non-contiguous, this will trigger
+    /// a copy of all buffers.
     public func withUnsafeBufferPointer<R>(@noescape body: UnsafeBufferPointer<T> -> R) -> R {
         var ptr: UnsafePointer<Void> = nil
         var byteCount = 0
@@ -180,6 +204,9 @@ extension Data {
 
 // MARK: Generators
 
+/// The `SequenceType` returned by `Data.byteBuffers`.  `DataRegions`
+/// is a sequence of byte buffers, represented in Swift as
+/// `UnsafeBufferPointer<UInt8>`.
 public struct DataRegions: SequenceType {
     
     private let data: dispatch_data_t
@@ -188,12 +215,14 @@ public struct DataRegions: SequenceType {
         self.data = data
     }
     
+    /// Start enumeration of byte buffers.
     public func generate() -> DataRegionsGenerator {
         return DataRegionsGenerator(data: data)
     }
     
 }
 
+/// A generator over the underlying contiguous storage of a `Data<T>`.
 public struct DataRegionsGenerator: GeneratorType, SequenceType {
     
     private let data: dispatch_data_t
@@ -204,6 +233,10 @@ public struct DataRegionsGenerator: GeneratorType, SequenceType {
         self.data = data
     }
     
+    /// Advance to the next buffer and return it, or `nil` if no more buffers
+    /// exist.
+    ///
+    /// - Requires: No preceding call to `self.next()` has returned `nil`.
     public mutating func next() -> UnsafeBufferPointer<UInt8>? {
         if nextByteOffset >= dispatch_data_get_size(data) {
             return nil
@@ -221,6 +254,7 @@ public struct DataRegionsGenerator: GeneratorType, SequenceType {
         return UnsafeBufferPointer(start: UnsafePointer(mapPtr), count: mapSize)
     }
     
+    /// Restart enumeration of byte buffers.
     public func generate() -> DataRegionsGenerator {
         return DataRegionsGenerator(data: data)
     }
@@ -253,6 +287,10 @@ public struct DataGenerator<T: UnsignedIntegerType>: GeneratorType, SequenceType
         return byte
     }
     
+    /// Advance to the next element and return it, or `nil` if no next
+    /// element exists.
+    ///
+    /// - Requires: No preceding call to `self.next()` has returned `nil`.
     public mutating func next() -> T? {
         return (0 ..< sizeof(T)).reduce(T.allZeros) { (current, byteIdx) -> T? in
             guard let current = current, byte = nextByte() else { return nil }
@@ -260,6 +298,7 @@ public struct DataGenerator<T: UnsignedIntegerType>: GeneratorType, SequenceType
         }
     }
     
+    /// Restart enumeration of the data.
     public func generate() -> DataGenerator<T> {
         return DataGenerator(regions: regions.generate())
     }
@@ -270,6 +309,7 @@ public struct DataGenerator<T: UnsignedIntegerType>: GeneratorType, SequenceType
 
 extension Data: CustomStringConvertible {
     
+    /// A textual representation of `self`.
     public var description: String {
         return data.description
     }
@@ -278,6 +318,7 @@ extension Data: CustomStringConvertible {
 
 extension Data: CustomReflectable {
     
+    /// Return the `Mirror` for `self`.
     public func customMirror() -> Mirror {
         // Appears as an array of the integer type, as suggested in the docs
         // for Mirror.init(_:unlabeledChildren:displayStyle:ancestorRepresentation:).
