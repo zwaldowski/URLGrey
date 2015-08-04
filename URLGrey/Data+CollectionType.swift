@@ -12,35 +12,40 @@ public enum UnsafeBufferOwnership<T> {
     case Copy
     case Free
     case Unmap
-    case Custom(UnsafeMutableBufferPointer<T> -> ())
+    case Custom(UnsafeBufferPointer<T> -> ())
 }
 
 extension Data {
     
-    public init(unsafeWithBuffer buffer: UnsafeMutableBufferPointer<T>, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeBufferOwnership<T>) {
+    private init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t, destructor: dispatch_block_t!) {
         let baseAddress = UnsafePointer<Void>(buffer.baseAddress)
         let bytes = buffer.count * sizeof(T)
-        let destructor: dispatch_block_t? = {
+        self.init(unsafe: dispatch_data_create(baseAddress, bytes, queue, destructor))
+    }
+    
+    private init<Owner: CollectionType>(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {
+        self.init(unsafeWithBuffer: buffer, queue: queue, destructor: { _ = owner })
+    }
+    
+    public init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeBufferOwnership<T>) {
+        self.init(unsafeWithBuffer: buffer, queue: queue, destructor: {
             switch behavior {
             case .Copy: return nil
             case .Free: return _dispatch_data_destructor_free
             case .Unmap: return _dispatch_data_destructor_munmap
             case .Custom(let fn): return { fn(buffer) }
             }
-        }()
-        
-        self.init(unsafe: dispatch_data_create(baseAddress, bytes, queue, destructor))
+        }())
     }
     
-    private init<Owner: CollectionType>(unsafeWithOwnedPointer pointer: UnsafePointer<T>, count: Int, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), owner: Owner) {
-        let buffer = UnsafeMutableBufferPointer<T>(start: UnsafeMutablePointer(pointer), count: count)
-        self.init(unsafeWithBuffer: buffer, queue: queue, behavior: .Custom({ _ in
-            _ = owner
-        }))
+    public init(array: [T]) {
+        let buffer = array.withUnsafeBufferPointer { $0 }
+        self.init(unsafeWithBuffer: buffer, owner: array)
     }
     
-    public init(var array: [T]) {
-        self.init(unsafeWithOwnedPointer: &array, count: array.count, owner: array)
+    public init(array: ContiguousArray<T>) {
+        let buffer = array.withUnsafeBufferPointer { $0 }
+        self.init(unsafeWithBuffer: buffer, owner: array)
     }
     
 }
