@@ -49,3 +49,37 @@ extension Data {
     }
     
 }
+
+// MARK: AnyObject bridging
+
+extension Data: _ObjectiveCBridgeable {
+    
+    public typealias _ObjectiveCType = NSData
+    
+    public static func _isBridgedToObjectiveC() -> Bool {
+        return true
+    }
+    
+    public func _bridgeToObjectiveC() -> NSData {
+        return data as! NSData
+    }
+    
+    public static func _getObjectiveCType() -> Any.Type {
+        return NSData.self
+    }
+    
+    public static func _forceBridgeFromObjectiveC(source: NSData, inout result: Data?) {
+        result = try! Data(source)
+    }
+    
+    public static func _conditionallyBridgeFromObjectiveC(source: NSData, inout result: Data?) -> Bool {
+        do {
+            result = try Data(source)
+            return true
+        } catch {
+            result = nil
+            return false
+        }
+    }
+    
+}

@@ -286,37 +286,3 @@ extension Data: CustomReflectable {
     }
     
 }
-
-// MARK: AnyObject bridging
-
-extension Data: _ObjectiveCBridgeable {
-    
-    public typealias _ObjectiveCType = dispatch_data_t
-    
-    public static func _isBridgedToObjectiveC() -> Bool {
-        return true
-    }
-    
-    public func _bridgeToObjectiveC() -> dispatch_data_t {
-        return data
-    }
-    
-    public static func _getObjectiveCType() -> Any.Type {
-        return dispatch_data_t.self
-    }
-    
-    public static func _forceBridgeFromObjectiveC(source: dispatch_data_t, inout result: Data?) {
-        result = try! Data(source)
-    }
-    
-    public static func _conditionallyBridgeFromObjectiveC(source: dispatch_data_t, inout result: Data?) -> Bool {
-        do {
-            result = try Data(source)
-            return true
-        } catch {
-            result = nil
-            return false
-        }
-    }
-    
-}
