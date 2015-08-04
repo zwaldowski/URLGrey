@@ -12,7 +12,7 @@ import Lustre
 public final class IOChannel<T: UnsignedIntegerType>: DataReader {
     
     private let channel: dispatch_io_t
-    private var partialData: Data<UInt8>?
+    private var partialData = Data<UInt8>()
     
     private init(channel: dispatch_io_t) {
         self.channel = channel

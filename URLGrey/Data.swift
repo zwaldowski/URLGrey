@@ -31,8 +31,8 @@ public struct Data<T: UnsignedIntegerType> {
         }
     }
     
-    public init(_ data: dispatch_data_t, inout partial: Data<UInt8>?) {
-        let combined = partial.map { dispatch_data_create_concat($0.data, data)! } ?? data
+    public init(_ data: dispatch_data_t, inout partial: Data<UInt8>) {
+        let combined = dispatch_data_create_concat(partial.data, data)
         try! self.init(safe: combined) { data in
             partial = data
         }
@@ -159,14 +159,6 @@ public func +<T: UnsignedIntegerType>(lhs: Data<T>, rhs: Data<T>) -> Data<T> {
 
 public func +=<T: UnsignedIntegerType>(inout lhs: Data<T>, rhs: Data<T>) {
     lhs = lhs + rhs
-}
-
-public func +=<T: UnsignedIntegerType>(inout lhs: Data<T>?, rhs: Data<T>) {
-    if let currentData = lhs {
-        lhs = currentData + rhs
-    } else {
-        lhs = rhs
-    }
 }
 
 // MARK: Mapped access
