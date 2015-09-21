@@ -19,7 +19,7 @@ extension NSFileManager {
         }
                 
         if let enumerator = enumeratorAtURL(url, includingPropertiesForKeys: keyStrings, options: mask, errorHandler: unsafeHandler) {
-            return AnySequence(lazy(enumerator).map(unsafeDowncast))
+            return AnySequence(enumerator.lazy.map(unsafeDowncast))
         } else {
             return AnySequence(EmptyGenerator())
         }

@@ -22,7 +22,7 @@ public struct UTI {
     }
     
     public func conformsTo(other: UTI) -> Bool {
-        return UTTypeConformsTo(identifier, other.identifier) == 1
+        return UTTypeConformsTo(identifier, other.identifier)
     }
     
     public var declared: Bool {
@@ -32,7 +32,7 @@ public struct UTI {
             }
         #endif
 
-        return UTTypeIsDeclared(identifier) == 1
+        return UTTypeIsDeclared(identifier)
     }
     
     public var dynamic: Bool {
@@ -42,7 +42,7 @@ public struct UTI {
             }
         #endif
 
-        return UTTypeIsDynamic(identifier) == 1
+        return UTTypeIsDynamic(identifier)
     }
     
     public var declaringBundleURL: NSURL? {
@@ -82,7 +82,7 @@ extension UTI: CustomStringConvertible {
 // MARK: Equatable, Hashable
 
 public func ==(a: UTI, b: UTI) -> Bool {
-    return UTTypeEqual(a.identifier, b.identifier) == 1
+    return UTTypeEqual(a.identifier, b.identifier)
 }
 
 extension UTI: Hashable {
@@ -125,7 +125,7 @@ private extension UTI {
             }
         #endif
         guard let cfTags = UTTypeCopyAllTagsWithClass(identifier, kind)?.takeRetainedValue() else { return [] }
-        return lazy(cfTags as [AnyObject]).map { $0 as! String }
+        return (cfTags as [AnyObject]).lazy.map { $0 as! String }
     }
     
 }
@@ -201,7 +201,7 @@ public extension UTI {
         guard let cfUTIs = UTTypeCreateAllIdentifiersForTag(tag.kindValue, tag.stringValue, parentUTI)?.takeRetainedValue() else {
             return AnyRandomAccessCollection(EmptyCollection())
         }
-        let lazyUTIs = lazy(cfUTIs as [AnyObject]).map(unsafeDowncast).map(UTI.init)
+        let lazyUTIs = (cfUTIs as [AnyObject]).lazy.map(unsafeDowncast).map(UTI.init)
         return AnyRandomAccessCollection(lazyUTIs)
     }
     
