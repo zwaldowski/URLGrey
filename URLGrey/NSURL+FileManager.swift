@@ -51,6 +51,10 @@ public extension NSURL {
     func relationship(with item: NSURL) throws -> URLRelationship {
         return try NSFileManager.currentManager.relationship(directory: self, toItem: item)
     }
+    
+    var children: AnySequence<NSURL> {
+        return NSFileManager.currentManager.directory(URL: self)
+    }
 
     // MARK: File management
 
