@@ -45,16 +45,4 @@ public extension NSURL {
         try setResourceValue(object, forKey: resource.key)
     }
     
-    // MARK: Grouped convenience
-
-    /// Returns values for the given resources based on the given URLs.
-    static func valuesForResource<Prototype: URLResourceReadable>(resource: Prototype, URLs urls: NSURL...) throws -> [Prototype.Value] {
-        var results = Array<Prototype.Value>()
-        results.reserveCapacity(urls.count)
-        for url in urls {
-            try results.append(url.valueForResource(resource))
-        }
-        return results
-    }
-    
 }

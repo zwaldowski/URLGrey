@@ -24,10 +24,11 @@ extension NSFileManager {
                 let isDirectory = try directoryURL.valueForResource(URLResource.IsDirectory)
                 guard isDirectory else { return .Other }
                 
-                let fileIDs = try NSURL.valuesForResource(URLResource.FileIdentifier, URLs: directoryURL, itemURL)
+                let URLs = [ directoryURL, itemURL ]
+                let fileIDs = try URLs.map { try $0.valueForResource(URLResource.FileIdentifier) }
                 guard !fileIDs[0].isEqual(fileIDs[1]) else { return .Same }
                 
-                let volIDs = try NSURL.valuesForResource(URLResource.VolumeIdentifier, URLs: directoryURL, itemURL)
+                let volIDs = try URLs.map { try $0.valueForResource(URLResource.VolumeIdentifier) }
                 guard volIDs[0].isEqual(volIDs[1]) else { return .Other }
                 
                 let directoryID = fileIDs[0]
