@@ -20,9 +20,9 @@ public enum UnsafeBufferOwnership<T> {
     case Custom(UnsafeBufferPointer<T> -> ())
 }
 
-extension Data {
+public extension Data {
     
-    private init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t, destructor: dispatch_block_t!) {
+    private init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t, destructor: dispatch_block_t?) {
         let baseAddress = UnsafePointer<Void>(buffer.baseAddress)
         let bytes = buffer.count * sizeof(T)
         self.init(unsafe: dispatch_data_create(baseAddress, bytes, queue, destructor))
@@ -39,27 +39,31 @@ extension Data {
     ///  - `.Free` to dealloc data created by `malloc` or equivalent.
     ///  - `.Unmap` to free data created by `mmap` or equivalent.
     ///  - `.Custom` for some custom deallocation.
-    public init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeBufferOwnership<T>) {
-        self.init(unsafeWithBuffer: buffer, queue: queue, destructor: {
-            switch behavior {
-            case .Copy: return nil
-            case .Free: return _dispatch_data_destructor_free
-            case .Unmap: return _dispatch_data_destructor_munmap
-            case .Custom(let fn): return { fn(buffer) }
-            }
-            }())
+    init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeBufferOwnership<T>) {
+        let destructor: dispatch_block_t?
+        switch behavior {
+        case .Copy:
+            destructor = nil
+        case .Free:
+            destructor = _dispatch_data_destructor_free
+        case .Unmap:
+            destructor = _dispatch_data_destructor_munmap
+        case .Custom(let fn):
+            destructor = { fn(buffer) }
+        }
+        self.init(unsafeWithBuffer: buffer, queue: queue, destructor: destructor)
     }
     
     /// Create `Data` backed by the contiguous contents of an array.
     /// If the array itself is represented discontiguously, the initializer
     /// must first create the storage.
-    public init(array: [T]) {
+    init(array: [T]) {
         let buffer = array.withUnsafeBufferPointer { $0 }
         self.init(unsafeWithBuffer: buffer, owner: array)
     }
     
     /// Create `Data` backed by a contiguous array.
-    public init(array: ContiguousArray<T>) {
+    init(array: ContiguousArray<T>) {
         let buffer = array.withUnsafeBufferPointer { $0 }
         self.init(unsafeWithBuffer: buffer, owner: array)
     }
