@@ -7,9 +7,8 @@
 //
 
 import Dispatch
-import Lustre
 
-public final class IOChannel<T: UnsignedIntegerType>: DataReader {
+public final class IOChannel<Element: UnsignedIntegerType>: DataReader {
     
     private let channel: dispatch_io_t
     private var partialData = Data<UInt8>()
@@ -18,12 +17,8 @@ public final class IOChannel<T: UnsignedIntegerType>: DataReader {
         self.channel = channel
     }
 
-    public func readUntilEnd(queue queue: dispatch_queue_t, handler: Result<Data<T>> -> ()) {
-        read(queue: queue, handler: handler)
-    }
-    
-    public func read(count count: Int? = nil, queue: dispatch_queue_t, handler: Result<Data<T>> -> ()) {
-        let length = count.map(Data<T>.toBytes) ?? Int.max
+    public func read(count: Int, queue: dispatch_queue_t, handler: DataReadResult<Element> -> Void) {
+        let length = Data<Element>.toBytes(count)
         let progress = NSProgress.currentProgress().map { _ in NSProgress(totalUnitCount: numericCast(length)) }
         if let progress = progress {
             progress.kind = NSProgressKindFile
@@ -35,21 +30,21 @@ public final class IOChannel<T: UnsignedIntegerType>: DataReader {
             let userCancelled = progress?.cancelled ?? false
             switch (userCancelled, done, errno) {
             case (false, true, 0):
-                handler(Result.Success(Data()))
+                handler(.Success(Data()))
             case (false, false, 0):
-                let data = Data<T>(dispatchData, partial: &self.partialData)
+                let data = Data<Element>(dispatchData, partial: &self.partialData)
                 progress?.becomeCurrentWithPendingUnitCount(numericCast(data.count))
-                handler(Result.Success(data))
+                handler(.Success(data))
                 progress?.resignCurrent()
             case (true, _, _):
-                handler(Result.Failure(IOError.UserCancelled))
+                handler(.Failure(IOError.UserCancelled))
             case (_, _, ECANCELED):
-                handler(Result.Failure(IOError.Closed))
+                handler(.Failure(IOError.Closed))
             case (_, _, let err):
                 if let error = POSIXError(rawValue: err) {
-                    handler(Result.Failure(error))
+                    handler(.Failure(error))
                 } else {
-                    handler(Result.Failure(IOError.Unknown))
+                    handler(.Failure(IOError.Unknown))
                 }
             }
         }

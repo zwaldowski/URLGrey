@@ -7,8 +7,7 @@
 //
 
 import XCTest
-import URLGrey
-import Lustre
+@testable import URLGrey
 
 class IOChannelTests: XCTestCase {
     
@@ -60,8 +59,13 @@ class IOChannelTests: XCTestCase {
         
         // Set up reader
         src.readUntilEnd(queue: queue) {
-            let newData = try! $0.extract()
+            guard case let .Success(newData) = $0 else {
+                XCTFail("Unexpected failure")
+                return
+            }
+
             result += newData
+
             if newData.isEmpty {
                 XCTAssert(result.elementsEqual(buffer), "The data was corrupted during the copy")
                 expect.fulfill()
