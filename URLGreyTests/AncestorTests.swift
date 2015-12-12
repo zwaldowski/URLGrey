@@ -29,10 +29,12 @@ class AncestorTests: XCTestCase {
     // stable target on Darwin volumes, but not anywhere else. If Swift ever
     // runs on something else, someone let me know.
     func testURLParents() {
-        let sysLib = try! fm.URLForDirectory(.LibraryDirectory, inDomain: .SystemDomainMask, appropriateForURL: nil, create: false)
-        XCTAssertNotNil(sysLib)
+        guard let sysLib = try? fm.URLForDirectory(.LibraryDirectory, inDomain: .SystemDomainMask, appropriateForURL: nil, create: false) else {
+            XCTFail("Could not get system directory")
+            return
+        }
         
-        let sysVersion = sysLib + .Directory("CoreServices") + .File("SystemVersion", .PropertyList)
+        let sysVersion = sysLib + "CoreServices" + .File("SystemVersion", .PropertyList)
         
         var validParents = 0
         let expectedValidParents = 5

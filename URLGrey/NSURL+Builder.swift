@@ -22,7 +22,7 @@ public func +(lhs: NSURL, rhs: PathComponent) -> NSURL {
     case .File(let name, let uti):
         return lhs.URLByAppendingPathComponent(name, isDirectory: false) + .Extension(uti)
     case .Filename(let name):
-        return lhs.URLByAppendingPathComponent(name, isDirectory: false)
+        return lhs.URLByAppendingPathComponent(name)
     case .Directory(let dir):
         return lhs.URLByAppendingPathComponent(dir, isDirectory: true)
     }
@@ -38,4 +38,20 @@ public func +=(inout lhs: NSURL, rhs: PathComponent) {
 
 public func +=(inout lhs: NSURL, rhs: String) {
     lhs = lhs + rhs
+}
+
+extension PathComponent: StringLiteralConvertible {
+
+    public init(stringLiteral value: String) {
+        self = .Filename(value)
+    }
+
+    public init(unicodeScalarLiteral value: String) {
+        self = .Filename(value)
+    }
+
+    public init(extendedGraphemeClusterLiteral value: String) {
+        self = .Filename(value)
+    }
+
 }
