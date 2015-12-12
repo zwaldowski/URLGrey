@@ -7,8 +7,7 @@
 //
 
 import XCTest
-import URLGrey
-import Lustre
+@testable import URLGrey
 
 class RelationshipTests: XCTestCase {
     

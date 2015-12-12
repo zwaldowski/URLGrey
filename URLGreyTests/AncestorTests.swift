@@ -6,8 +6,8 @@
 //  Copyright © 2014-2015. Some rights reserved.
 //
 
-import URLGrey
 import XCTest
+@testable import URLGrey
 
 class AncestorTests: XCTestCase {
     
@@ -39,9 +39,15 @@ class AncestorTests: XCTestCase {
         var reachedRoot = false
         
         for i in sysVersion.ancestors {
-            let (_, isRoot) = try! i.extract()
-            reachedRoot = reachedRoot || isRoot
-            ++validParents
+            switch i {
+            case .Next:
+                ++validParents
+            case .VolumeRoot:
+                reachedRoot = true
+                ++validParents
+            case .Failure(let error):
+                XCTFail("Unexpected error: \(error)")
+            }
         }
         
         XCTAssert(reachedRoot)

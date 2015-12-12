@@ -21,9 +21,8 @@ extension NSFileManager {
     public func relationship(directory directoryURL: NSURL, toItem itemURL: NSURL) throws -> URLRelationship {
         #if os(OSX)
             guard #available(OSX 10.10, *) else {
-                let isDirectory = try directoryURL.valueForResource(URLResource.IsDirectory)
-                guard isDirectory else { return .Other }
-                
+                guard try directoryURL.valueForResource(URLResource.IsDirectory) else { return .Other }
+
                 let URLs = [ directoryURL, itemURL ]
                 let fileIDs = try URLs.map { try $0.valueForResource(URLResource.FileIdentifier) }
                 guard !fileIDs[0].isEqual(fileIDs[1]) else { return .Same }
@@ -32,11 +31,15 @@ extension NSFileManager {
                 guard volIDs[0].isEqual(volIDs[1]) else { return .Other }
                 
                 let directoryID = fileIDs[0]
-                for parentResult in itemURL.ancestors {
-                    let (parent, _) = try parentResult.extract()
-                    let parentID = try parent.valueForResource(URLResource.FileIdentifier)
-                    if parentID.isEqual(directoryID) {
-                        return .Contains
+                parentsLoop: for parentResult in itemURL.ancestors {
+                    switch parentResult {
+                    case .Next(let parent):
+                        let parentID = try parent.valueForResource(URLResource.FileIdentifier)
+                        guard !parentID.isEqual(directoryID) else { return .Contains }
+                    case .VolumeRoot:
+                        break parentsLoop
+                    case .Failure(let error):
+                        throw error
                     }
                 }
                 
