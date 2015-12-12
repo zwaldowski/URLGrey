@@ -440,7 +440,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Zachary Waldowski";
 				TargetAttributes = {
 					DBA832791B65FA45003E0E23 = {
@@ -684,6 +684,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DBA832BF1B65FA9E003E0E23 /* Debug.xcconfig */;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
