@@ -39,7 +39,7 @@ public extension Data {
     ///  - `.Free` to dealloc data created by `malloc` or equivalent.
     ///  - `.Unmap` to free data created by `mmap` or equivalent.
     ///  - `.Custom` for some custom deallocation.
-    init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeBufferOwnership<T>) {
+    public init(unsafeWithBuffer buffer: UnsafeBufferPointer<T>, queue: dispatch_queue_t = dispatch_get_global_queue(0, 0), behavior: UnsafeBufferOwnership<T>) {
         let destructor: dispatch_block_t?
         switch behavior {
         case .Copy:
@@ -57,13 +57,13 @@ public extension Data {
     /// Create `Data` backed by the contiguous contents of an array.
     /// If the array itself is represented discontiguously, the initializer
     /// must first create the storage.
-    init(array: [T]) {
+    public init(array: [T]) {
         let buffer = array.withUnsafeBufferPointer { $0 }
         self.init(unsafeWithBuffer: buffer, owner: array)
     }
     
     /// Create `Data` backed by a contiguous array.
-    init(array: ContiguousArray<T>) {
+    public init(array: ContiguousArray<T>) {
         let buffer = array.withUnsafeBufferPointer { $0 }
         self.init(unsafeWithBuffer: buffer, owner: array)
     }

@@ -51,4 +51,10 @@ extension Data {
         try self.init(data.dispatchValue)
     }
     
+    /// Convert `self` to Objective-C.
+    public var objectValue: NSData! {
+        assert(OS_OBJECT_USE_OBJC != 0, "Casting `Data<T>` to `NSData` requires Objective-C ARC bridging for OS objects.")
+        return data as? NSData
+    }
+    
 }

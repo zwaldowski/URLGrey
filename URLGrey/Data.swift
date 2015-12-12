@@ -32,16 +32,20 @@ public struct Data<T: UnsignedIntegerType> {
         }
     }
     
+    /// Create an empty data.
+    public init() {
+        self.init(unsafe: dispatch_data_empty)
+    }
+    
+    /// Create data from `dispatch_data_t`. If the bytes cannot be represented
+    /// by a whole number of elements, the given buffer will be replaced
+    /// with the leftover amount. Any partial data will be combined with the
+    /// given data.
     public init(_ data: dispatch_data_t, inout partial: Data<UInt8>) {
         let combined = dispatch_data_create_concat(partial.data, data)
         try! self.init(safe: combined) { data in
             partial = data
         }
-    }
-    
-    /// Create an empty data.
-    public init() {
-        self.init(unsafe: dispatch_data_empty)
     }
     
     /// Create data from `dispatch_data_t`. If the bytes cannot be represented
