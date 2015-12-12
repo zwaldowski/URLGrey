@@ -12,10 +12,8 @@ import Foundation
 
 /// A static namespace providing prototypes for resources that may be read from
 /// or written to URLs.
-public struct URLResource {
+public enum URLResource {
     
-    private init() {}
-
     // MARK: Item resources
     
     /// The resource name provided by the file system.
