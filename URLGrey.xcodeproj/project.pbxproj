@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DBA8327E1B65FA45003E0E23 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA8327D1B65FA45003E0E23 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBA832D61B65FABD003E0E23 /* Lustre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA832CD1B65FAB0003E0E23 /* Lustre.framework */; };
-		DBA832D71B65FAC5003E0E23 /* Lustre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA832D11B65FAB0003E0E23 /* Lustre.framework */; };
-		DBA832D81B65FAC8003E0E23 /* Lustre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA832CD1B65FAB0003E0E23 /* Lustre.framework */; };
 		DBA832D91B65FAD6003E0E23 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA8327D1B65FA45003E0E23 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBA832DA1B65FAD6003E0E23 /* URLGrey.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA8327D1B65FA45003E0E23 /* URLGrey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBA832E51B65FB0C003E0E23 /* URLGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA8327A1B65FA45003E0E23 /* URLGrey.framework */; };
@@ -83,41 +80,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DBA832CC1B65FAB0003E0E23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DB5BCDF11B61FE8A009E42A9;
-			remoteInfo = Lustre;
-		};
-		DBA832CE1B65FAB0003E0E23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DB5BCE751B6207A7009E42A9;
-			remoteInfo = LustreTests;
-		};
-		DBA832D01B65FAB0003E0E23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DB5BCE101B61FE94009E42A9;
-			remoteInfo = MobileLustre;
-		};
-		DBA832D21B65FAB0003E0E23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DB5BCE191B61FE95009E42A9;
-			remoteInfo = MobileLustreTests;
-		};
-		DBA832D41B65FAB0003E0E23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DB5BCE2C1B61FE9B009E42A9;
-			remoteInfo = NanoLustre;
-		};
 		DBA832E61B65FB0C003E0E23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBA832711B65FA45003E0E23 /* Project object */;
@@ -146,7 +108,6 @@
 		DBA832C01B65FA9E003E0E23 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		DBA832C11B65FA9E003E0E23 /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
 		DBA832C21B65FA9E003E0E23 /* URLGrey.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = URLGrey.xcconfig; sourceTree = "<group>"; };
-		DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Lustre.xcodeproj; path = Carthage/Checkouts/Lustre/Lustre.xcodeproj; sourceTree = "<group>"; };
 		DBA832E01B65FB0C003E0E23 /* URLGreyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLGreyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA832EF1B65FB21003E0E23 /* MobileURLGreyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileURLGreyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA832FC1B65FC3E003E0E23 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -179,7 +140,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBA832D61B65FABD003E0E23 /* Lustre.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +147,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBA832D71B65FAC5003E0E23 /* Lustre.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBA832D81B65FAC8003E0E23 /* Lustre.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +182,6 @@
 				DBA832BD1B65FA9E003E0E23 /* Configurations */,
 				DBA8327C1B65FA45003E0E23 /* URLGrey */,
 				DBA832881B65FA45003E0E23 /* URLGreyTests */,
-				DBA832C31B65FAA3003E0E23 /* Frameworks */,
 				DBA8327B1B65FA45003E0E23 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -291,26 +248,6 @@
 				DBA832C21B65FA9E003E0E23 /* URLGrey.xcconfig */,
 			);
 			path = Configurations;
-			sourceTree = "<group>";
-		};
-		DBA832C31B65FAA3003E0E23 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DBA832C51B65FAB0003E0E23 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DBA832CD1B65FAB0003E0E23 /* Lustre.framework */,
-				DBA832CF1B65FAB0003E0E23 /* LustreTests.xctest */,
-				DBA832D11B65FAB0003E0E23 /* Lustre.framework */,
-				DBA832D31B65FAB0003E0E23 /* MobileLustreTests.xctest */,
-				DBA832D51B65FAB0003E0E23 /* Lustre.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,12 +407,6 @@
 			mainGroup = DBA832701B65FA45003E0E23;
 			productRefGroup = DBA8327B1B65FA45003E0E23 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = DBA832C51B65FAB0003E0E23 /* Products */;
-					ProjectRef = DBA832C41B65FAB0003E0E23 /* Lustre.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				DBA832791B65FA45003E0E23 /* URLGrey */,
@@ -486,44 +417,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		DBA832CD1B65FAB0003E0E23 /* Lustre.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Lustre.framework;
-			remoteRef = DBA832CC1B65FAB0003E0E23 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBA832CF1B65FAB0003E0E23 /* LustreTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = LustreTests.xctest;
-			remoteRef = DBA832CE1B65FAB0003E0E23 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBA832D11B65FAB0003E0E23 /* Lustre.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Lustre.framework;
-			remoteRef = DBA832D01B65FAB0003E0E23 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBA832D31B65FAB0003E0E23 /* MobileLustreTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MobileLustreTests.xctest;
-			remoteRef = DBA832D21B65FAB0003E0E23 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBA832D51B65FAB0003E0E23 /* Lustre.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Lustre.framework;
-			remoteRef = DBA832D41B65FAB0003E0E23 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DBA832781B65FA45003E0E23 /* Resources */ = {
