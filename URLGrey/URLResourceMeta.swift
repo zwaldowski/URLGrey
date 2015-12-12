@@ -14,7 +14,7 @@ public protocol URLResourceConvertible {
     
     /// A resource-readable type must be created with a Cocoa-compatible
     /// object or bridged type.
-    typealias Source: _ObjectiveCBridgeable
+    typealias Source
     
     /// Attempt to create an instance from a given Cocoa-compatible type.
     init(URLResource: Source) throws
@@ -74,7 +74,7 @@ extension URLResourceReadable {
 
 // MARK: Common Prototypes
 
-public struct URLResourceBridgedRead<T: _ObjectiveCBridgeable>: URLResourceReadable {
+public struct URLResourceBridgedRead<T>: URLResourceReadable {
     
     public let key: String
     
@@ -87,7 +87,7 @@ public struct URLResourceBridgedRead<T: _ObjectiveCBridgeable>: URLResourceReada
     
 }
 
-public struct URLResourceBridgedWrite<T: _ObjectiveCBridgeable>: URLResourceWritable {
+public struct URLResourceBridgedWrite<T>: URLResourceWritable {
     
     public let key: String
     
